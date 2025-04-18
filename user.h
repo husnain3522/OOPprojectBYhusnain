@@ -16,18 +16,25 @@ class user
 	//	virtual bool login() = 0;
 
 	//};
-private:
+protected:
 	string name;
-	string password;	
+	string password;
+	string cnic;
 public:
+	string getCnic();
+	void setCnic(string c);
 	string getName();
 	string getPassword();
 	void setName(string n);
 	void setPassword(string p);
-	user(string n, string p);
+	user(string n,string cninc, string p);
 	virtual bool isLogin() = 0;
 	void display();
-	void saveUserToFile();
+	user(){} //default constructor for user
+	int fileLenght();
+
+	void addUserToFile(string, string, string, string);
+	bool checkIfUserExists(string cnic , string fileName);
 
 };
 

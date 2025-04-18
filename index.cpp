@@ -110,8 +110,11 @@ data.
 */
 #include "user.h"
 #include "voter.h"
+#include"admin.h"
 using namespace std;
 int main() {
-	voter v("John Doe", "password123");
-	
+
+	admin v1("admin", "123456789", "admin");
+	//v1.addCandidate();
+
 }

@@ -137,6 +137,12 @@
     <ClInclude Include="user.h" />
     <ClInclude Include="voter.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="admin.txt" />
+    <Text Include="candidate.txt" />
+    <Text Include="user.txt" />
+    <Text Include="voter.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

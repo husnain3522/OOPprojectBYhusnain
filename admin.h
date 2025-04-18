@@ -4,9 +4,25 @@ class admin :public user
 {
 private:
 public:
-	bool isLogin() {
-		cout << "Admin logged in successfully." << endl;
-		return 1;
-	}
+	//constructor
+	admin(string name, string snic, string password) :user(name, snic, password) {
+		//checking if cnic already exists
+		if (checkIfUserExists(snic, "admin")) {
+			cout << "CNIC already exists." << endl;
+			return;
+		}
+		saveAdminToFile();
+	};
+	bool isLogin();
+
+	void saveAdminToFile();
+
+	admin();
+
+	void addVoter();
+	void addAdmin();
+	void addCandidate();
+
+
 };
 
