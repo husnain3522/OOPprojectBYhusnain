@@ -116,5 +116,5 @@ int main() {
 
 	admin v1("admin", "123456789", "admin");
 	//v1.addCandidate();
-
+	//Salam a laikum
 }
