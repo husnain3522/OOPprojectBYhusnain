@@ -30,13 +30,14 @@ public:
 	string getPassword();
 	void setName(string n);
 	void setPassword(string p);
-	user(string n,string cninc, string p);
+	user(string n, string cninc, string p); //  default constructor plus parametrerized constructor
 	virtual bool isLogin(string name, string cnic, string password) = 0;//pure virtual function
 	void display();
 	user(){} //default constructor for user
-	int fileLenght();
-	void addUserToFile(string, string, string, string);
-	bool checkIfUserExists(string cnic , string fileName);
-	void checkCredentials(string cnic, string password, string fileName);
+	int fileLenght();// checkes file lengh
+	void addUserToFile(string, string, string, string); // add user to file
+	bool checkIfUserExists(string cnic , string fileName);// maches only cnic
+	void checkCredentials(string cnic, string password, string fileName);  // maches cnic and pass word
+	bool checkIfPartyIdExists(string partyId); // checks if party has already registerd a candidate
 };
 

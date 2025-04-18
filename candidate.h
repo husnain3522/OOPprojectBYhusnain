@@ -7,20 +7,15 @@ using namespace std;
 class candidate :public user
 {
 protected:
-	string name;
-	string cnic;
-	string password;
-	bool loginStatus = false;
+
 	string partyName;
 public:
 	void setLoginStatus(bool status) { loginStatus = status; }
-	bool getLoginStatus();
-	string getCnic();
-	void setCnic(string c);
-	string getName();
-	string getPassword();
-	void setName(string n);
-	void setPassword(string p);
+
+	string getPartyName();
+	void setPartyName(string p);
+	bool isLogin(string name, string cnic, string password) override;
+
 	/*candidate(string n, string cnin, string p,) : user(n, cnic, p) {
 		
 	};*/

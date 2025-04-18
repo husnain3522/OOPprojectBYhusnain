@@ -75,15 +75,28 @@ void admin::addCandidate() {
 		cout << "Enter CNIC: ";
 		string snic;
 		cin >> snic;
+		
 		// check if cnic already exists
 		if (checkIfUserExists(snic, "candidate")) {
 			cout << "CNIC already exists." << endl;
 			goto AgainEnterData;
 		}
 		cout << "Enter password: ";
-		string password;
-		cin >> password;
-		addUserToFile(name, snic, password, "candidate");
+		string partyId;
+		cin >> partyId;
+		if (checkIfPartyIdExists(partyId))
+		{
+			cout << "Party Candidate already exists." << endl;
+			cout << "Press 1 to Re Enter Credentials\nPress 2 to Again Enter this Candidate" << endl;
+			int choice;
+			cin >> choice;
+			if (choice == 1)
+				goto AgainEnterData;
+			else
+				continue;
+			
+		}
+		addUserToFile(name, snic, partyId, "candidate");
 	}
 
 	cout << "Enter name: ";

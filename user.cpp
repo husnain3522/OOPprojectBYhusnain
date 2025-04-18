@@ -106,3 +106,23 @@ void user::checkCredentials(string inputCnic, string inputPassword, string fileN
 	}
 	cout << "Login failed to "<<fileName<< ".Something MisMatched" << endl;
 }
+bool checkIfPartyIdExists(string partyId) {
+	ifstream partyFile("candidate.txt");
+	if (!partyFile.is_open()) {
+		cerr << "Error opening file." << endl;
+		return false;
+	}
+	string serchedPartyId;
+	string temp;
+	while (getline(partyFile, temp, '*'))
+	{
+		getline(partyFile, serchedPartyId, '*');
+		if (serchedPartyId == partyId) {
+			partyFile.close();
+			return true;
+		}
+		getline(partyFile, temp, '\n');
+	}
+	partyFile.close();
+	return false;
+}

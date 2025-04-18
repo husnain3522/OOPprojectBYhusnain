@@ -3,7 +3,7 @@
 using namespace std;
 class voter :public user
 {
-private:
+protected:
 	bool isLoginVar = false;
 
 public:
