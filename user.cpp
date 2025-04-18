@@ -106,7 +106,7 @@ void user::checkCredentials(string inputCnic, string inputPassword, string fileN
 	}
 	cout << "Login failed to "<<fileName<< ".Something MisMatched" << endl;
 }
-bool checkIfPartyIdExists(string partyId) {
+bool user::checkIfPartyIdExists(string partyId) {
 	ifstream partyFile("candidate.txt");
 	if (!partyFile.is_open()) {
 		cerr << "Error opening file." << endl;

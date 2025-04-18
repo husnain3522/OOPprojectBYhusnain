@@ -81,13 +81,13 @@ void admin::addCandidate() {
 			cout << "CNIC already exists." << endl;
 			goto AgainEnterData;
 		}
-		cout << "Enter password: ";
+		cout << "Enter PartyName: ";
 		string partyId;
 		cin >> partyId;
 		if (checkIfPartyIdExists(partyId))
 		{
 			cout << "Party Candidate already exists." << endl;
-			cout << "Press 1 to Re Enter Credentials\nPress 2 to Again Enter this Candidate" << endl;
+			cout << "Press 1 to Re Enter Credentials\nPress 2 to Skip this candidate" << endl;
 			int choice;
 			cin >> choice;
 			if (choice == 1)
@@ -99,19 +99,4 @@ void admin::addCandidate() {
 		addUserToFile(name, snic, partyId, "candidate");
 	}
 
-	cout << "Enter name: ";
-	string name;
-	cin >> name;
-	cout << "Enter CNIC: ";
-	string snic;
-	cin >> snic;
-	// check if cnic already exists
-	if (checkIfUserExists(snic, "candidate")) {
-		cout << "CNIC already exists." << endl;
-		return;
-	}
-	cout << "Enter password: ";
-	string password;
-	cin >> password;
-	addUserToFile(name, snic, password, "candidate");
 }
