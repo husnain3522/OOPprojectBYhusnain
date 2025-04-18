@@ -52,7 +52,7 @@ void admin::addAdmin() {
 	string snic;
 	cin >> snic;
 	// check if cnic already exists
-	if (checkIfUserExists(snic, "admin.txt")) {
+	if (checkIfUserExists(snic, "admin")) {
 		cout << "CNIC already exists." << endl;
 		return;
 	}
@@ -76,7 +76,7 @@ void admin::addCandidate() {
 		string snic;
 		cin >> snic;
 		// check if cnic already exists
-		if (checkIfUserExists(snic, "candidate.txt")) {
+		if (checkIfUserExists(snic, "candidate")) {
 			cout << "CNIC already exists." << endl;
 			goto AgainEnterData;
 		}
@@ -93,7 +93,7 @@ void admin::addCandidate() {
 	string snic;
 	cin >> snic;
 	// check if cnic already exists
-	if (checkIfUserExists(snic, "candidate.txt")) {
+	if (checkIfUserExists(snic, "candidate")) {
 		cout << "CNIC already exists." << endl;
 		return;
 	}
