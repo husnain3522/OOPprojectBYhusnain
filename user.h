@@ -35,6 +35,8 @@ public:
 	void display();
 	user(){} //default constructor for user
 	int fileLenght();// checkes file lengh
+	int fileLenght(string);// checkes file lengh
+
 	void addUserToFile(string, string, string, string); // add user to file
 	bool checkIfUserExists(string cnic , string fileName);// maches only cnic
 	void checkCredentials(string cnic, string password, string fileName);  // maches cnic and pass word

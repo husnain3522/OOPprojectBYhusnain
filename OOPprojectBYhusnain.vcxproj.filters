@@ -33,6 +33,9 @@
     <ClCompile Include="candidate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="election.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="user.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="candidate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="election.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

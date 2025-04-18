@@ -50,7 +50,20 @@ int user::fileLenght() {
 	file.close();
 	return count;
 }
-
+int user::fileLenght(string fileName) {
+	ifstream file(fileName + ".txt");
+	if (!file.is_open()) {
+		cerr << "Error opening file." << endl;
+		return -1;
+	}
+	int count = 0;
+	string line;
+	while (getline(file, line)) {
+		count++;
+	}
+	file.close();
+	return count;
+}
 void user::addUserToFile(string name, string snic, string password, string fileName) {
 	// checking if cnic already exists
 

@@ -15,7 +15,6 @@ public:
 	string getPartyName();
 	void setPartyName(string p);
 	bool isLogin(string name, string cnic, string password) override;
-
 	/*candidate(string n, string cnin, string p,) : user(n, cnic, p) {
 		
 	};*/
