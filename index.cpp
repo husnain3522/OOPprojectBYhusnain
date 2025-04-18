@@ -162,7 +162,9 @@ int main() {
 				cout << "1. Add Voter" << endl;
 				cout << "2. Add Admin" << endl;
 				cout << "3. Add Candidate" << endl;
-				cout << "4. Exit" << endl;
+				cout << "4. Create Election" << endl;
+				cout << "5. Exit" << endl;
+
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
 				switch (adminChoice) {
@@ -176,6 +178,9 @@ int main() {
 					a.addCandidate();
 					break;
 				case 4:
+					a.createElection();
+					break;
+				case 5 :
 					break;
 				default:
 					cout << "Invalid choice." << endl;

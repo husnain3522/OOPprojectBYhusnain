@@ -2,6 +2,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "user.h"
+#include "election.h"
+#include "candidate.h"
+#include "voter.h"
+
 using namespace std;
 bool admin::isLogin(string name, string cnic, string password) {
 
@@ -99,4 +104,28 @@ void admin::addCandidate() {
 		addUserToFile(name, snic, partyId, "candidate");
 	}
 
+}
+
+void admin::createElection() {
+	cout << "Enter Election Name: ";
+	string name;
+	cin >> name;
+	cout << "Enter Election Date: ";
+	string date;
+	cin >> date;
+	cout << "Enter Election Time: ";
+	string time;
+	cin >> time;
+	cout << "Enter Number of Regions: ";
+	int numRegions;
+	cin >> numRegions;
+	string* regionCodes = new string[numRegions];
+	for (int i = 0; i < numRegions; i++) {
+		cout << "Enter Region Code " << i + 1 << ": ";
+		cin >> regionCodes[i];
+	}
+	election e(name, date, time, numRegions);
+	e.setRegionCodes(regionCodes, numRegions);
+	e.addElectionToFileWithCandies();
+	delete[] regionCodes;
 }

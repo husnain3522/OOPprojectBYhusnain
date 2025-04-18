@@ -5,9 +5,9 @@
 #include "candidate.h"
 using namespace std;
 int election::fileLenght(string fileName) {
-	ifstream file(fileName+".txt");
+	ifstream file((fileName+".txt"));
 	if (!file.is_open()) {
-		cerr << "Error opening file." << endl;
+		cerr << "Error opening file."<<fileName << endl;
 		return -1;
 	}
 	int count = 0;
@@ -74,7 +74,7 @@ void election::displayElectionDetails() {
 	cout << endl;
 }
 candidate* election::getCandidateArray() {
-	int totalCandidates = fileLenght("candidates");
+	int totalCandidates = fileLenght("candidate");
 	candidate* candiArray = new candidate[totalCandidates];
 	ifstream candidateFile("candidate.txt");
 	if (!candidateFile.is_open()) {
@@ -93,8 +93,18 @@ candidate* election::getCandidateArray() {
 	}
 	return candiArray;
 }
+
 void election::displayCandiates(candidate * candiArray) {
-	int totalCandi = fileLenght("candidates");
+//find candidates in array
+
+  
+       int totalCandidates = 0;  
+       while (!candiArray[totalCandidates].getName().empty()) {  
+           totalCandidates++;  
+       }  
+	   int totalCandi = totalCandidates;
+    
+  
 	cout << "Candidates:" << endl;
 	for (int i = 0; i< totalCandi; i++) {
 		cout << "Name: " << candiArray[i].getName() << endl;
@@ -103,17 +113,130 @@ void election::displayCandiates(candidate * candiArray) {
 	}
 	delete[] candiArray;
 }
+candidate* deleteAcandy(candidate* candiArray, int candyIndex, int total) {  
+   // Create a new array with size reduced by 1  
+   candidate* tempArray = new candidate[total - 1];  
 
-void election::addCandidatesToElection() {
-	cout << "Here Is list of candidates" << endl;
-	int totalCandidates = fileLenght("candidates");
-	candidate *candiArray = new candidate[totalCandidates];
+   for (int i = 0, j = 0; i < total; i++) {  
+       if (i != candyIndex) {  
+           tempArray[j++] = candiArray[i];  
+       }  
+   }  
+
+   // Free the old array memory  
+   delete[] candiArray;  
+
+   // Return the new array  
+   return tempArray;  
+}
+candidate* election::addSelectedCandidate(candidate candi, candidate* selectedCandidates) {  
+   // Calculate the total number of candidates in the selectedCandidates array  
+   int totalCandidates = 0;  
+   if (selectedCandidates != nullptr) {  
+       while (selectedCandidates[totalCandidates].getName() != "") {  
+           totalCandidates++;  
+       }  
+   }  
+
+   // Create a new array with size increased by 1  
+   candidate* tempArray = new candidate[totalCandidates + 1];  
+
+   // Copy existing candidates to the new array  
+   for (int i = 0; i < totalCandidates; i++) {  
+       tempArray[i] = selectedCandidates[i];  
+   }  
+
+   // Add the new candidate to the array  
+   tempArray[totalCandidates] = candi;  
+
+   // Free the old array memory  
+   delete[] selectedCandidates;  
+
+   // Return the new array  
+   return tempArray;  
+}
+candidate* election::selectCandidates() {
+	int totalCandidates = fileLenght("candidate");
+	candidate* candiArray = new candidate[totalCandidates];
 	ifstream candidateFile("candidate.txt");
 	if (!candidateFile.is_open()) {
 		cerr << "Error opening file." << endl;
+		return nullptr;
+	}
+	bool selectNext = true;
+	candidate* selectedCandidates ;
+	selectedCandidates = nullptr;
+	while (selectNext) {
+		displayCandiates(candiArray);
+		cout << "Select a candidate by entering their CNIC: ";
+		string cnic;
+		cin >> cnic;
+		for (int i = 0; i < totalCandidates; i++) {
+			if (candiArray[i].getCnic() == cnic) {
+				//add that candidate to selected candidates
+				addSelectedCandidate(candiArray[i], selectedCandidates);
+				cout << "Candidate selected: " << candiArray[i].getName() << endl;
+
+
+				//delete that candidate from that array and add it to selected candies
+				candiArray = deleteAcandy(candiArray, i, totalCandidates);
+				totalCandidates--;
+				cout << "Do You want to add More Candidates (y/n): ";
+				char choice;
+				cin >> choice;
+				if (choice == 'y' || choice == 'Y') {
+					selectNext = true;
+				}
+				else {
+					selectNext = false;
+					break;
+				}
+
+			}
+
+		}
+		if (selectNext == false) {
+			break;
+		}
+		else {
+			cout << "Candidate not found. Please try again." << endl;
+		}
+		//show all candidates
+
+	}
+	delete[] candiArray;
+	return selectedCandidates;
+
+}
+void election::addElectionToFileWithCandies() {
+	cout << "Here Is list of candidates" << endl;
+	int totalCandidates = fileLenght("candidate");
+	cout << "Flile lenght is " << totalCandidates << endl;
+	candidate *candiArray = new candidate[totalCandidates];
+	ofstream electionFile("candidate.txt");
+
+	if (!electionFile.is_open()) {
+		cerr << "Error opening file." << endl;
 		return;
 	}
-	  candiArray = getCandidateArray();
+
+	  candiArray = selectCandidates();
+	  //find lenght of selected candidates
+	  int selectedCandidatesLength = 0;
+	  while (candiArray[selectedCandidatesLength].getName() != "") {
+		  selectedCandidatesLength++;
+	  }	
+	  //write selected candidates to file
+
+	  electionFile << electionName << "*" << electionDate << "*" << electionTime << "*" << numberOfRegions << "*";
+	  for (int i = 0; i < numberOfRegions; i++) {
+		  electionFile << regionCodes[i] << "*";
+	  }
+	  for (int i = 0; i < selectedCandidatesLength; i++) {
+		  electionFile << candiArray[i].getName() << "*" << candiArray[i].getCnic() << "*" << candiArray[i].getPartyName() << "*";
+	  }
+	  electionFile << endl;
+	  cout << "Election saved to file." << endl;
 
 
 	

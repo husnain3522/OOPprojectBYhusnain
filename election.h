@@ -15,14 +15,15 @@ protected:
 	int numberOfRegions;
 	string electionId;
 public:
+	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate);
 	candidate* getCandidateArray();
 	void displayCandiates(candidate*);
 	election(string , string , string , int );
 	void setElectionId(string id);
 	string getElectionId();
 	int fileLenght(string);// checkes file lengh
-	void addCandidatesToElection();
-
+	void addElectionToFileWithCandies();
+	candidate* selectCandidates();
 	void setElectionName(string name);
 	void setElectionDate(string date);
 	void setElectionTime(string time);	
