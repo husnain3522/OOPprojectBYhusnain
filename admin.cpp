@@ -3,15 +3,16 @@
 #include <string>
 #include <fstream>
 using namespace std;
-bool admin::isLogin() {
-	cout << "Admin logged in successfully." << endl;
-	return 1;
+bool admin::isLogin(string name, string cnic, string password) {
+
+	if (isLoginVar)
+		return 1;
+	else 
+		return 0;
+
+
 }
 //default constructor for admin
-admin::admin() {
-	saveAdminToFile();
-}
-
 
 void admin::saveAdminToFile() {  
    ofstream adminFile("admin.txt", ios::app);  
@@ -62,6 +63,29 @@ void admin::addAdmin() {
 
 }
 void admin::addCandidate() {
+
+	cout << "How many Candidates you want to add" << endl;
+	int num;
+	cin >> num;
+	for (int i = 0; i < num; i++) {
+		AgainEnterData:
+		cout << "Enter name: ";
+		string name;
+		cin >> name;
+		cout << "Enter CNIC: ";
+		string snic;
+		cin >> snic;
+		// check if cnic already exists
+		if (checkIfUserExists(snic, "candidate.txt")) {
+			cout << "CNIC already exists." << endl;
+			goto AgainEnterData;
+		}
+		cout << "Enter password: ";
+		string password;
+		cin >> password;
+		addUserToFile(name, snic, password, "candidate");
+	}
+
 	cout << "Enter name: ";
 	string name;
 	cin >> name;

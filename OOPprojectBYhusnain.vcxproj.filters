@@ -30,6 +30,9 @@
     <ClCompile Include="index.cpp">
       <Filter>indexFile</Filter>
     </ClCompile>
+    <ClCompile Include="candidate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="user.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="admin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="candidate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

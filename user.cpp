@@ -26,10 +26,10 @@ void user::setName(string n) {
 void user::setPassword(string p) {
 	password = p;
 }
-bool user::isLogin() {
-
-	return true; // Placeholder for actual login logic
-}
+//bool user::isLogin() {
+//
+//	return true; // Placeholder for actual login logic
+//}
 
 void user::display() {
 	cout << "Name: " << name << endl;
@@ -84,4 +84,25 @@ bool user::checkIfUserExists(string inputCnic, string fileName) {
 	userFile.close();
 	return false;
 
+}
+void user::checkCredentials(string inputCnic, string inputPassword, string fileName) {
+	ifstream userFile(fileName + ".txt");
+	if (!userFile.is_open()) {
+		cerr << "Error opening file." << endl;
+		return;
+	}
+	string serchedCnic;
+	string serchedPassword;
+	string temp;
+	while (getline(userFile, temp, '*'))
+	{
+		getline(userFile, serchedCnic, '*');
+		getline(userFile, serchedPassword, '\n');
+		if (serchedCnic == inputCnic && serchedPassword == inputPassword) {
+			userFile.close();
+			cout << "Login successful." << endl;
+			return;
+		}
+	}
+	cout << "Login failed to "<<fileName<< ".Something MisMatched" << endl;
 }

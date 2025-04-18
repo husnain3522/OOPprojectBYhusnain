@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
+    <ClCompile Include="candidate.cpp" />
     <ClCompile Include="index.cpp" />
     <ClCompile Include="user.cpp" />
     <ClCompile Include="voter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin.h" />
+    <ClInclude Include="candidate.h" />
     <ClInclude Include="user.h" />
     <ClInclude Include="voter.h" />
   </ItemGroup>

@@ -20,7 +20,10 @@ protected:
 	string name;
 	string password;
 	string cnic;
+	bool loginStatus = false;
 public:
+	void setLoginStatus(bool status) { loginStatus = status; }
+	bool getLoginStatus() { return loginStatus; }
 	string getCnic();
 	void setCnic(string c);
 	string getName();
@@ -28,13 +31,12 @@ public:
 	void setName(string n);
 	void setPassword(string p);
 	user(string n,string cninc, string p);
-	virtual bool isLogin() = 0;
+	virtual bool isLogin(string name, string cnic, string password) = 0;//pure virtual function
 	void display();
 	user(){} //default constructor for user
 	int fileLenght();
-
 	void addUserToFile(string, string, string, string);
 	bool checkIfUserExists(string cnic , string fileName);
-
+	void checkCredentials(string cnic, string password, string fileName);
 };
 
