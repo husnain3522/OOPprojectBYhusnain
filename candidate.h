@@ -10,6 +10,9 @@ protected:
 
 	string partyName;
 public:
+	string getCnic() {
+		return cnic;
+	}
 	void setLoginStatus(bool status) { loginStatus = status; }
 
 	string getPartyName();

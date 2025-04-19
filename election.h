@@ -11,14 +11,15 @@ protected:
 	string electionName;
 	string electionDate;
 	string electionTime;
-	string *regionCodes;
+	string* regionCodes;
 	int numberOfRegions;
 	string electionId;
 public:
-	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate);
+
+	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);
 	candidate* getCandidateArray();
-	void displayCandiates(candidate*);
-	election(string , string , string , int );
+	void displayCandiates(candidate*,int);
+	election(string, string, string, int);
 	void setElectionId(string id);
 	string getElectionId();
 	int fileLenght(string);// checkes file lengh
@@ -26,7 +27,7 @@ public:
 	candidate* selectCandidates();
 	void setElectionName(string name);
 	void setElectionDate(string date);
-	void setElectionTime(string time);	
+	void setElectionTime(string time);
 	void setRegionCodes(string* codes, int numRegions);
 	string getElectionName();
 	string getElectionDate();
@@ -45,10 +46,9 @@ public:
 	void filterElections();
 	void displayElectionResults();
 	void displayElectionResults(string electionId);
+	int addArrayToTempFileThanReturnArraySize(string*, string);
 
-	
 
 };
-
 
 

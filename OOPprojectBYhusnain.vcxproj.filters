@@ -67,5 +67,11 @@
     <Text Include="candidate.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="electionData.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="lenghOfSelectedCandies.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
