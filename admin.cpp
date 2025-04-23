@@ -37,7 +37,7 @@ void admin::addVoter() {
 	string snic;
 	cin >> snic;
 	// check if cnic already exists
-	if (checkIfUserExists(snic, "voter.txt")) {
+	if (checkIfUserExists(snic, "voter")) {
 		cout << "CNIC already exists." << endl;
 		return;
 	}

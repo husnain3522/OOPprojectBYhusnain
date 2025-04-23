@@ -1,1 +1,3 @@
 Local*12March*time*2*3533*35202
+Local*1*1*1*1*123
+ElectionName*Date*time*2*code1code2*123

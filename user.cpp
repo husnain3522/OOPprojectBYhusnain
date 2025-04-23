@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include"election.h"
 using namespace std;
 
 user::user(string n,string snic, string p) : name(n),cnic(snic), password(p) {
@@ -138,4 +139,44 @@ bool user::checkIfPartyIdExists(string partyId) {
 	}
 	partyFile.close();
 	return false;
+}
+void user::viewElections() {
+	ifstream electionFile("election.txt");
+	if (!electionFile.is_open()) {
+		cerr << "Error opening file." << endl;
+		return;
+	}
+	election elec;
+	string electionType, electionName, electionDate, electionTime,elecCodeNumberStr,selectedCandiStr,* selectedCandi;
+	int elecCodeNumberInt,selectedCandiInt;
+	int* regionCodes;
+	
+	while (getline(electionFile,electionName,'*')) {
+		getline(electionFile, electionDate, '*');
+		getline(electionFile, electionTime, '*');
+		getline(electionFile, elecCodeNumberStr, '*');
+		elecCodeNumberInt = stoi(elecCodeNumberStr);
+		regionCodes = new int[elecCodeNumberInt];
+		for (int i = 0; i < elecCodeNumberInt; i++) {
+			getline(electionFile, elecCodeNumberStr, '*');
+			regionCodes[i] = stoi(elecCodeNumberStr);
+		}
+		getline(electionFile, selectedCandiStr, '*');
+		selectedCandiInt = stoi(selectedCandiStr);
+		selectedCandi = new string[selectedCandiInt];
+		for (int i = 0; i < selectedCandiInt; i++) {
+			getline(electionFile, selectedCandiStr, '*');
+			selectedCandi[i] = selectedCandiStr;
+		}
+		elec.setElectionName(electionName);
+		elec.setElectionDate(electionDate);
+		elec.setElectionTime(electionTime);
+		//elec.setRegionCodes(regionCodes, elecCodeNumberInt);
+
+
+
+
+		//cout << line << endl;
+	}
+	electionFile.close();
 }

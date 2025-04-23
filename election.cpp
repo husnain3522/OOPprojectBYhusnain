@@ -252,9 +252,9 @@ void election::addElectionToFileWithCandies() {
 
 	//write selected candidates to file
 
-	electionFile << electionName << "*" << electionDate << "*" << electionTime << "*" << numberOfRegions << "*";
+	electionFile << electionName << "*" << electionDate << "*" << electionTime << "*" << numberOfRegions ;
 	for (int i = 0; i < numberOfRegions; i++) {
-		electionFile << regionCodes[i] ;
+		electionFile<<"*" << regionCodes[i];
 	}
 	for (int i = 0; i < selectedCandidatesLength; i++) {
 		electionFile << "*" << candiArray[i].getCnic();

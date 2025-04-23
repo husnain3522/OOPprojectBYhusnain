@@ -17,6 +17,14 @@ protected:
 public:
 
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);
+	election() {
+		electionName = "";
+		electionDate = "";
+		electionTime = "";
+		regionCodes = nullptr;
+		numberOfRegions = 0;
+		electionId = "";
+	};
 	candidate* getCandidateArray();
 	void displayCandiates(candidate*,int);
 	election(string, string, string, int);

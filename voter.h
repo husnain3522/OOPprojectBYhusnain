@@ -8,6 +8,7 @@ protected:
 
 public:
 	voter(string name,string snic, string password) :user(name,snic,password) {}
+	voter() {}
 	bool isLogin() {
 		cout << "Voter logged in successfully." << endl;
 		return 1;

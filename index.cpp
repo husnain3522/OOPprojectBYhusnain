@@ -115,13 +115,13 @@ data.
 #include<string>
 using namespace std;
 admin checkAdmin(string , string , string );
-voter checkVoter();
-admin checkCandidate();
+voter checkVoter(string, string, string);
+admin checkCandidate(string, string , string);
 
 
 
 int main() {
-
+	logIn:
 	cout << "Welcome to Online Voting System" << endl;
 	cout << "1. Admin" << endl;
 	cout << "2. Voter" << endl;
@@ -181,7 +181,10 @@ int main() {
 					a.createElection();
 					break;
 				case 5 :
+					a.setLoginStatus(false);
+					goto logIn;
 					break;
+					
 				default:
 					cout << "Invalid choice." << endl;
 				}
@@ -200,7 +203,42 @@ int main() {
 		string password;
 		cin >> password;
 		voter v(name , snic, password);
-		v.isLogin();
+		v = checkVoter(snic, password, "voter");
+		if (v.getCnic() == "") {
+			v.setLoginStatus(false);
+		}
+		else v.setLoginStatus(true);
+
+		if (v.getLoginStatus() == true) {
+			cout << "Welcome To Voter Panel" << endl;
+			int voterChoice;
+			do {
+				cout << "1. View Elections" << endl;
+				cout << "2. Cast Vote" << endl;
+				cout << "3. Check Vote Status" << endl;
+				cout << "4. Exit" << endl;
+				cout << "Enter your choice: ";
+				cin >> voterChoice;
+				switch (voterChoice) {
+				case 1:
+					//v.viewElections();
+					break;
+				case 2:
+					//v.castVote();
+					break;
+				case 3:
+					//v.checkVoteStatus();
+					break;
+				case 4:
+					v.setLoginStatus(false);
+					goto logIn;
+					break;
+
+				default:
+					cout << "Invalid choice." << endl;
+				}
+			} while (voterChoice != 4);
+		}
 
 	}
 	else {
@@ -228,7 +266,7 @@ admin checkAdmin(string inputCnic, string inputPassword, string fileName) {
 				userFile.close();
 				cout << "Login successful." << endl;
 				admin temp(serchedName, serchedCnic, serchedPassword);
-
+				temp.setLoginStatus(true);	
 				return temp;
 			}
 		}
@@ -237,4 +275,29 @@ admin checkAdmin(string inputCnic, string inputPassword, string fileName) {
 		return admin();
 	
 	
+}
+voter checkVoter(string inputCnic, string inputPassword, string fileName) {
+	ifstream userFile(fileName + ".txt");
+	if (!userFile.is_open()) {
+		cerr << "Error opening file." << endl;
+		return voter();
+	}
+	string serchedCnic;
+	string serchedPassword;
+	string serchedName;
+	while (getline(userFile, serchedName, '*'))
+	{
+		getline(userFile, serchedCnic, '*');
+		getline(userFile, serchedPassword, '\n');
+		if (serchedCnic == inputCnic && serchedPassword == inputPassword) {
+			userFile.close();
+			cout << "Login successful." << endl;
+			voter temp(serchedName, serchedCnic, serchedPassword);
+			return temp;
+		}
+	}
+	cout << "Login failed to " << fileName << ". Something MisMatched" << endl;
+
+	userFile.close();
+	return voter();
 }
