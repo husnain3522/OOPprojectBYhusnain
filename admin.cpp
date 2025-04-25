@@ -112,17 +112,21 @@ void admin::createElection() {
 	int choice;
 	string name; 
 	cin >> choice;
+	string fileNameToStoreName;
 	if (choice == 1) {
 		cout << "You have selected National Election" << endl;
 		name = "National Election";
+		fileNameToStoreName = "nationalElection";
 	}
 	else if (choice == 2) {
 		cout << "You have selected Local Election" << endl;
 		name = "Local Election";
+		fileNameToStoreName = "localElection";
 	}
 	else if (choice == 3) {
 		cout << "You have selected Regional Election" << endl;
 		name = "Regional Election";
+		fileNameToStoreName = "regionalElection";
 	}
 	else {
 		cout << "Invalid choice." << endl;
@@ -170,6 +174,6 @@ void admin::createElection() {
 	else if (choice1 == 2)
 		numRegions = 2;
 
-	e.addElectionToFileWithCandies(numRegions);
+	e.addElectionToFileWithCandies(numRegions,fileNameToStoreName);
 	delete[] regionCodes;
 }

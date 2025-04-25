@@ -12,5 +12,6 @@
 #include "nationalElection.h"
 class localElection : public election
 {
+
 };
 

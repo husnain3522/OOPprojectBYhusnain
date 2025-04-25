@@ -228,12 +228,12 @@ candidate* election::selectCandidates() {
 	return selectedCandidates;
 
 }
-void election::addElectionToFileWithCandies(int timeType) {
+void election::addElectionToFileWithCandies(int timeType,string fileName) {
 	cout << "Here Is list of candidates" << endl;
 	int totalCandidates = fileLenght("candidate");
 	cout << "Flile lenght is " << totalCandidates << endl;
 	candidate* candiArray = new candidate[totalCandidates];
-	ofstream electionFile("electionData.txt",ios::app);
+	ofstream electionFile(fileName+".txt", ios::app);
 
 	if (!electionFile.is_open()) {
 		cerr << "Error opening file." << endl;
@@ -264,5 +264,11 @@ void election::addElectionToFileWithCandies(int timeType) {
 
 
 
+
+}
+
+void election::loadElectionFromFile(string fileName) {
+
+	int fileLen = fileLenght(fileName);
 
 }

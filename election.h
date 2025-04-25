@@ -31,7 +31,7 @@ public:
 	void setElectionId(string id);
 	string getElectionId();
 	int fileLenght(string);// checkes file lengh
-	void addElectionToFileWithCandies(int);
+	void addElectionToFileWithCandies(int,string);
 	candidate* selectCandidates();
 	void setElectionName(string name);
 	void setElectionDate(string date);
@@ -44,7 +44,7 @@ public:
 	int getNumberOfRegions();
 	void displayElectionDetails();
 	void saveElectionToFile();
-	void loadElectionFromFile();
+	void loadElectionFromFile(string);
 	void addElection();
 	void deleteElection();
 	void updateElection();

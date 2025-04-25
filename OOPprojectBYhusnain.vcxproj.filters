@@ -97,5 +97,11 @@
     <Text Include="lenghOfSelectedCandies.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="localElection.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="regionalElection.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -14,9 +14,22 @@
 using namespace std;
 class electionManger
 {
+//protected:
+private:
 	localElection *local;
 	nationalElection *national;
 	regionalElection *regional;
+	int countLocal, countNational, countRegional;
+public:
+	//well use this class to get all data to load from files and be ready when to evaluate what
+	int countNumOfElections(string);
+
+	localElection* getLocalElections();
+	nationalElection* getNationalElections();
+	regionalElection* getRegionalElections();
+
+
+
 
 };
 
