@@ -192,7 +192,9 @@ int main() {
 					a.createElection();
 					break;
 				case 5 :
-					em.displayAllElectionNames();
+					//em.displayAllElectionNames();
+					em.displayAllElectionInDetails();
+
 					break;
 				case 6:
 					a.setLoginStatus(false);

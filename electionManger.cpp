@@ -95,3 +95,18 @@ void electionManger::displayAllElectionNames() {
 	}
 	}
 }
+ 
+void electionManger::displayAllElectionInDetails() {
+	cout << "Local Elections: " << endl;
+	for (int i = 0; i < countLocal; i++) {
+		local[i].displayElectionDetails();
+	}
+	cout << "National Elections: " << endl;
+	for (int i = 0; i < countNational; i++) {
+		national[i].displayElectionDetails();
+	}
+	cout << "Regional Elections: " << endl;
+	for (int i = 0; i < countRegional; i++) {
+		regional[i].displayElectionDetails();
+	}
+}

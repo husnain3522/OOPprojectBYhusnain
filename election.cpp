@@ -67,10 +67,13 @@ void election::displayElectionDetails() {
 	cout << "Election Name: " << electionName << endl;
 	cout << "Election Date: " << electionDate << endl;
 	cout << "Election Time: " << electionTime << endl;
-	cout << "Number of Regions: " << numberOfRegions << endl;
+	cout << "Duration: " << duration << endl;
 	cout << "Region Codes: ";
-	for (int i = 0; i < numberOfRegions; i++) {
+	/*for (int i = 0; i< 1; i++) {
 		cout << regionCodes[i] << " ";
+	}*/
+	for (int i = 0; i < numOfCandidates; i++) {
+		displayCandiates(selCandidates, numOfCandidates);
 	}
 	cout << endl;
 }

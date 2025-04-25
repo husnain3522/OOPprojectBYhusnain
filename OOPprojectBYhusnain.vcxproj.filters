@@ -27,9 +27,6 @@
     <ClCompile Include="admin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="index.cpp">
-      <Filter>indexFile</Filter>
-    </ClCompile>
     <ClCompile Include="candidate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -47,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="nationalElection.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="index.cpp">
+      <Filter>indexFile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
