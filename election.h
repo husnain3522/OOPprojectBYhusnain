@@ -17,6 +17,7 @@ protected:
 	string electionId;
 	int numOfCandidates;
 	int duration;
+	string* selCandidatesCnic;
 public:
 
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);

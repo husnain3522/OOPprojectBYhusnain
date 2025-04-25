@@ -299,7 +299,7 @@ void election::loadElectionFromFile(string fileName) {
 		getline(electionFile, numOfCandidatesStr, '*');
 		numOfCandidates = stoi(numOfCandidatesStr);
 
-
+		//selCandidatesCnic = 
 		for (int i = 0; i < numOfCandidates; i++) {
 			
 		}
