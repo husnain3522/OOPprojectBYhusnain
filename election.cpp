@@ -298,11 +298,24 @@ void election::loadElectionFromFile(string fileName) {
 		string numOfCandidatesStr;
 		getline(electionFile, numOfCandidatesStr, '*');
 		numOfCandidates = stoi(numOfCandidatesStr);
-
+		string *candidateCnic = new string[numOfCandidates];
+		selCandidates = new candidate[numOfCandidates];
 		//selCandidatesCnic = 
 		for (int i = 0; i < numOfCandidates; i++) {
-			
+			if (i == numOfCandidates) {
+				getline(electionFile, candidateCnic[i], '\n');
+			//getCandidate
+			selCandidates[i]. getCandidateByCnic(candidateCnic[i]);
+			}
+
+			else {
+			getline(electionFile, candidateCnic[i], '*');
+			selCandidates[i].getCandidateByCnic(candidateCnic[i]);
+
+			}
+			//selCandidatesCnic[i] = candidateCnic[i];
 		}
+
 	}
 
 

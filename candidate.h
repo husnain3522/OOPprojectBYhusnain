@@ -14,7 +14,7 @@ public:
 		return cnic;
 	}
 	void setLoginStatus(bool status) { loginStatus = status; }
-
+	void getCandidateByCnic(string);
 	string getPartyName();
 	void setPartyName(string p);
 	bool isLogin(string name, string cnic, string password) override;
