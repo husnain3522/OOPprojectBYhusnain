@@ -31,7 +31,7 @@ public:
 	void setElectionId(string id);
 	string getElectionId();
 	int fileLenght(string);// checkes file lengh
-	void addElectionToFileWithCandies();
+	void addElectionToFileWithCandies(int);
 	candidate* selectCandidates();
 	void setElectionName(string name);
 	void setElectionDate(string date);

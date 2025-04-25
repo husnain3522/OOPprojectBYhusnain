@@ -36,6 +36,18 @@
     <ClCompile Include="election.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="electionManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="localElection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regionalElection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nationalElection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="user.h">
@@ -51,6 +63,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="election.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="electionManger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="localElection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="regionalElection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nationalElection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

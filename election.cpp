@@ -228,7 +228,7 @@ candidate* election::selectCandidates() {
 	return selectedCandidates;
 
 }
-void election::addElectionToFileWithCandies() {
+void election::addElectionToFileWithCandies(int timeType) {
 	cout << "Here Is list of candidates" << endl;
 	int totalCandidates = fileLenght("candidate");
 	cout << "Flile lenght is " << totalCandidates << endl;
@@ -252,7 +252,7 @@ void election::addElectionToFileWithCandies() {
 
 	//write selected candidates to file
 
-	electionFile << electionName << "*" << electionDate << "*" << electionTime << "*" << numberOfRegions ;
+	electionFile << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType ;
 	for (int i = 0; i < numberOfRegions; i++) {
 		electionFile<<"*" << regionCodes[i];
 	}

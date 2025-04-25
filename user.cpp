@@ -171,12 +171,13 @@ void user::viewElections() {
 		elec.setElectionName(electionName);
 		elec.setElectionDate(electionDate);
 		elec.setElectionTime(electionTime);
+		 
 		//elec.setRegionCodes(regionCodes, elecCodeNumberInt);
 
 
-
-
-		//cout << line << endl;
+;
 	}
+
+		//cout << line << end
 	electionFile.close();
 }

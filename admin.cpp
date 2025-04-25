@@ -107,18 +107,55 @@ void admin::addCandidate() {
 }
 
 void admin::createElection() {
-	cout << "Enter Election Name: ";
-	string name;
-	cin >> name;
+	reEnterName:
+	cout << "Enter ( 1 - 3 ) Respectively\n1 : National\n2 : Local \n3 : Regional ";
+	int choice;
+	string name; 
+	cin >> choice;
+	if (choice == 1) {
+		cout << "You have selected National Election" << endl;
+		name = "National Election";
+	}
+	else if (choice == 2) {
+		cout << "You have selected Local Election" << endl;
+		name = "Local Election";
+	}
+	else if (choice == 3) {
+		cout << "You have selected Regional Election" << endl;
+		name = "Regional Election";
+	}
+	else {
+		cout << "Invalid choice." << endl;
+		goto reEnterName;
+	}
 	cout << "Enter Election Date: ";
 	string date;
 	cin >> date;
-	cout << "Enter Election Time: ";
 	string time;
-	cin >> time;
-	cout << "Enter Number of Regions: ";
-	int numRegions;
-	cin >> numRegions;
+
+	reEnterHrs:
+	cout << "Enter Election Time :: Press 1 - 2 repectively\n1 : Hours\nDays ";
+	int choice1;
+	cin >> choice1;
+	if (choice1 == 1) {
+		cout << "You have selected Hours" << endl;
+		cout << "Enter Time in Hours: ";
+		cin >> time;
+	}
+	else if (choice1 == 2) {
+		cout << "You have selected Days" << endl;
+		cout << "Enter Time in Days: ";
+		cin >> time;
+
+	}
+	else {
+		cout << "Invalid choice." << endl;
+		goto reEnterHrs;
+	}
+
+	//cout << "Enter Number of Regions: ";
+	int numRegions=1;
+	
 	string* regionCodes = new string[numRegions];
 	for (int i = 0; i < numRegions; i++) {
 		cout << "Enter Region Code " << i + 1 << ": ";
@@ -126,6 +163,13 @@ void admin::createElection() {
 	}
 	election e(name, date, time, numRegions);
 	e.setRegionCodes(regionCodes, numRegions);
-	e.addElectionToFileWithCandies();
+	// were using numRegions due to change of plan disccused by our team
+	// here num regions show that you have slected hours or days
+	if (choice1 == 1)
+		numRegions = 1;
+	else if (choice1 == 2)
+		numRegions = 2;
+
+	e.addElectionToFileWithCandies(numRegions);
 	delete[] regionCodes;
 }
