@@ -113,6 +113,13 @@ data.
 #include"admin.h"
 #include<fstream>
 #include<string>
+#include "election.h"
+#include "candidate.h"
+#include "regionalElection.h"
+#include "localElection.h"
+#include "nationalElection.h"
+#include "electionManger.h"
+
 using namespace std;
 admin checkAdmin(string , string , string );
 voter checkVoter(string, string, string);
@@ -121,6 +128,8 @@ admin checkCandidate(string, string , string);
 
 
 int main() {
+	electionManger em;
+
 	logIn:
 	cout << "Welcome to Online Voting System" << endl;
 	cout << "1. Admin" << endl;
@@ -163,7 +172,9 @@ int main() {
 				cout << "2. Add Admin" << endl;
 				cout << "3. Add Candidate" << endl;
 				cout << "4. Create Election" << endl;
-				cout << "5. Exit" << endl;
+				cout << "5. Show ALl Election Names" << endl;
+				cout << "6. Exit" << endl;
+
 
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
@@ -181,10 +192,13 @@ int main() {
 					a.createElection();
 					break;
 				case 5 :
+					em.displayAllElectionNames();
+					break;
+				case 6:
 					a.setLoginStatus(false);
 					goto logIn;
 					break;
-					
+
 				default:
 					cout << "Invalid choice." << endl;
 				}

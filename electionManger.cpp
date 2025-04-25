@@ -9,7 +9,7 @@ int electionManger::countNumOfElections(string fileName) {
 	int count = 0;
 	ifstream file(fileName+".txt");
 	if (!file.is_open()) {
-		cerr << "Error opening file :: "<<fileName << endl;
+		cerr << "Error opening file in counting :: "<<fileName << endl;
 		return -1;
 
 	}
@@ -21,23 +21,77 @@ int electionManger::countNumOfElections(string fileName) {
 	return count;
 
 
+
 }
 electionManger::electionManger() {
-	countLocal = countNumOfElections("local");
-	countNational =  countNumOfElections("national");
-	countRegional = countNumOfElections("regional");
+	countLocal = countNumOfElections("localElection");
+	countNational =  countNumOfElections("nationalElection");
+	countRegional = countNumOfElections("regionalElection");
 	local = new localElection[countLocal];
 	national = new nationalElection[countNational];
 	regional = new regionalElection[countRegional];
-	ifstream localFile("local.txt");
+	ifstream localFile("localElection.txt");
 	if (!localFile.is_open()) {
 		cerr << "Error opening local file to load data." << endl;
 		return;
 	}
 	for (int i = 0; i < countLocal; i++) {
-		
+		local[i].loadElectionFromFile("localElection");
 	}
+	ifstream nationalFile("nationalElection.txt");
+	if (!nationalFile.is_open()) {
+		cerr << "Error opening national file to load data." << endl;
+		return;
+	}
+	for (int i = 0; i < countNational; i++) {
+		national[i].loadElectionFromFile("nationalElection");
+	}
+	ifstream regionalFile("regionalElection.txt");
+	if (!regionalFile.is_open()) {
+		cerr << "Error opening regional file to load data." << endl;
+		return;
+	}
+	for (int i = 0; i < countRegional; i++) {
+		regional[i].loadElectionFromFile("regionalElection");
+	}
+	localFile.close();
+	nationalFile.close();
+	regionalFile.close();
 
 
 
+
+}
+void electionManger::displayAllElectionNames() {
+
+	if (countLocal == 0) {
+		cout << "No Local Election" << endl;
+	}
+	else {
+	cout << "Local Elections: " << endl;
+
+	for (int i = 0; i < countLocal; i++) {
+		cout << local[i].getElectionName() << endl;
+	}
+	}
+	if (countNational == 0) {
+		cout << "No National Election" << endl;;
+	}
+	else {
+
+	cout << "National Elections: " << endl;
+	for (int i = 0; i < countNational; i++) {
+		cout << national[i].getElectionName() << endl;
+	}
+	}
+	if (countRegional == 0) {
+		cout << "No Regional Election"<<endl;
+	}
+	else {
+
+	cout << "Regional Elections: " << endl;
+	for (int i = 0; i < countRegional; i++) {
+		cout << regional[i].getElectionName() << endl;
+	}
+	}
 }

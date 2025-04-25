@@ -103,5 +103,8 @@
     <Text Include="regionalElection.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="nationalElection.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

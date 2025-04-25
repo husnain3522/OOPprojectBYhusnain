@@ -275,11 +275,11 @@ void election::loadElectionFromFile(string fileName) {
 		cerr << "Error opening file." << endl;
 		return;
 	}
-	//string electionName, electionDate, electionTime, regionCode;
-	//string duration;
-	//string selectedCandi;
-	//int selectedCandiInt;
-	//int* regionCodes;
+	string electionName, electionDate, electionTime, regionCode;
+	string duration;
+	string selectedCandi;
+	int selectedCandiInt;
+	int* regionCodes;
 	for (int i = 0; i < fileLen; i++) {
 		getline(electionFile, electionName, '*');
 		getline(electionFile, electionDate, '*');
@@ -290,18 +290,13 @@ void election::loadElectionFromFile(string fileName) {
 			getline(electionFile, regionCode, '*');
 			regionCodes[j] = stoi(regionCode);
 		}*/
-		string durationStr;
-		getline(electionFile, durationStr, '*');
-		duration = stoi(durationStr);
-
+		getline(electionFile, duration, '*');
 		getline(electionFile, regionCode, '*');
-		string numOfCandidatesStr;
-		getline(electionFile, numOfCandidatesStr, '*');
-		numOfCandidates = stoi(numOfCandidatesStr);
 
 
-		for (int i = 0; i < numOfCandidates; i++) {
-			
+		while (getline(electionFile, selectedCandi, '*')) {
+			selectedCandiInt = stoi(selectedCandi);
+			//cout << "Selected Candidate: " << selectedCandiInt << endl;
 		}
 	}
 

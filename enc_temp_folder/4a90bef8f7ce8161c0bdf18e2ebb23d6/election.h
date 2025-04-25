@@ -12,11 +12,9 @@ protected:
 	string electionDate;
 	string electionTime;
 	string* regionCodes;
-	string regionCode;
 	int numberOfRegions;
 	string electionId;
 	int numOfCandidates;
-	int duration;
 public:
 
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);

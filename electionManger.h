@@ -12,7 +12,7 @@
 #include "nationalElection.h"
 
 using namespace std;
-class electionManger
+class electionManger /*:public election*/
 {
 //protected:
 private:
@@ -23,6 +23,18 @@ private:
 public:
 	//well use this class to get all data to load from files and be ready when to evaluate what
 	int countNumOfElections(string);
+	electionManger();
+	//electionManger() {
+	//	countLocal = 0;
+	//	countNational = 0;
+	//	countRegional = 0;
+	//	local = nullptr;
+	//	national = nullptr;
+	//	regional = nullptr;
+	//}
+	void displayAllElectionNames();
+	void displayAllElectionInDetails();
+	void displayAllElectionForCasting();
 
 	localElection* getLocalElections();
 	nationalElection* getNationalElections();
