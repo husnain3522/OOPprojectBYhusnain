@@ -106,7 +106,7 @@ void admin::addCandidate() {
 
 }
 
-void admin::createElection() {
+void admin::createElection(int id) {
 	reEnterName:
 	cout << "Enter ( 1 - 3 ) Respectively\n1 : National\n2 : Local \n3 : Regional ";
 	int choice;
@@ -136,7 +136,7 @@ void admin::createElection() {
 	string date;
 	cin >> date;
 	string time;
-
+	
 	reEnterHrs:
 	cout << "Enter Election Time :: Press 1 - 2 repectively\n1 : Hours\nDays ";
 	int choice1;
@@ -166,6 +166,7 @@ void admin::createElection() {
 		cin >> regionCodes[i];
 	}
 	election e(name, date, time, numRegions);
+	e.setElectionId(id);
 	e.setRegionCodes(regionCodes, numRegions);
 	// were using numRegions due to change of plan disccused by our team
 	// here num regions show that you have slected hours or days

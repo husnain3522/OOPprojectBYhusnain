@@ -124,11 +124,14 @@ using namespace std;
 admin checkAdmin(string , string , string );
 voter checkVoter(string, string, string);
 admin checkCandidate(string, string , string);
+int electionIdGenerator();
 
-
- int election::electionIdCounter = 0;
+ int election::electionIdCounter = 3;
 int main() {
+	
+
 	electionManger em;
+	//cout << "Id genereator :: " << electionIdGenerator() << endl;
 	//em.local->selCandidates[0].voteCount = 69;
 	//cout<< em.local->selCandidates[0].voteCount;
 
@@ -195,15 +198,21 @@ int main() {
 					goto adminPanel;
 
 					break;
-				case 4:
-					a.createElection();
+				case 4: {
+
+					int id =  electionIdGenerator();
+
+					a.createElection(id);
+					
 					em.refreshAllData();
 					goto adminPanel;
 
 					break;
+				}
+
 				case 5 :
-					//em.displayAllElectionNames();
-					em.displayAllElectionInDetails();
+					em.displayAllElectionNames();
+					//em.displayAllElectionInDetails();
 					//em.displayAllCandidates();
 
 					break;
@@ -327,4 +336,24 @@ voter checkVoter(string inputCnic, string inputPassword, string fileName) {
 
 	userFile.close();
 	return voter();
+}
+int electionIdGenerator() {
+	int electionId;
+	ifstream file("electionId.txt");
+	if (!file.is_open()) {
+		cerr << "Error opening file." << endl;
+		return -1;
+	}
+	file >> electionId;
+	file.close();
+	ofstream fileOut("electionId.txt");
+	if (!fileOut.is_open()) {
+		cerr << "Error opening file." << endl;
+		return -1;
+	}
+	electionId++;
+	fileOut << electionId;
+	fileOut.close();
+	return electionId;
+
 }

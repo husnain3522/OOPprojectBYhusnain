@@ -24,8 +24,10 @@ public:// please change
 
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);
 	election() {
-		electionIdCounter++;
-		electionId = electionIdCounter;
+		//electionIdCounter++;
+		//electionId = electionIdCounter;
+		electionId = -1;
+		cout << "ID" << electionId << endl;
 		electionName = "";
 		electionDate = "";
 		electionTime = "";
@@ -33,11 +35,25 @@ public:// please change
 		numberOfRegions = 0;
 		//electionId = "";
 	};
+	int getElectionIdCounter() {
+		return electionIdCounter;
+	}
+	void setElectionIdCounter(int id) {
+		electionIdCounter = id;
+	}
+	void incrementElectionIdCounter() {
+		electionIdCounter++;
+	}
+
 	candidate* getCandidateArray();
 	void displayCandiates(candidate*,int);
 	election(string, string, string, int);
-	void setElectionId(string id);
-	string getElectionId();
+	void setElectionId(int id) {
+		electionId = id;
+	}
+	int getElectionId() {
+		return electionId;
+	}
 	int fileLenght(string);// checkes file lengh
 	void addElectionToFileWithCandies(int,string);
 	candidate* selectCandidates();

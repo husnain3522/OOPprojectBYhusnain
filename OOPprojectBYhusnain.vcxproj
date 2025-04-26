@@ -155,6 +155,7 @@
     <Text Include="admin.txt" />
     <Text Include="candidate.txt" />
     <Text Include="electionData.txt" />
+    <Text Include="electionId.txt" />
     <Text Include="lenghOfSelectedCandies.txt" />
     <Text Include="localElection.txt" />
     <Text Include="nationalElection.txt" />

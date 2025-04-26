@@ -257,7 +257,7 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 
 	//write selected candidates to file
 
-	electionFile<<electionId << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
+	electionFile<<electionId<<"*" << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
 	for (int i = 0; i < numberOfRegions; i++) {
 		electionFile<<"*" << regionCodes[i]<< "*" << selectedCandidatesLength;
 	}
@@ -289,6 +289,7 @@ void election::loadElectionFromFile(string fileName) {
 	for (int i = 0; i < fileLen; i++) {
 		getline(electionFile, electionIdStr, '*');
 		electionId = stoi(electionIdStr); 
+		cout << "e;ection id in load is " << electionId << endl;
 		getline(electionFile, electionName, '*');
 		getline(electionFile, electionDate, '*');
 		getline(electionFile, electionTime, '*');

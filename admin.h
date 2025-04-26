@@ -21,7 +21,7 @@ public:
 	void addVoter();
 	void addAdmin();
 	void addCandidate();
-	void createElection();
+	void createElection(int);
 
 };
 

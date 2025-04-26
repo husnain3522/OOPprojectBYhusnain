@@ -74,7 +74,9 @@ void electionManger::displayAllElectionNames() {
 	cout << "Local Elections: " << endl;
 
 	for (int i = 0; i < countLocal; i++) {
-		cout << local[i].getElectionName() << endl;
+		cout << "Name :: " << local[i].getElectionName() << endl;
+		//cout << "ID :: " << local[i] << endl;
+		cout << "ID :: " << local[i].getElectionId() << endl;
 	}
 	}
 	if (countNational == 0) {
@@ -84,7 +86,8 @@ void electionManger::displayAllElectionNames() {
 
 	cout << "National Elections: " << endl;
 	for (int i = 0; i < countNational; i++) {
-		cout << national[i].getElectionName() << endl;
+		cout<<"Name :: " << national[i].getElectionName() << endl;
+		cout << "ID :: " << national[i].getElectionId() << endl;
 	}
 	}
 	if (countRegional == 0) {
@@ -94,7 +97,9 @@ void electionManger::displayAllElectionNames() {
 
 	cout << "Regional Elections: " << endl;
 	for (int i = 0; i < countRegional; i++) {
-		cout << regional[i].getElectionName() << endl;
+		cout<<"Name :: " << regional[i].getElectionName() << endl;
+		cout << "ID :: " << regional[i].getElectionId() << endl;
+
 	}
 	}
 }

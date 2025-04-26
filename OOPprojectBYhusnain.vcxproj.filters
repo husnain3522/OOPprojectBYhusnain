@@ -112,5 +112,8 @@
     <Text Include="nationalElection.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="electionId.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
