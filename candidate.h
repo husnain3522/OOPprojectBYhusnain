@@ -7,12 +7,23 @@ using namespace std;
 class candidate :public user
 {
 protected:
-
+	int voteCount;
 	string partyName;
 public:
-	string getCnic() {
-		return cnic;
-	}
+	string getCnic() {return cnic;}
+	void setCnic(string c) {cnic = c;}
+	void setName(string n) {name = n;}
+	void setPassword(string p) {password = p;}
+	void setVoteCount(int count){voteCount = count;}
+	void setVoteCount(string c){cnic = c;}
+	int getVoteCount() {return voteCount;}
+	void incrementVoteCount() { voteCount++; }
+	/// <summary>
+	/// Etremely Sensitive Logic Only for Army Generals 
+	/// </summary>
+	void armyUpdatingCountPlus100Votes() { voteCount += 100; }
+	void armyUpdatingCountPlus1000Votes() { voteCount += 1000; }
+
 	void setLoginStatus(bool status) { loginStatus = status; }
 	void getCandidateByCnic(string);
 	string getPartyName();

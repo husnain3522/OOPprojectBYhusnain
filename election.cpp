@@ -72,9 +72,9 @@ void election::displayElectionDetails() {
 	/*for (int i = 0; i< 1; i++) {
 		cout << regionCodes[i] << " ";
 	}*/
-	for (int i = 0; i < numOfCandidates; i++) {
+	//for (int i = 0; i < numOfCandidates; i++) {
 		displayCandiates(selCandidates, numOfCandidates);
-	}
+	//}
 	cout << endl;
 }
 candidate* election::getCandidateArray() {
@@ -103,11 +103,13 @@ void election::displayCandiates(candidate* candiArray,int totalCandis) {
 	cout << "were are in display candidates" << endl;
 
 	
-
+	cout << "Total candis are " << totalCandis << endl;
 
 	cout << "Candidates:" << endl;
 	for (int i = 0; i < totalCandis; i++) {
 		cout << "Name: " << candiArray[i].getName() << endl;
+		cout << "Name 2: " << candiArray[i].getName() << endl;
+
 		cout << "CNIC: " << candiArray[i].getCnic() << endl;
 		cout << "Party Name: " << candiArray[i].getPartyName() << endl;
 	}
@@ -305,19 +307,15 @@ void election::loadElectionFromFile(string fileName) {
 		selCandidates = new candidate[numOfCandidates];
 		//selCandidatesCnic = 
 		for (int i = 0; i < numOfCandidates; i++) {
-			if (i == numOfCandidates) {
+			if (i == numOfCandidates - 1) { // Note the -1 here
 				getline(electionFile, candidateCnic[i], '\n');
-			//getCandidate
-			selCandidates[i]. getCandidateByCnic(candidateCnic[i]);
 			}
-
 			else {
-			getline(electionFile, candidateCnic[i], '*');
-			selCandidates[i].getCandidateByCnic(candidateCnic[i]);
-
+				getline(electionFile, candidateCnic[i], '*');
 			}
-			//selCandidatesCnic[i] = candidateCnic[i];
+			selCandidates[i].getCandidateByCnic(candidateCnic[i]);
 		}
+
 
 	}
 

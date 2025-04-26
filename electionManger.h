@@ -32,6 +32,8 @@ public:
 	//	national = nullptr;
 	//	regional = nullptr;
 	//}
+	void refreshAllData();
+	void displayAllCandidates();
 	void displayAllElectionNames();
 	void displayAllElectionInDetails();
 	void displayAllElectionForCasting();

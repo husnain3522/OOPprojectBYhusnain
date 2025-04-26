@@ -136,6 +136,7 @@
     <ClCompile Include="nationalElection.cpp" />
     <ClCompile Include="regionalElection.cpp" />
     <ClCompile Include="user.cpp" />
+    <ClCompile Include="vote.cpp" />
     <ClCompile Include="voter.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="nationalElection.h" />
     <ClInclude Include="regionalElection.h" />
     <ClInclude Include="user.h" />
+    <ClInclude Include="vote.h" />
     <ClInclude Include="voter.h" />
   </ItemGroup>
   <ItemGroup>

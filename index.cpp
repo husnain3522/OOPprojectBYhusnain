@@ -167,6 +167,8 @@ int main() {
 
 
 			int adminChoice;
+			adminPanel:
+			cout << "Welcome To Admin Panel" << endl;
 			do {
 				cout << "1. Add Voter" << endl;
 				cout << "2. Add Admin" << endl;
@@ -174,26 +176,33 @@ int main() {
 				cout << "4. Create Election" << endl;
 				cout << "5. Show ALl Election Names" << endl;
 				cout << "6. Exit" << endl;
-
-
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
 				switch (adminChoice) {
 				case 1:
 					a.addVoter();
+					goto adminPanel;
 					break;
 				case 2:
 					a.addAdmin();
+					goto adminPanel;
+
 					break;
 				case 3:
 					a.addCandidate();
+					goto adminPanel;
+
 					break;
 				case 4:
 					a.createElection();
+					em.refreshAllData();
+					goto adminPanel;
+
 					break;
 				case 5 :
 					//em.displayAllElectionNames();
 					em.displayAllElectionInDetails();
+					//em.displayAllCandidates();
 
 					break;
 				case 6:

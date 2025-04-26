@@ -18,6 +18,7 @@ protected:
 	int numOfCandidates;
 	int duration;
 	candidate * selCandidates;
+	
 public:
 
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);

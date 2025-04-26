@@ -23,9 +23,9 @@ int electionManger::countNumOfElections(string fileName) {
 
 
 }
-electionManger::electionManger() {
+void electionManger::refreshAllData() {
 	countLocal = countNumOfElections("localElection");
-	countNational =  countNumOfElections("nationalElection");
+	countNational = countNumOfElections("nationalElection");
 	countRegional = countNumOfElections("regionalElection");
 	local = new localElection[countLocal];
 	national = new nationalElection[countNational];
@@ -60,6 +60,9 @@ electionManger::electionManger() {
 
 
 
+}
+electionManger::electionManger() {
+	refreshAllData();
 
 }
 void electionManger::displayAllElectionNames() {
@@ -109,4 +112,19 @@ void electionManger::displayAllElectionInDetails() {
 	for (int i = 0; i < countRegional; i++) {
 		regional[i].displayElectionDetails();
 	}
+}
+void electionManger::displayAllCandidates() {
+	
+	cout << "Local Candidates: " << endl;
+	for (int i = 0; i < countLocal; i++) {
+		local[i].displayCandiates(local[i].getCandidateArray(), local[i].getNumberOfRegions());
+	}
+	//cout << "National Candidates: " << endl;
+	//for (int i = 0; i < countNational; i++) {
+	//	national[i].displayCandiates(national[i].getCandidateArray(), national[i].getNumberOfRegions());
+	//}
+	//cout << "Regional Candidates: " << endl;
+	//for (int i = 0; i < countRegional; i++) {
+	//	regional[i].displayCandiates(regional[i].getCandidateArray(), regional[i].getNumberOfRegions());
+	//}
 }

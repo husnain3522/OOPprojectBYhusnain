@@ -48,6 +48,9 @@
     <ClCompile Include="index.cpp">
       <Filter>indexFile</Filter>
     </ClCompile>
+    <ClCompile Include="vote.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="user.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nationalElection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vote.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
