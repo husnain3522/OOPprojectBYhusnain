@@ -5,6 +5,6 @@ protected:
 	int voteCount;
 public:
 	vote() {};
-	void setVoteCount
+	//void setVoteCount
 };
 

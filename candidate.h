@@ -10,6 +10,13 @@ protected:
 	int voteCount;
 	string partyName;
 public:
+	candidate() {
+		voteCount = 0;
+		partyName = "";
+		name = "";
+		cnic = "";
+		password = "";
+	}
 	string getCnic() {return cnic;}
 	void setCnic(string c) {cnic = c;}
 	void setName(string n) {name = n;}
@@ -37,5 +44,6 @@ public:
 	/*candidate(string n, string cnin, string p,) : user(n, cnic, p) {
 		
 	};*/
+	
 };
 

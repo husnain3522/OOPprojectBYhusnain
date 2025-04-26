@@ -14,21 +14,24 @@ protected:
 	string* regionCodes;
 	string regionCode;
 	int numberOfRegions;
-	string electionId;
+	int electionId;
 	int numOfCandidates;
 	int duration;
 	candidate * selCandidates;
+ static	int electionIdCounter;
 	
-public:
+public:// please change
 
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);
 	election() {
+		electionIdCounter++;
+		electionId = electionIdCounter;
 		electionName = "";
 		electionDate = "";
 		electionTime = "";
 		regionCodes = nullptr;
 		numberOfRegions = 0;
-		electionId = "";
+		//electionId = "";
 	};
 	candidate* getCandidateArray();
 	void displayCandiates(candidate*,int);

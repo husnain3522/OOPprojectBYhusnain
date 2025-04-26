@@ -126,9 +126,11 @@ voter checkVoter(string, string, string);
 admin checkCandidate(string, string , string);
 
 
-
+ int election::electionIdCounter = 0;
 int main() {
 	electionManger em;
+	//em.local->selCandidates[0].voteCount = 69;
+	//cout<< em.local->selCandidates[0].voteCount;
 
 	logIn:
 	cout << "Welcome to Online Voting System" << endl;

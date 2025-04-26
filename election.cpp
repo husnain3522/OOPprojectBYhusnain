@@ -26,12 +26,12 @@ election::election(string name = "", string date = "0", string time = "0", int n
 	numberOfRegions = numRegioons;
 	regionCodes = new string[numRegioons];
 }
-void election::setElectionId(string id) {
-	electionId = id;
-}
-string election::getElectionId() {
-	return electionId;
-}
+//void election::setElectionId(int id) {
+//	electionId = id;
+//}
+//int election::getElectionId() {
+//	return electionId;
+//}
 void election::setElectionName(string name) {
 	electionName = name;
 }
@@ -257,7 +257,7 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 
 	//write selected candidates to file
 
-	electionFile << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
+	electionFile<<electionId << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
 	for (int i = 0; i < numberOfRegions; i++) {
 		electionFile<<"*" << regionCodes[i]<< "*" << selectedCandidatesLength;
 	}
@@ -285,7 +285,10 @@ void election::loadElectionFromFile(string fileName) {
 	//string selectedCandi;
 	//int selectedCandiInt;
 	//int* regionCodes;
+	string electionIdStr;
 	for (int i = 0; i < fileLen; i++) {
+		getline(electionFile, electionIdStr, '*');
+		electionId = stoi(electionIdStr); 
 		getline(electionFile, electionName, '*');
 		getline(electionFile, electionDate, '*');
 		getline(electionFile, electionTime, '*');

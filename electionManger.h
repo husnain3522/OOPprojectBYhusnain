@@ -20,7 +20,7 @@ private:
 	nationalElection *national;
 	regionalElection *regional;
 	int countLocal, countNational, countRegional;
-public:
+public://change please
 	//well use this class to get all data to load from files and be ready when to evaluate what
 	int countNumOfElections(string);
 	electionManger();
