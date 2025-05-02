@@ -18,6 +18,11 @@ public:
 		password = "";
 	}
 	string getCnic() {return cnic;}
+	int getCnicInt() { 
+		int cnicInt = stoi(cnic);
+
+		return cnicInt; }
+
 	void setCnic(string c) {cnic = c;}
 	void setName(string n) {name = n;}
 	void setPassword(string p) {password = p;}

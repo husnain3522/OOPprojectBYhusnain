@@ -103,6 +103,27 @@ void electionManger::displayAllElectionNames() {
 	}
 	}
 }
+void electionManger::displayLocalElections(){
+	cout << "Local Elections: " << endl;
+	for (int i = 0; i < countLocal; i++) {
+		cout << "Name :: " << local[i].getElectionName() << endl;
+		cout << "ID :: " << local[i].getElectionId() << endl;
+	}
+}
+void electionManger::displayNationalElections() {
+	cout << "National Elections: " << endl;
+	for (int i = 0; i < countNational; i++) {
+		cout << "Name :: " << national[i].getElectionName() << endl;
+		cout << "ID :: " << national[i].getElectionId() << endl;
+	}
+}
+void electionManger::displayRegionalElections() {
+	cout << "Regional Elections: " << endl;
+	for (int i = 0; i < countRegional; i++) {
+		cout << "Name :: " << regional[i].getElectionName() << endl;
+		cout << "ID :: " << regional[i].getElectionId() << endl;
+	}
+}
  
 void electionManger::displayAllElectionInDetails() {
 	cout << "Local Elections: " << endl;
@@ -132,4 +153,79 @@ void electionManger::displayAllCandidates() {
 	//for (int i = 0; i < countRegional; i++) {
 	//	regional[i].displayCandiates(regional[i].getCandidateArray(), regional[i].getNumberOfRegions());
 	//}
+}
+void electionManger::casteVoteInElection(election* e, int size) {
+
+	cout << "Enter Election ID: ";
+	int id;
+	cin >> id;
+	int index = -1;
+	for (int i = 0; i < size; i++) {
+		if (e[i].getElectionId() == id) {
+			index = i;
+			cout << "Election Found :: " << index << endl;
+			break;
+		}
+	}
+	if (index != -1) {
+		e[index].displayCandiates(e[index].getSelectedCandidates(), e[index].getTotalCandidates());
+		cout << "Enter Candidate ID: ";
+		int candidateId;
+		cin >> candidateId;
+		
+		// Check if the candidate ID is valid
+		for (int i = 0; i < e[index].getTotalCandidates(); i++) {
+			if (e[index].getSelectedCandidates()[i].getCnicInt() == candidateId) {
+				e[index].castVote(voterr, candidateId);
+				cout << "Vote casted successfully." << endl;
+				return;
+			}
+		}
+		
+	}
+	else {
+		cout << "Election not found." << endl;
+	}
+
+}
+void electionManger::castVote(){
+	reSelectVoteType:
+	cout << "Enter Which type of Election you want to cast vote for" << endl;
+	cout << "1. Local Election" << endl;
+	cout << "2. National Election" << endl;
+	cout << "3. Regional Election" << endl;
+	int choice;
+	cin >> choice;
+	if (choice == 1) {
+		cout << "Local Election" << endl;
+		displayLocalElections();
+		casteVoteInElection(local, countLocal);
+
+	}
+	else if (choice == 2) {
+		cout << "National Election" << endl;
+		displayNationalElections();
+		casteVoteInElection(national, countNational);
+	}
+	else if (choice == 3) {
+		cout << "Regional Election" << endl;
+		displayRegionalElections();
+		casteVoteInElection(regional, countRegional);
+	}
+	else {
+		cout << "Invalid choice." << endl;
+		goto reSelectVoteType;
+	}
+	
+
+
+}
+localElection* electionManger::getLocalElections() {
+	return local;
+}
+nationalElection* electionManger::getNationalElections() {
+	return national;
+}
+regionalElection* electionManger::getRegionalElections() {
+	return regional;
 }

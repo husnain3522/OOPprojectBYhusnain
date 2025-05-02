@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include "candidate.h"
+#include "voter.h"
 using namespace std;
 
 class election
@@ -21,7 +22,9 @@ protected:
  static	int electionIdCounter;
 	
 public:// please change
-
+	candidate* getSelectedCandidates() {
+		return selCandidates;
+	}
 	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);
 	election() {
 		//electionIdCounter++;
@@ -38,6 +41,10 @@ public:// please change
 	int getElectionIdCounter() {
 		return electionIdCounter;
 	}
+	int getTotalCandidates() {
+		return numOfCandidates;
+	}
+
 	void setElectionIdCounter(int id) {
 		electionIdCounter = id;
 	}
@@ -67,6 +74,7 @@ public:// please change
 	string* getRegionCodes();
 	int getNumberOfRegions();
 	void displayElectionDetails();
+	void castVote(voter*, int);
 	void saveElectionToFile();
 	void loadElectionFromFile(string);
 	void addElection();

@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include "candidate.h"
+#include "voter.h"
 using namespace std;
 
 int election::fileLenght(string fileName) {
@@ -324,4 +325,14 @@ void election::loadElectionFromFile(string fileName) {
 	}
 
 
+}
+void election::castVote(voter* v, int candidateId) {
+	cout << "Casting vote for candidate with ID: " << candidateId << endl;
+	for (int i = 0; i < numOfCandidates; i++) {
+		if (selCandidates[i].getCnicInt() == candidateId) {
+			selCandidates[i].incrementVoteCount();
+			cout << "Vote casted successfully for candidate: " << selCandidates[i].getName() << endl;
+			break;
+		}
+	}
 }

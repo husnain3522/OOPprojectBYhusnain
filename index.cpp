@@ -248,6 +248,8 @@ int main() {
 		if (v.getLoginStatus() == true) {
 			cout << "Welcome To Voter Panel" << endl;
 			int voterChoice;
+			em.setVoter(&v);
+			/*em.getVoter().display();*/
 			do {
 				cout << "1. View Elections" << endl;
 				cout << "2. Cast Vote" << endl;
@@ -257,10 +259,10 @@ int main() {
 				cin >> voterChoice;
 				switch (voterChoice) {
 				case 1:
-					//v.viewElections();
+				em.displayAllElectionNames();
 					break;
 				case 2:
-					//v.castVote();
+					em.castVote();
 					break;
 				case 3:
 					//v.checkVoteStatus();
