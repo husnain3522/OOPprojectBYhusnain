@@ -151,12 +151,12 @@ int* electionManger::displayNationalElections() {
 	else {
 		int counter = 0;
 
-		int* Choices = new int[countNational];
+		int* Choices = new int[countNational+1];
 		cout << "National Elections: " << endl;
 		for (int i = 0; i < countNational; i++) {
 			cout << "Name :: " << national[i].getElectionName() << endl;
 			cout << "ID :: " << national[i].getElectionId() << endl;
-			Choices[i + 1] = regional[i].getElectionId();
+			Choices[i + 1] = national[i].getElectionId();
 			counter++;
 
 
@@ -179,7 +179,7 @@ int* electionManger::displayRegionalElections() {
 	}
 	else {
 		int counter = 0;
-		int* Choices = new int[countRegional];
+		int* Choices = new int[countRegional+1];
 
 		cout << "Regional Elections: " << endl;
 		for (int i = 0; i < countRegional; i++) {
@@ -260,7 +260,8 @@ void electionManger::casteVoteInElection(election* e, int size, int* choices) {
 	int id;
 	cin >> id;
 	bool isElectionFound = false;
-	for (int i = 1;i < choices[0];i++) {
+	cout << "Choices :: at 0 is " << choices[0] << endl;
+	for (int i = 1;i < choices[0]+1;i++) {
 		cout << "choices::::" << choices[i] << endl;
 		if (choices[i] == id) {
 			isElectionFound = true;
@@ -268,7 +269,7 @@ void electionManger::casteVoteInElection(election* e, int size, int* choices) {
 		}
 
 	}
-	if (!isElectionFound) {
+	if (isElectionFound==false) {
 		cout << "Election not found...." << endl;
 		return;
 	}
