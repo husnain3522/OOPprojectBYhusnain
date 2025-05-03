@@ -89,6 +89,7 @@ public:// please change
 	int addArrayToTempFileThanReturnArraySize(string*, string);
 	void saveCandidateVotesToFile(candidate* candi);
 	void saveElectionVotesToFile();
+	void addElectionToFileWithCandiesToMainFile(int timeType, string fileName);
 };
 
 

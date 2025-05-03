@@ -46,7 +46,7 @@ void electionManger::refreshAllData() {
 		cerr << "Error opening national file to load data." << endl;
 		return;
 	}
-	cout << "before region lodin elction" << endl;
+	//cout << "before region lodin elction" << endl;
 	load = 0;
 	for (int i = 0; i < countNational; i++) {
 		load++;
