@@ -90,6 +90,8 @@ public:// please change
 	void saveCandidateVotesToFile(candidate* candi);
 	void saveElectionVotesToFile();
 	void addElectionToFileWithCandiesToMainFile(int timeType, string fileName);
+	string getPartyNameToSetInCandidate(int id);
+
 };
 
 
