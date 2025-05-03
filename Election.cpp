@@ -255,25 +255,83 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 	cout << "after selected candis" << endl;
 	//find lenght of selected candidates
 	int selectedCandidatesLength = len;
-
+	//election is saving to 3 files 
+	// 1 for normal usage
+	// 2 for data backup
+	// 3 for names
 	//write selected candidates to file
 	ofstream electionVoteFile(to_string(electionId) + ".txt", ios::app);
+	ofstream electionVoteFileToMain("electionData.txt", ios::app);
+	ofstream electionNameFile("electionNames.txt", ios::app);
+	electionNameFile << electionId << "*" << electionName << endl;
+	electionNameFile.close();
+
 	electionFile<<electionId<<"*" << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
+	electionVoteFileToMain << electionId << "*" << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
+
 	for (int i = 0; i < numberOfRegions; i++) {
-		electionFile<<"*" << regionCodes[i]<< "*" << selectedCandidatesLength;
+		electionFile           <<"*" << regionCodes[i]<< "*" << selectedCandidatesLength;
+		electionVoteFileToMain <<"*" << regionCodes[i]<< "*" << selectedCandidatesLength;
 	}
 	for (int i = 0; i < selectedCandidatesLength; i++) {
 		electionFile << "*" << candiArray[i].getCnic();
+		electionVoteFileToMain << "*" << candiArray[i].getCnic();
 		electionVoteFile << electionId << "*" << candiArray[i].getCnic() << "*" << 0<<endl;
 	}
 	electionFile << endl;
+	electionVoteFileToMain << endl;
+	electionVoteFileToMain.close();
 	electionVoteFile.close();
+	//addElectionToFileWithCandiesToMainFile(timeType, "electionData");
+
+
+
+
 	cout << "Election saved to file." << endl;
 
 
 
 
 }
+//
+//void election::addElectionToFileWithCandiesToMainFile(int timeType, string fileName) {
+//	cout << "Here Is list of candidates" << endl;
+//	int totalCandidates = fileLenght("candidate");
+//	cout << "Flile lenght is " << totalCandidates << endl;
+//	candidate* candiArray = new candidate[totalCandidates];
+//	ofstream electionFile(fileName + ".txt", ios::app);
+//
+//	if (!electionFile.is_open()) {
+//		cerr << "Error opening file." << endl;
+//		return;
+//	}
+//	cout << "selected candis" << endl;
+//
+//	candiArray = selectCandidates();
+//
+//	int len;
+//	ifstream fileF("lenghOfSelectedCandies.txt");
+//	fileF >> len;
+//	cout << "after selected candis" << endl;
+//	//find lenght of selected candidates
+//	int selectedCandidatesLength = len;
+//
+//	//write selected candidates to file
+//	ofstream electionVoteFile(to_string(electionId) + ".txt", ios::app);
+//	electionFile << electionId << "*" << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
+//	for (int i = 0; i < numberOfRegions; i++) {
+//		electionFile << "*" << regionCodes[i] << "*" << selectedCandidatesLength;
+//	}
+//	for (int i = 0; i < selectedCandidatesLength; i++) {
+//		electionFile << "*" << candiArray[i].getCnic();
+//		electionVoteFile << electionId << "*" << candiArray[i].getCnic() << "*" << 0 << endl;
+//	}
+//	electionFile << endl;
+//	electionVoteFile.close();
+//	cout << "Election saved to file." << endl;
+//
+//
+//}
 
 void election::loadElectionFromFile(string fileName,int load) {
 

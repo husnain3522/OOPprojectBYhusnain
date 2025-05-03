@@ -55,6 +55,8 @@ public://change please
 	bool checkIfUserAlreadyVoted(int);
 	void saveVoterVoteStatusToFile(int);
 	void saveCandidateVotesToFile(int);
+	void checkVoteHistory();
+	string getElectionNameById(int id);
 
 
 };

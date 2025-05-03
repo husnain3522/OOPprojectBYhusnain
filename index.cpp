@@ -265,7 +265,9 @@ int main() {
 					em.castVote();
 					break;
 				case 3:
-					//v.checkVoteStatus();
+					//check vvote history
+					// 
+					em.checkVoteHistory();
 					break;
 				case 4:
 					v.setLoginStatus(false);

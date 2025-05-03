@@ -9,12 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="indexFile">
       <UniqueIdentifier>{7fb4fb57-f258-4efe-99a8-f524c3c1b8ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="indexFile\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,37 +86,40 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="user.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="admin.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="voter.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="candidate.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="electionData.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="lenghOfSelectedCandies.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="localElection.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="regionalElection.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="nationalElection.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="electionId.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
+    </Text>
+    <Text Include="electionNames.txt">
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
     <Text Include="voterVoteStatus.txt">
-      <Filter>Header Files</Filter>
+      <Filter>indexFile\Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

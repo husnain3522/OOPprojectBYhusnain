@@ -374,3 +374,42 @@ nationalElection* electionManger::getNationalElections() {
 regionalElection* electionManger::getRegionalElections() {
 	return regional;
 }
+void electionManger::checkVoteHistory() {
+	ifstream historyFile("voterVoteStatus.txt");	
+	if (!historyFile.is_open()) {
+		cerr << "Error opening file to check vote history." << endl;
+		return;
+	}
+	cout << "History Of Elections You Voted For" << endl;
+	string idStr, voterCnicStr;
+	int electionIdInt;
+	while (getline(historyFile, idStr, '*')) {
+		electionIdInt = stoi(idStr);
+		getline(historyFile, voterCnicStr, '\n');
+		if (voterCnicStr == voterr->getCnic()) {
+			cout << "Election ID: " << idStr ;
+			cout << " :: ElectionName : " <<getElectionNameById(electionIdInt)  << endl;
+		}
+	}
+	historyFile.close();
+	cout << "End Of History" << endl;
+
+
+}
+string electionManger::getElectionNameById(int id) {
+
+	ifstream checkNameFile("electionNames.txt");
+	if (!checkNameFile.is_open()) {
+		cerr << "Error opening file to check election names." << endl;
+		return "";
+	}
+	string electionId, electionName;
+	while (getline(checkNameFile, electionId, '*')) {
+		getline(checkNameFile, electionName, '\n');
+		if (stoi(electionId) == id) {
+			checkNameFile.close();
+			return electionName;
+		}
+	}
+
+}
