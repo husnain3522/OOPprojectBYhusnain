@@ -7,9 +7,9 @@ using namespace std;
 int electionManger::countNumOfElections(string fileName) {
 	// Implement the logic to count local elections
 	int count = 0;
-	ifstream file(fileName+".txt");
+	ifstream file(fileName + ".txt");
 	if (!file.is_open()) {
-		cerr << "Error opening file in counting :: "<<fileName << endl;
+		cerr << "Error opening file in counting :: " << fileName << endl;
 		return -1;
 
 	}
@@ -39,7 +39,7 @@ void electionManger::refreshAllData() {
 	int load = 0;
 	for (int i = 0; i < countLocal; i++) {
 		load++;
-		local[i].loadElectionFromFile("localElection",load);
+		local[i].loadElectionFromFile("localElection", load);
 	}
 	ifstream nationalFile("nationalElection.txt");
 	if (!nationalFile.is_open()) {
@@ -53,7 +53,7 @@ void electionManger::refreshAllData() {
 
 		cout << "count regional is " << countRegional << endl;
 		cout << "lodaing local election::" << i << endl;
-		national[i].loadElectionFromFile("nationalElection",load);
+		national[i].loadElectionFromFile("nationalElection", load);
 	}
 	cout << "after region lodin elction" << endl;
 
@@ -66,7 +66,7 @@ void electionManger::refreshAllData() {
 	for (int i = 0; i < countRegional; i++) {
 		load++;
 
-		regional[i].loadElectionFromFile("regionalElection",load);
+		regional[i].loadElectionFromFile("regionalElection", load);
 	}
 	localFile.close();
 	nationalFile.close();
@@ -85,39 +85,39 @@ void electionManger::displayAllElectionNames() {
 		cout << "No Local Election" << endl;
 	}
 	else {
-	cout << "Local Elections: " << endl;
+		cout << "Local Elections: " << endl;
 
-	for (int i = 0; i < countLocal; i++) {
-		cout << "Name :: " << local[i].getElectionName() << endl;
-		//cout << "ID :: " << local[i] << endl;
-		cout << "ID :: " << local[i].getElectionId() << endl;
-	}
+		for (int i = 0; i < countLocal; i++) {
+			cout << "Name :: " << local[i].getElectionName() << endl;
+			//cout << "ID :: " << local[i] << endl;
+			cout << "ID :: " << local[i].getElectionId() << endl;
+		}
 	}
 	if (countNational == 0) {
 		cout << "No National Election" << endl;;
 	}
 	else {
 
-	cout << "National Elections: " << endl;
-	for (int i = 0; i < countNational; i++) {
-		cout<<"Name :: " << national[i].getElectionName() << endl;
-		cout << "ID :: " << national[i].getElectionId() << endl;
-	}
+		cout << "National Elections: " << endl;
+		for (int i = 0; i < countNational; i++) {
+			cout << "Name :: " << national[i].getElectionName() << endl;
+			cout << "ID :: " << national[i].getElectionId() << endl;
+		}
 	}
 	if (countRegional == 0) {
-		cout << "No Regional Election"<<endl;
+		cout << "No Regional Election" << endl;
 	}
 	else {
 
-	cout << "Regional Elections: " << endl;
-	for (int i = 0; i < countRegional; i++) {
-		cout<<"Name :: " << regional[i].getElectionName() << endl;
-		cout << "ID :: " << regional[i].getElectionId() << endl;
+		cout << "Regional Elections: " << endl;
+		for (int i = 0; i < countRegional; i++) {
+			cout << "Name :: " << regional[i].getElectionName() << endl;
+			cout << "ID :: " << regional[i].getElectionId() << endl;
 
-	}
+		}
 	}
 }
-int * electionManger::displayLocalElections(){
+int* electionManger::displayLocalElections() {
 	if (countLocal == 0) {
 		cout << "No Local Election" << endl;
 		int* regionChoices = new int[1];
@@ -126,21 +126,21 @@ int * electionManger::displayLocalElections(){
 	}
 	else {
 		int counter = 0;
-		int* Choices = new int[countLocal+1];
-	cout << "Local Elections: " << endl;
-			for (int i = 0; i < countLocal; i++) {
+		int* Choices = new int[countLocal + 1];
+		cout << "Local Elections: " << endl;
+		for (int i = 0; i < countLocal; i++) {
 			cout << "Name :: " << local[i].getElectionName() << endl;
 			cout << "ID :: " << local[i].getElectionId() << endl;
-			Choices[i+1] = local[i].getElectionId();
+			Choices[i + 1] = local[i].getElectionId();
 			counter++;
-			}
-			Choices[0] = counter;
-			return Choices;
-			
+		}
+		Choices[0] = counter;
+		return Choices;
+
 	}
-	
+
 }
-int * electionManger::displayNationalElections() {
+int* electionManger::displayNationalElections() {
 	if (countNational == 0)
 	{
 		cout << "No National Election" << endl;
@@ -156,7 +156,7 @@ int * electionManger::displayNationalElections() {
 		for (int i = 0; i < countNational; i++) {
 			cout << "Name :: " << national[i].getElectionName() << endl;
 			cout << "ID :: " << national[i].getElectionId() << endl;
-			Choices[i+1] = regional[i].getElectionId();
+			Choices[i + 1] = regional[i].getElectionId();
 			counter++;
 
 
@@ -166,36 +166,36 @@ int * electionManger::displayNationalElections() {
 
 		return Choices;
 	}
-	
+
 }
-int * electionManger::displayRegionalElections() {
-	
+int* electionManger::displayRegionalElections() {
+
 	if (countRegional == 0) {
 		cout << "No Regional Electios" << endl;
 		int* Choices = new int[1];
-	Choices[0] = -1;
+		Choices[0] = -1;
 		return Choices;
-		
+
 	}
 	else {
 		int counter = 0;
-	int* Choices = new int[countRegional];
+		int* Choices = new int[countRegional];
 
-	cout << "Regional Elections: " << endl;
-	for (int i = 0; i < countRegional; i++) {
-		cout << "Name :: " << regional[i].getElectionName() << endl;
-		cout << "ID :: " << regional[i].getElectionId() << endl;
-		Choices[i+1] = regional[i].getElectionId();
-		counter++;
+		cout << "Regional Elections: " << endl;
+		for (int i = 0; i < countRegional; i++) {
+			cout << "Name :: " << regional[i].getElectionName() << endl;
+			cout << "ID :: " << regional[i].getElectionId() << endl;
+			Choices[i + 1] = regional[i].getElectionId();
+			counter++;
 
-	}
+		}
 
-	Choices[0] = counter;
+		Choices[0] = counter;
 
-	return Choices;
+		return Choices;
 	}
 }
- 
+
 void electionManger::displayAllElectionInDetails() {
 	cout << "Local Elections: " << endl;
 	for (int i = 0; i < countLocal; i++) {
@@ -211,7 +211,7 @@ void electionManger::displayAllElectionInDetails() {
 	}
 }
 void electionManger::displayAllCandidates() {
-	
+
 	cout << "Local Candidates: " << endl;
 	for (int i = 0; i < countLocal; i++) {
 		local[i].displayCandiates(local[i].getCandidateArray(), local[i].getNumberOfRegions());
@@ -250,24 +250,26 @@ void electionManger::saveVoterVoteStatusToFile(int id) {
 		cerr << "Error opening file to save vote status." << endl;
 		return;
 	}
-	file << id<< "*" << voterr->getCnic() << endl;
+	file << id << "*" << voterr->getCnic() << endl;
 	file.close();
 
 }
-void electionManger::casteVoteInElection(election* e, int size,int* choices) {
+void electionManger::casteVoteInElection(election* e, int size, int* choices) {
 
 	cout << "Enter Election ID: ";
 	int id;
 	cin >> id;
 	bool isElectionFound = false;
 	for (int i = 1;i < choices[0];i++) {
+		cout << "choices::::" << choices[i] << endl;
 		if (choices[i] == id) {
 			isElectionFound = true;
+			cout << "electionFound" << endl;
 		}
 
 	}
 	if (!isElectionFound) {
-		cout << "Election not found." << endl;
+		cout << "Election not found...." << endl;
 		return;
 	}
 	// Check if the user has already voted in this election
@@ -288,7 +290,7 @@ void electionManger::casteVoteInElection(election* e, int size,int* choices) {
 		cout << "Enter Candidate ID: ";
 		int candidateId;
 		cin >> candidateId;
-		
+
 		// Check if the candidate ID is valid
 		for (int i = 0; i < e[index].getTotalCandidates(); i++) {
 			if (e[index].getSelectedCandidates()[i].getCnicInt() == candidateId) {
@@ -298,15 +300,15 @@ void electionManger::casteVoteInElection(election* e, int size,int* choices) {
 				return;
 			}
 		}
-		
+
 	}
 	else {
 		cout << "Election not found." << endl;
 	}
 
 }
-void electionManger::castVote(){
-	reSelectVoteType:
+void electionManger::castVote() {
+reSelectVoteType:
 	cout << "Enter Which type of Election you want to cast vote for" << endl;
 	cout << "1. Local Election" << endl;
 	cout << "2. National Election" << endl;
@@ -314,13 +316,13 @@ void electionManger::castVote(){
 	cout << "4. Exit" << endl;
 	int choice;
 	cin >> choice;
-	int *electionChoice;
+	int* electionChoice;
 	if (choice == 1) {
 		cout << "Local Election" << endl;
 		electionChoice = displayLocalElections();
 		if (electionChoice[0] != -1) {
 
-		casteVoteInElection(local, countLocal,electionChoice);
+			casteVoteInElection(local, countLocal, electionChoice);
 		}
 		else goto reSelectVoteType;
 
@@ -329,23 +331,23 @@ void electionManger::castVote(){
 	}
 	else if (choice == 2) {
 		cout << "National Election" << endl;
-		electionChoice = displayLocalElections();
+		electionChoice = displayNationalElections();
 
 		if (electionChoice[0] != -1)
 		{
 
-		casteVoteInElection(national, countNational,electionChoice);
+			casteVoteInElection(national, countNational, electionChoice);
 		}
 		else goto reSelectVoteType;
 
 	}
 	else if (choice == 3) {
 		cout << "Regional Election" << endl;
-		electionChoice = displayLocalElections();
+		electionChoice = displayRegionalElections();
 
 		if (electionChoice[0] != -1) {
 
-			casteVoteInElection(regional, countRegional,electionChoice);
+			casteVoteInElection(regional, countRegional, electionChoice);
 		}
 		else goto reSelectVoteType;
 	}
@@ -358,7 +360,7 @@ void electionManger::castVote(){
 		cout << "Invalid choice." << endl;
 		goto reSelectVoteType;
 	}
-	
+
 
 
 }
