@@ -180,7 +180,9 @@ int main() {
 				cout << "3. Add Candidate" << endl;
 				cout << "4. Create Election" << endl;
 				cout << "5. Show ALl Election Names" << endl;
-				cout << "6. Exit" << endl;
+				cout << "6. Show Result" << endl;
+				cout << "7. Exit" << endl;
+
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
 				switch (adminChoice) {
@@ -217,6 +219,9 @@ int main() {
 
 					break;
 				case 6:
+					//em.displayResults(2);
+					break;
+				case 7:
 					a.setLoginStatus(false);
 					goto logIn;
 					break;

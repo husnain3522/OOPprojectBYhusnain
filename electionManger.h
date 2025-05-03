@@ -57,6 +57,8 @@ public://change please
 	void saveCandidateVotesToFile(int);
 	void checkVoteHistory();
 	string getElectionNameById(int id);
+	void displayResultsWithId(int); 
+	void displayResults();
 
 
 };

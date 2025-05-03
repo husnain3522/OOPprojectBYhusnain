@@ -416,3 +416,121 @@ string electionManger::getElectionNameById(int id) {
 	return "";
 
 }
+
+void electionManger::displayResultsWithId(int electionId) {
+
+	ifstream electionName("electionNames.txt");
+	if (!electionName.is_open()) {
+		cerr << "Error opening file to check election names." << endl;
+		return;
+	}
+	string electionIdStr, electionNameStr, totalCandidates;
+	while (getline(electionName, electionIdStr, '*')) {
+		getline(electionName, electionNameStr, '*');
+		getline(electionName, totalCandidates, '\n');
+		if (stoi(electionIdStr) == electionId) {
+			cout << "Election ID: " << electionIdStr << endl;
+			cout << "Election Name: " << electionNameStr << endl;
+			cout << "Total Candidates: " << totalCandidates << endl;
+			break;
+		}
+	}
+	electionName.close();
+	int totalCandidatesInt = stoi(totalCandidates);
+	
+	// Now read the election data file to get the results
+
+	//cout << "elction id is :: " << electionId << endl;
+	string id = to_string(electionId);
+	//cout << "elction id is :: " <<id << endl;
+
+	ifstream electionData( id + ".txt");
+	if (!electionData.is_open()) {
+		cerr << "Error opening file to check election names." << endl;
+		return;
+	}
+	int *candidateCnic = new int[totalCandidatesInt];
+	int* candidateVoteCount = new int[totalCandidatesInt];
+	string temp;
+		string candidateCnicStr, candidateVoteCountStr;
+	for (int i = 0; i < totalCandidatesInt; i++) {
+		getline(electionData, temp, '*');
+		getline(electionData, temp, '*');
+		candidateCnic[i] = stoi(temp);
+		//cout << "CNIC" << endl;
+		getline(electionData, temp ,'\n');
+
+		candidateVoteCount[i]= stoi(temp);
+		/*candidateCnic[i] = stoi(candidateCnicStr);
+		candidateVoteCount[i] = stoi(candidateVoteCountStr);*/
+	}
+	electionData.close();
+	cout << "Results: " << endl;
+	for (int i = 0; i < totalCandidatesInt; i++) {
+		cout << "Candidate ID: " << candidateCnic[i] << endl;
+		cout << "Vote Count: " << candidateVoteCount[i] << endl;
+	}
+	delete[] candidateCnic;
+	delete[] candidateVoteCount;
+	cout << "End Of Results" << endl;
+
+
+
+}
+void electionManger::displayResults() {
+	cout << "Enter " << endl;
+reSelectVoteType:
+	cout << "1. Local Election" << endl;
+	cout << "2. National Election" << endl;
+	cout << "3. Regional Election" << endl;
+	cout << "4. Exit" << endl;
+	int choice;
+	cin >> choice;
+	int* electionChoice;
+	if (choice == 1) {
+		cout << "Local Election" << endl;
+		electionChoice = displayLocalElections();
+		if (electionChoice[0] != -1) {
+
+			casteVoteInElection(local, countLocal, electionChoice);
+		}
+		else goto reSelectVoteType;
+
+
+
+	}
+	else if (choice == 2) {
+		cout << "National Election" << endl;
+		electionChoice = displayNationalElections();
+
+		if (electionChoice[0] != -1)
+		{
+
+			casteVoteInElection(national, countNational, electionChoice);
+		}
+		else goto reSelectVoteType;
+
+	}
+	else if (choice == 3) {
+		cout << "Regional Election" << endl;
+		electionChoice = displayRegionalElections();
+
+		if (electionChoice[0] != -1) {
+
+			casteVoteInElection(regional, countRegional, electionChoice);
+		}
+		else goto reSelectVoteType;
+	}
+	else if (choice == 4) {
+		cout << "exiting..." << endl;
+		return;
+	}
+
+	else {
+		cout << "Invalid choice." << endl;
+		goto reSelectVoteType;
+	}
+
+
+
+}
