@@ -1,2 +1,2 @@
-1*National Election
-2*Regional Election
+1*National Election*2
+2*Regional Election*2

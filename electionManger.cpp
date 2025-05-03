@@ -403,13 +403,16 @@ string electionManger::getElectionNameById(int id) {
 		cerr << "Error opening file to check election names." << endl;
 		return "";
 	}
-	string electionId, electionName;
+	string electionId, electionName,temp;
 	while (getline(checkNameFile, electionId, '*')) {
-		getline(checkNameFile, electionName, '\n');
+		getline(checkNameFile, electionName, '*');
+		getline(checkNameFile, temp, '\n');
 		if (stoi(electionId) == id) {
 			checkNameFile.close();
 			return electionName;
 		}
 	}
+	checkNameFile.close();
+	return "";
 
 }

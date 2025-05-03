@@ -263,7 +263,7 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 	ofstream electionVoteFile(to_string(electionId) + ".txt", ios::app);
 	ofstream electionVoteFileToMain("electionData.txt", ios::app);
 	ofstream electionNameFile("electionNames.txt", ios::app);
-	electionNameFile << electionId << "*" << electionName << endl;
+	electionNameFile << electionId << "*" << electionName << "*"<< totalCandidates <<endl;
 	electionNameFile.close();
 
 	electionFile<<electionId<<"*" << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
