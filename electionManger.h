@@ -48,10 +48,10 @@ public://change please
 	localElection* getLocalElections();
 	nationalElection* getNationalElections();
 	regionalElection* getRegionalElections();
-	bool displayRegionalElections();
-	bool displayLocalElections();
-	bool displayNationalElections();
-	void casteVoteInElection(election*,int);
+	int * displayRegionalElections();
+	int * displayLocalElections();
+	int * displayNationalElections();
+	void casteVoteInElection(election*,int,int*);
 	bool checkIfUserAlreadyVoted(int);
 	void saveVoterVoteStatusToFile(int);
 	void saveCandidateVotesToFile(int);
