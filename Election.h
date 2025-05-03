@@ -51,6 +51,13 @@ public:// please change
 	void incrementElectionIdCounter() {
 		electionIdCounter++;
 	}
+	int getTimeType() {
+		return duration;
+	}
+	void setTimeType(int type) {
+		duration = type;
+	}
+	
 
 	candidate* getCandidateArray();
 	void displayCandiates(candidate*,int);
@@ -71,6 +78,7 @@ public:// please change
 	string getElectionName();
 	string getElectionDate();
 	string getElectionTime();
+
 	string* getRegionCodes();
 	int getNumberOfRegions();
 	void displayElectionDetails();
@@ -91,6 +99,7 @@ public:// please change
 	void saveElectionVotesToFile();
 	void addElectionToFileWithCandiesToMainFile(int timeType, string fileName);
 	string getPartyNameToSetInCandidate(int id);
+
 
 };
 
