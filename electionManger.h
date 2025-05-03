@@ -48,9 +48,9 @@ public://change please
 	localElection* getLocalElections();
 	nationalElection* getNationalElections();
 	regionalElection* getRegionalElections();
-	void displayLocalElections();
-	void displayNationalElections();
-	void displayRegionalElections();
+	bool displayRegionalElections();
+	bool displayLocalElections();
+	bool displayNationalElections();
 	void casteVoteInElection(election*,int);
 	bool checkIfUserAlreadyVoted(int);
 	void saveVoterVoteStatusToFile(int);
