@@ -402,11 +402,9 @@ void election::loadElectionFromFile(string fileName,int load) {
 				getline(electionFile, candidateCnic[i], '*');
 			}
 			selCandidates[i].getCandidateByCnic(candidateCnic[i]);
+			selCandidates[i].setPartyString(getPartyNameToSetInCandidate(stoi(candidateCnic[i])));
+
 		}
-
-
-	
-
 
 }
 void election::saveElectionVotesToFile() {
@@ -446,4 +444,25 @@ void election::saveCandidateVotesToFile( candidate* candi) {
 	candidateVote << endl;
 	cout << "candidateVote ssaved to file :: " << candi->getName() << "::" << candi->getVoteCount() << endl;
 	candidateVote.close();
+}
+string election::getPartyNameToSetInCandidate(int id) {
+	int len = fileLenght("partyNames");
+	ifstream partyNameFile("partyNames.txt");
+	string partyId, partyName;
+	for (int i = 0; i < len; i++) {
+		getline(partyNameFile, partyId, '*');
+		getline(partyNameFile, partyName, '\n');
+		if (partyId == to_string(id)) {
+			cout << "Returning Part Name" << partyName << endl;
+			return partyName;
+		}
+
+
+
+	}
+	return "not found";
+
+
+
+
 }

@@ -160,6 +160,7 @@
     <Text Include="lenghOfSelectedCandies.txt" />
     <Text Include="localElection.txt" />
     <Text Include="nationalElection.txt" />
+    <Text Include="partyNames.txt" />
     <Text Include="regionalElection.txt" />
     <Text Include="user.txt" />
     <Text Include="voter.txt" />

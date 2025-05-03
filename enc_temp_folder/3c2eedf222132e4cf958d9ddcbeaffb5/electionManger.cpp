@@ -566,3 +566,9 @@ int electionManger::getIdFromUserTodDisplayResult(int* choices) {
 
 
 }
+//candidate* electionManger::getCandidateByCnic(string id) {
+//
+//
+//
+//
+//}

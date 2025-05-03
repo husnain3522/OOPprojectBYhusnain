@@ -121,5 +121,8 @@
     <Text Include="voterVoteStatus.txt">
       <Filter>indexFile\Resource Files</Filter>
     </Text>
+    <Text Include="partyNames.txt">
+      <Filter>indexFile\Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

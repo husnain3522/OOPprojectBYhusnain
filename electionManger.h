@@ -59,7 +59,8 @@ public://change please
 	string getElectionNameById(int id);
 	void displayResultsWithId(int); 
 	void displayResults();
-
+	int getIdFromUserTodDisplayResult(int*);
+	candidate* getCandidateByCnic(string);
 
 };
 

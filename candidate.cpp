@@ -28,7 +28,7 @@ void candidate::getCandidateByCnic(string inputCnic) {
    while (getline(candidateFile, Sname, '*')) {
        getline(candidateFile, Scnic, '*');
        getline(candidateFile, partyId, '\n');
-       if (inputCnic == Scnic) { // Fixed comparison issue by using std::string's operator==
+       if (inputCnic == Scnic) { 
            isCnicFound = true;
            partyName = partyId;
            cnic = inputCnic;

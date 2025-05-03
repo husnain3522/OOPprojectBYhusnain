@@ -9,6 +9,7 @@ class candidate :public user
 protected:
 	int voteCount;
 	string partyName;
+	string partyNameInString;
 public:
 	candidate() {
 		voteCount = 0;
@@ -16,6 +17,12 @@ public:
 		name = "";
 		cnic = "";
 		password = "";
+	}
+	void setPartyString(string name) {
+		partyNameInString = name;
+	}
+	string getPartyNameInString() {
+		return partyNameInString;
 	}
 	string getCnic() {return cnic;}
 	int getCnicInt() { 

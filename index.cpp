@@ -219,7 +219,7 @@ int main() {
 
 					break;
 				case 6:
-					//em.displayResults(2);
+					em.displayResults();
 					break;
 				case 7:
 					a.setLoginStatus(false);
