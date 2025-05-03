@@ -261,7 +261,11 @@ void electionManger::casteVoteInElection(election* e, int size, int* choices) {
 	cin >> id;
 	bool isElectionFound = false;
 	for (int i = 1;i < choices[0];i++) {
+<<<<<<< Updated upstream
 		cout << "choices::::" << choices[i] << endl;
+=======
+			cout << "choices::::" << choices[i] << endl;
+>>>>>>> Stashed changes
 		if (choices[i] == id) {
 			isElectionFound = true;
 			cout << "electionFound" << endl;
