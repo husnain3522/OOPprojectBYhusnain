@@ -1,8 +1,0 @@
-Local*12March*time*2*3533*35202
-Local*1*1*1*1*123
-ElectionName*Date*time*2*code1code2*123
-Farmi*Elction*11*2*35202*35404*1100*0011
-Local Election*1*10*1*35202*1100
-National Election*1*1*1*1*1100
-National Election*1*1*1*1*0011
-National Election*1*1*2*1*0011

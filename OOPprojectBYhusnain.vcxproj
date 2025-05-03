@@ -162,6 +162,7 @@
     <Text Include="regionalElection.txt" />
     <Text Include="user.txt" />
     <Text Include="voter.txt" />
+    <Text Include="voterVoteStatus.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

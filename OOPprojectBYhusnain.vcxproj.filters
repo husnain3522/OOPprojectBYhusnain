@@ -115,5 +115,8 @@
     <Text Include="electionId.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="voterVoteStatus.txt">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

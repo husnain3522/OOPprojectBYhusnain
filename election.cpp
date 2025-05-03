@@ -257,15 +257,17 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 	int selectedCandidatesLength = len;
 
 	//write selected candidates to file
-
+	ofstream electionVoteFile(to_string(electionId) + ".txt", ios::app);
 	electionFile<<electionId<<"*" << electionName << "*" << electionDate << "*" << electionTime << "*" << timeType;
 	for (int i = 0; i < numberOfRegions; i++) {
 		electionFile<<"*" << regionCodes[i]<< "*" << selectedCandidatesLength;
 	}
 	for (int i = 0; i < selectedCandidatesLength; i++) {
 		electionFile << "*" << candiArray[i].getCnic();
+		electionVoteFile << electionId << "*" << candiArray[i].getCnic() << "*" << 0<<endl;
 	}
 	electionFile << endl;
+	electionVoteFile.close();
 	cout << "Election saved to file." << endl;
 
 
@@ -273,7 +275,7 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 
 }
 
-void election::loadElectionFromFile(string fileName) {
+void election::loadElectionFromFile(string fileName,int load) {
 
 	int fileLen = fileLenght(fileName);
 	ifstream electionFile(fileName + ".txt");
@@ -286,8 +288,16 @@ void election::loadElectionFromFile(string fileName) {
 	//string selectedCandi;
 	//int selectedCandiInt;
 	//int* regionCodes;
+	string line;
+	for (int i = 0; i < fileLen; i++)
+	{
+		cout << "load is L:: " << load << endl;
+		
+		if (i<load-1) {
+			getline(electionFile, line,'\n');
+		}
+	}
 	string electionIdStr;
-	for (int i = 0; i < fileLen; i++) {
 		getline(electionFile, electionIdStr, '*');
 		electionId = stoi(electionIdStr); 
 		cout << "e;ection id in load is " << electionId << endl;
@@ -311,7 +321,22 @@ void election::loadElectionFromFile(string fileName) {
 		string *candidateCnic = new string[numOfCandidates];
 		selCandidates = new candidate[numOfCandidates];
 		//selCandidatesCnic = 
+		ifstream candidateVoteFile(to_string(electionId) + ".txt");
+		if (!candidateVoteFile.is_open()) {
+			cerr << "Error opening file." << endl;
+			return;
+		}
+		string temp;
 		for (int i = 0; i < numOfCandidates; i++) {
+
+			getline(candidateVoteFile, temp, '*');
+			cout << "election id is " << temp << endl;
+			getline(candidateVoteFile, temp, '*');
+			cout << "candidate cnic is " << temp << endl;
+			getline(candidateVoteFile, temp, '\n');
+			cout << "vote count is " << temp << endl;
+			selCandidates[i].setVoteCount(stoi(temp));
+
 			if (i == numOfCandidates - 1) { // Note the -1 here
 				getline(electionFile, candidateCnic[i], '\n');
 			}
@@ -322,17 +347,45 @@ void election::loadElectionFromFile(string fileName) {
 		}
 
 
-	}
+	
 
 
 }
+void election::saveElectionVotesToFile() {
+	ofstream candidateVote(to_string(electionId) + ".txt");
+	if (!candidateVote.is_open()) {
+		cerr << "Error opening file to save candidate votes." << endl;
+		return;
+	}
+	for (int i = 0; i < numOfCandidates; i++) {
+		candidateVote << electionId << "*" << selCandidates[i].getCnic() << "*" << selCandidates[i].getVoteCount();
+		candidateVote << endl;
+	}
+	cout << "candidateVote ssaved to file :: " << selCandidates[0].getName() << "::" << selCandidates[0].getVoteCount() << endl;
+	candidateVote.close();
+}
+
 void election::castVote(voter* v, int candidateId) {
 	cout << "Casting vote for candidate with ID: " << candidateId << endl;
 	for (int i = 0; i < numOfCandidates; i++) {
 		if (selCandidates[i].getCnicInt() == candidateId) {
 			selCandidates[i].incrementVoteCount();
+			cout << "Vote count for candidate " << selCandidates[i].getName() << ": " << selCandidates[i].getVoteCount() << endl;
+			saveCandidateVotesToFile(&selCandidates[i]);
 			cout << "Vote casted successfully for candidate: " << selCandidates[i].getName() << endl;
 			break;
 		}
 	}
+	saveElectionVotesToFile();
+}
+void election::saveCandidateVotesToFile( candidate* candi) {
+	ofstream candidateVote ( to_string(electionId) + ".txt", ios::app);
+	if (!candidateVote.is_open()) {
+		cerr << "Error opening file to save candidate votes." << endl;
+		return;
+	}
+	candidateVote <<electionId<< "*" << candi->getCnic() << "*" <<candi->getVoteCount() ;
+	candidateVote << endl;
+	cout << "candidateVote ssaved to file :: " << candi->getName() << "::" << candi->getVoteCount() << endl;
+	candidateVote.close();
 }

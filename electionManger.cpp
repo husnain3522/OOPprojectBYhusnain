@@ -24,6 +24,7 @@ int electionManger::countNumOfElections(string fileName) {
 
 }
 void electionManger::refreshAllData() {
+	cout << "refereshin...." << endl;
 	countLocal = countNumOfElections("localElection");
 	countNational = countNumOfElections("nationalElection");
 	countRegional = countNumOfElections("regionalElection");
@@ -35,24 +36,37 @@ void electionManger::refreshAllData() {
 		cerr << "Error opening local file to load data." << endl;
 		return;
 	}
+	int load = 0;
 	for (int i = 0; i < countLocal; i++) {
-		local[i].loadElectionFromFile("localElection");
+		load++;
+		local[i].loadElectionFromFile("localElection",load);
 	}
 	ifstream nationalFile("nationalElection.txt");
 	if (!nationalFile.is_open()) {
 		cerr << "Error opening national file to load data." << endl;
 		return;
 	}
+	cout << "before region lodin elction" << endl;
+	load = 0;
 	for (int i = 0; i < countNational; i++) {
-		national[i].loadElectionFromFile("nationalElection");
+		load++;
+
+		cout << "count regional is " << countRegional << endl;
+		cout << "lodaing local election::" << i << endl;
+		national[i].loadElectionFromFile("nationalElection",load);
 	}
+	cout << "after region lodin elction" << endl;
+
 	ifstream regionalFile("regionalElection.txt");
 	if (!regionalFile.is_open()) {
 		cerr << "Error opening regional file to load data." << endl;
 		return;
 	}
+	load = 0;
 	for (int i = 0; i < countRegional; i++) {
-		regional[i].loadElectionFromFile("regionalElection");
+		load++;
+
+		regional[i].loadElectionFromFile("regionalElection",load);
 	}
 	localFile.close();
 	nationalFile.close();
@@ -154,11 +168,45 @@ void electionManger::displayAllCandidates() {
 	//	regional[i].displayCandiates(regional[i].getCandidateArray(), regional[i].getNumberOfRegions());
 	//}
 }
+bool electionManger::checkIfUserAlreadyVoted(int id) {
+	// Check if the user has already voted in the election with the given ID
+	ifstream checkFile("voterVoteStatus.txt");
+	if (!checkFile.is_open()) {
+		cerr << "Error opening file to check vote status." << endl;
+		return false;
+	}
+	string electionId, cnic;
+	while (getline(checkFile, electionId, '*')) {
+		getline(checkFile, cnic, '\n');
+		if (stoi(electionId) == id && cnic == voterr->getCnic()) {
+			checkFile.close();
+			return true; // User has already voted
+		}
+	}
+	checkFile.close();
+
+	return false; // User has not voted
+}
+void electionManger::saveVoterVoteStatusToFile(int id) {
+	ofstream file("voterVoteStatus.txt", ios::app);
+	if (!file.is_open()) {
+		cerr << "Error opening file to save vote status." << endl;
+		return;
+	}
+	file << id<< "*" << voterr->getCnic() << endl;
+	file.close();
+
+}
 void electionManger::casteVoteInElection(election* e, int size) {
 
 	cout << "Enter Election ID: ";
 	int id;
 	cin >> id;
+	// Check if the user has already voted in this election
+	if (checkIfUserAlreadyVoted(id)) {
+		cout << "You have already voted in this election." << endl;
+		return;
+	}
 	int index = -1;
 	for (int i = 0; i < size; i++) {
 		if (e[i].getElectionId() == id) {
@@ -177,6 +225,7 @@ void electionManger::casteVoteInElection(election* e, int size) {
 		for (int i = 0; i < e[index].getTotalCandidates(); i++) {
 			if (e[index].getSelectedCandidates()[i].getCnicInt() == candidateId) {
 				e[index].castVote(voterr, candidateId);
+				saveVoterVoteStatusToFile(id);
 				cout << "Vote casted successfully." << endl;
 				return;
 			}
@@ -200,6 +249,7 @@ void electionManger::castVote(){
 		cout << "Local Election" << endl;
 		displayLocalElections();
 		casteVoteInElection(local, countLocal);
+
 
 	}
 	else if (choice == 2) {

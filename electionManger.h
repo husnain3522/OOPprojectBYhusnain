@@ -52,7 +52,9 @@ public://change please
 	void displayNationalElections();
 	void displayRegionalElections();
 	void casteVoteInElection(election*,int);
-
+	bool checkIfUserAlreadyVoted(int);
+	void saveVoterVoteStatusToFile(int);
+	void saveCandidateVotesToFile(int);
 
 
 };

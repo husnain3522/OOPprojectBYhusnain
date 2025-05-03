@@ -76,7 +76,7 @@ public:// please change
 	void displayElectionDetails();
 	void castVote(voter*, int);
 	void saveElectionToFile();
-	void loadElectionFromFile(string);
+	void loadElectionFromFile(string,int);
 	void addElection();
 	void deleteElection();
 	void updateElection();
@@ -87,8 +87,8 @@ public:// please change
 	void displayElectionResults();
 	void displayElectionResults(string electionId);
 	int addArrayToTempFileThanReturnArraySize(string*, string);
-
-
+	void saveCandidateVotesToFile(candidate* candi);
+	void saveElectionVotesToFile();
 };
 
 
