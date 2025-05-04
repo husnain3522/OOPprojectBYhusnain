@@ -4,6 +4,8 @@
 #include <fstream>
 #include "candidate.h"
 #include "voter.h"
+#include <ctime>
+
 using namespace std;
 
 int election::fileLenght(string fileName) {
@@ -278,8 +280,8 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 		electionVoteFileToMain << "*" << candiArray[i].getCnic();
 		electionVoteFile << electionId << "*" << candiArray[i].getCnic() << "*" << 0<<endl;
 	}
-	electionFile << endl;
-	electionVoteFileToMain << endl;
+	electionFile <<isActive<< endl;
+	electionVoteFileToMain<<isActive << endl;
 	electionVoteFileToMain.close();
 	electionVoteFile.close();
 	//addElectionToFileWithCandiesToMainFile(timeType, "electionData");
@@ -395,17 +397,22 @@ void election::loadElectionFromFile(string fileName,int load) {
 			cout << "vote count is " << temp << endl;
 			selCandidates[i].setVoteCount(stoi(temp));
 
-			if (i == numOfCandidates - 1) { // Note the -1 here
-				getline(electionFile, candidateCnic[i], '\n');
-			}
-			else {
+		
 				getline(electionFile, candidateCnic[i], '*');
-			}
+			
 			selCandidates[i].getCandidateByCnic(candidateCnic[i]);
 			selCandidates[i].setPartyString(getPartyNameToSetInCandidate(stoi(candidateCnic[i])));
 
 		}
-
+		string isActiveStr;
+		getline(electionFile, isActiveStr, '\n');
+		if (isActiveStr == "1") {
+			isActive = true;
+		}
+		else {
+			isActive = false;
+		}
+		electionFile.close();
 }
 void election::saveElectionVotesToFile() {
 	ofstream candidateVote(to_string(electionId) + ".txt");
@@ -465,4 +472,24 @@ string election::getPartyNameToSetInCandidate(int id) {
 
 
 
+}
+time_t election::calculateFutureTime(int amount, int type) {
+	time_t now = time(NULL); // current time in seconds
+
+	if (type == '1') {
+		now += amount * 24 * 60 * 60; // Add days in seconds
+	}
+	else if (type == '2') {
+		now += amount * 60 * 60; // Add hours in seconds
+	}
+	else {
+		cerr << "Invalid type. Use 'd' for days or 'h' for hours.\n";
+	}
+
+	return now;
+}
+
+bool election::hasTimePassed(time_t futureTime) {
+	time_t now = time(NULL);
+	return now >= futureTime;
 }
