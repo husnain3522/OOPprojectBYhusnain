@@ -181,7 +181,10 @@ int main() {
 				cout << "4. Create Election" << endl;
 				cout << "5. Show ALl Election Names" << endl;
 				cout << "6. Show Result" << endl;
-				cout << "7. Exit" << endl;
+				cout << "7. Activate Election" << endl;
+				cout << "8. Deactivate Election" << endl;
+				//cout << "9. Show All Candidates" << endl;
+				cout << "9. Exit" << endl;
 
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
@@ -213,7 +216,10 @@ int main() {
 				}
 
 				case 5 :
-					em.displayAllElectionNames();
+					//em.displayAllElectionNames();
+					em.displayNationalElections(3);
+					em.displayLocalElections(3);
+					em.displayRegionalElections(3);
 					//em.displayAllElectionInDetails();
 					//em.displayAllCandidates();
 
@@ -221,11 +227,17 @@ int main() {
 				case 6:
 					em.displayResults();
 					break;
-				case 7:
+				case 9:
 					a.setLoginStatus(false);
 					goto logIn;
 					break;
+				case 7:
+					em.actiDeactiElectionAdmin(true);
+					break;
 
+				case 8:
+					em.actiDeactiElectionAdmin(false);
+					break;
 				default:
 					cout << "Invalid choice." << endl;
 				}

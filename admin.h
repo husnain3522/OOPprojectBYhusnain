@@ -4,6 +4,7 @@ class admin :public user
 {
 private:
 	bool isLoginVar = false;
+	bool adminKey = true;
 public:
 	//constructor
 	admin(string name="", string snic="", string password="") :user(name, snic, password) {

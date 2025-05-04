@@ -48,9 +48,13 @@ public://change please
 	localElection* getLocalElections();
 	nationalElection* getNationalElections();
 	regionalElection* getRegionalElections();
-	int * displayRegionalElections();
-	int * displayLocalElections();
-	int * displayNationalElections();
+	int * displayRegionalElections(int);
+	int * displayLocalElections(int);
+	int * displayNationalElections(int);
+	//int* displayLocalElectionsOnlyNonActive(); 
+	//int* displayNationalElectionsOnlyNonActive(); 
+	//int* displayRegionalElectionsOnlyNonActive();
+
 	void casteVoteInElection(election*,int,int*);
 	bool checkIfUserAlreadyVoted(int);
 	void saveVoterVoteStatusToFile(int);
@@ -61,6 +65,10 @@ public://change please
 	void displayResults();
 	int getIdFromUserTodDisplayResult(int*);
 	candidate* getCandidateByCnic(string);
+	void actiDeactiElectionAdmin(bool);
+	void actiDeactiElectionUsingId(int,int,bool);
+	
+
 
 };
 

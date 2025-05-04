@@ -7,7 +7,10 @@ protected:
 	bool isLoginVar = false;
 
 public:
-	voter(string name,string snic, string password) :user(name,snic,password) {}
+	voter(string name,string snic, string password) :user(name,snic,password) {
+		isLoginVar = false;
+	
+	}
 	voter() {}
 	bool isLogin() {
 		cout << "Voter logged in successfully." << endl;

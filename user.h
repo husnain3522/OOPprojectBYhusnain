@@ -20,7 +20,7 @@ protected:
 	string name;
 	string password;
 	string cnic;
-	bool loginStatus = false;
+	bool loginStatus=false;
 public:
 	void setLoginStatus(bool status) { loginStatus = status; }
 	bool getLoginStatus() { return loginStatus; }

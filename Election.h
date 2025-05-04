@@ -4,6 +4,7 @@
 #include <fstream>
 #include "candidate.h"
 #include "voter.h"
+#include <ctime>
 using namespace std;
 
 class election
@@ -20,6 +21,7 @@ protected:
 	int duration;
 	candidate * selCandidates;
  static	int electionIdCounter;
+ bool isActive;
 	
 public:// please change
 	candidate* getSelectedCandidates() {
@@ -37,7 +39,14 @@ public:// please change
 		regionCodes = nullptr;
 		numberOfRegions = 0;
 		//electionId = "";
+		isActive = false;
 	};
+bool getIsActice() {
+		return isActive;
+	}
+void setIsActive(bool status) {
+	isActive = status;
+}
 	int getElectionIdCounter() {
 		return electionIdCounter;
 	}
@@ -99,6 +108,8 @@ public:// please change
 	void saveElectionVotesToFile();
 	void addElectionToFileWithCandiesToMainFile(int timeType, string fileName);
 	string getPartyNameToSetInCandidate(int id);
+	time_t calculateFutureTime(int amount, int type); 
+	bool hasTimePassed(time_t futureTime);
 
 
 };

@@ -280,8 +280,8 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 		electionVoteFileToMain << "*" << candiArray[i].getCnic();
 		electionVoteFile << electionId << "*" << candiArray[i].getCnic() << "*" << 0<<endl;
 	}
-	electionFile << endl;
-	electionVoteFileToMain << endl;
+	electionFile <<isActive<< endl;
+	electionVoteFileToMain<<isActive << endl;
 	electionVoteFileToMain.close();
 	electionVoteFile.close();
 	//addElectionToFileWithCandiesToMainFile(timeType, "electionData");
@@ -397,17 +397,22 @@ void election::loadElectionFromFile(string fileName,int load) {
 			cout << "vote count is " << temp << endl;
 			selCandidates[i].setVoteCount(stoi(temp));
 
-			if (i == numOfCandidates - 1) { // Note the -1 here
-				getline(electionFile, candidateCnic[i], '\n');
-			}
-			else {
+		
 				getline(electionFile, candidateCnic[i], '*');
-			}
+			
 			selCandidates[i].getCandidateByCnic(candidateCnic[i]);
 			selCandidates[i].setPartyString(getPartyNameToSetInCandidate(stoi(candidateCnic[i])));
 
 		}
-
+		string isActiveStr;
+		getline(electionFile, isActiveStr, '\n');
+		if (isActiveStr == "1") {
+			isActive = true;
+		}
+		else {
+			isActive = false;
+		}
+		electionFile.close();
 }
 void election::saveElectionVotesToFile() {
 	ofstream candidateVote(to_string(electionId) + ".txt");
