@@ -161,6 +161,8 @@ int* electionManger::displayLocalElections(int type) {
 
 		}
 		Choices[0] = counter;
+		cout << "election at choices 1" << Choices[1];
+
 		return Choices;
 
 	}
@@ -362,9 +364,14 @@ void electionManger::casteVoteInElection(election* e, int size, int* choices) {
 		// Check if the candidate ID is valid
 		for (int i = 0; i < e[index].getTotalCandidates(); i++) {
 			if (e[index].getSelectedCandidates()[i].getCnicInt() == candidateId) {
+				if (e[index].hasTimePassed(e[index].getFutureTime()) == false) {
 				e[index].castVote(voterr, candidateId);
 				saveVoterVoteStatusToFile(id);
 				cout << "Vote casted successfully." << endl;
+				}
+				else {
+					cout << "Election time has passed. You cannot vote." << endl;
+				}
 				return;
 			}
 		}
@@ -387,7 +394,8 @@ reSelectVoteType:
 	int* electionChoice;
 	if (choice == 1) {
 		cout << "Local Election" << endl;
-		electionChoice = displayLocalElections(1);
+		electionChoice = displayLocalElections(0);
+		cout << "Election aftere choice " << electionChoice[1] << endl;
 		if (electionChoice[0] != -1) {
 
 			casteVoteInElection(local, countLocal, electionChoice);
@@ -399,7 +407,7 @@ reSelectVoteType:
 	}
 	else if (choice == 2) {
 		cout << "National Election" << endl;
-		electionChoice = displayNationalElections(1);
+		electionChoice = displayNationalElections(0);
 
 		if (electionChoice[0] != -1)
 		{
@@ -411,7 +419,7 @@ reSelectVoteType:
 	}
 	else if (choice == 3) {
 		cout << "Regional Election" << endl;
-		electionChoice = displayRegionalElections(1);
+		electionChoice = displayRegionalElections(0);
 
 		if (electionChoice[0] != -1) {
 
@@ -697,10 +705,15 @@ void electionManger::actiDeactiElectionUsingId(int id,int type,bool parity) {
 		for (int i = 0; i < countLocal; i++) {
 			if (local[i].getElectionId() == id) {
 				local[i].setIsActive(parity);
+
 				if (parity == false)
 					cout << "Local Election DeActivated :: " <<local[i].getElectionId()<< endl;
-				else
+				else {
+				
 				cout << "Local Election Activated" << endl;
+				local[i].calculateFutureTime(stoi(local[i].getElectionTime()),local[i].getTimeType());
+
+				}
 				return;
 			}
 		}
@@ -711,9 +724,16 @@ void electionManger::actiDeactiElectionUsingId(int id,int type,bool parity) {
 			if (national[i].getElectionId() == id) {
 				national[i].setIsActive(parity);
 				if (parity == false)
-					cout << "National Election DeActivated ID::" <<national[i].getElectionId()<< endl;
+					cout << "National Election DeActivated ID::" << national[i].getElectionId() << endl;
 				else
+				{
 				cout << "National Election Activated" << endl;
+			
+				national[i].calculateFutureTime(stoi(national [i] .getElectionTime()),national[i].getTimeType());
+
+
+				}
+
 				return;
 			}
 		}
@@ -725,8 +745,11 @@ void electionManger::actiDeactiElectionUsingId(int id,int type,bool parity) {
 				regional[i].setIsActive(parity);
 				if (parity == false)
 					cout << "Regional Election DeActivated" << endl;
-				else
+				else {
+				regional[i].calculateFutureTime(stoi(regional[i].getElectionTime()), regional[i].getTimeType());
+					//cout << "Regional Election Activated" << endl;
 				cout << "Regional Election Activated" << endl;
+				}
 				return;
 			}
 		}
@@ -740,6 +763,7 @@ void electionManger::actiDeactiElectionUsingId(int id,int type,bool parity) {
 int electionManger::getIdFromUserTodDisplayResult(int* choices) {
 
 	cout << "Enter Election ID: ";
+
 	int id;
 	cin >> id;
 	bool isElectionFound = false;

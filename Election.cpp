@@ -476,16 +476,17 @@ string election::getPartyNameToSetInCandidate(int id) {
 time_t election::calculateFutureTime(int amount, int type) {
 	time_t now = time(NULL); // current time in seconds
 
-	if (type == '1') {
+	if (type == 1) {
 		now += amount * 24 * 60 * 60; // Add days in seconds
 	}
-	else if (type == '2') {
+	else if (type == 2) {
 		now += amount * 60 * 60; // Add hours in seconds
 	}
 	else {
 		cerr << "Invalid type. Use 'd' for days or 'h' for hours.\n";
 	}
-
+	cout << now << "  <- Time" << endl;
+	futureTime = now;
 	return now;
 }
 
