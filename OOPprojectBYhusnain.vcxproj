@@ -156,12 +156,15 @@
     <Text Include="candidate.txt" />
     <Text Include="electionData.txt" />
     <Text Include="electionId.txt" />
+    <Text Include="electionNames.txt" />
     <Text Include="lenghOfSelectedCandies.txt" />
     <Text Include="localElection.txt" />
     <Text Include="nationalElection.txt" />
+    <Text Include="partyNames.txt" />
     <Text Include="regionalElection.txt" />
     <Text Include="user.txt" />
     <Text Include="voter.txt" />
+    <Text Include="voterVoteStatus.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

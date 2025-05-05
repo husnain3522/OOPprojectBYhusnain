@@ -20,9 +20,16 @@ private:
 	nationalElection *national;
 	regionalElection *regional;
 	int countLocal, countNational, countRegional;
+	voter* voterr;
 public://change please
 	//well use this class to get all data to load from files and be ready when to evaluate what
 	int countNumOfElections(string);
+	void setVoter(voter * v) {
+		voterr = v;
+	}
+	voter getVoter() {
+		return *voterr;
+	}
 	electionManger();
 	//electionManger() {
 	//	countLocal = 0;
@@ -37,12 +44,30 @@ public://change please
 	void displayAllElectionNames();
 	void displayAllElectionInDetails();
 	void displayAllElectionForCasting();
-	void castVote(); 
+	void castVote();
 	localElection* getLocalElections();
 	nationalElection* getNationalElections();
 	regionalElection* getRegionalElections();
+	int * displayRegionalElections(int);
+	int * displayLocalElections(int);
+	int * displayNationalElections(int);
+	//int* displayLocalElectionsOnlyNonActive(); 
+	//int* displayNationalElectionsOnlyNonActive(); 
+	//int* displayRegionalElectionsOnlyNonActive();
 
-
+	void casteVoteInElection(election*,int,int*);
+	bool checkIfUserAlreadyVoted(int);
+	void saveVoterVoteStatusToFile(int);
+	void saveCandidateVotesToFile(int);
+	void checkVoteHistory();
+	string getElectionNameById(int id);
+	void displayResultsWithId(int); 
+	void displayResults();
+	int getIdFromUserTodDisplayResult(int*);
+	candidate* getCandidateByCnic(string);
+	void actiDeactiElectionAdmin(bool);
+	void actiDeactiElectionUsingId(int,int,bool);
+	
 
 
 };

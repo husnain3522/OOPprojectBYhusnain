@@ -1,2 +1,1 @@
-4*National Election*12*10*1*9911*2*1100*0011
-6*National Election*9May*24*1*8900*4*35202*1122*0011*1100
+1*National Election*1*1*1*1*2*1100*123*0

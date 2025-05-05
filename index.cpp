@@ -180,7 +180,12 @@ int main() {
 				cout << "3. Add Candidate" << endl;
 				cout << "4. Create Election" << endl;
 				cout << "5. Show ALl Election Names" << endl;
-				cout << "6. Exit" << endl;
+				cout << "6. Show Result" << endl;
+				cout << "7. Activate Election" << endl;
+				cout << "8. Deactivate Election" << endl;
+				//cout << "9. Show All Candidates" << endl;
+				cout << "9. Exit" << endl;
+
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
 				switch (adminChoice) {
@@ -212,15 +217,27 @@ int main() {
 
 				case 5 :
 					//em.displayAllElectionNames();
-					em.displayAllElectionInDetails();
+					em.displayNationalElections(3);
+					em.displayLocalElections(3);
+					em.displayRegionalElections(3);
+					//em.displayAllElectionInDetails();
 					//em.displayAllCandidates();
 
 					break;
 				case 6:
+					em.displayResults();
+					break;
+				case 9:
 					a.setLoginStatus(false);
 					goto logIn;
 					break;
+				case 7:
+					em.actiDeactiElectionAdmin(true);
+					break;
 
+				case 8:
+					em.actiDeactiElectionAdmin(false);
+					break;
 				default:
 					cout << "Invalid choice." << endl;
 				}
@@ -248,6 +265,8 @@ int main() {
 		if (v.getLoginStatus() == true) {
 			cout << "Welcome To Voter Panel" << endl;
 			int voterChoice;
+			em.setVoter(&v);
+			/*em.getVoter().display();*/
 			do {
 				cout << "1. View Elections" << endl;
 				cout << "2. Cast Vote" << endl;
@@ -257,14 +276,15 @@ int main() {
 				cin >> voterChoice;
 				switch (voterChoice) {
 				case 1:
-					//v.viewElections();
-					em.displayAllElectionNames();
+				em.displayAllElectionNames();
 					break;
 				case 2:
 					em.castVote();
 					break;
 				case 3:
-					//v.checkVoteStatus();
+					//check vvote history
+					// 
+					em.checkVoteHistory();
 					break;
 				case 4:
 					v.setLoginStatus(false);
