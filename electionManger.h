@@ -37,7 +37,7 @@ public://change please
 	void displayAllElectionNames();
 	void displayAllElectionInDetails();
 	void displayAllElectionForCasting();
-
+	void castVote(); 
 	localElection* getLocalElections();
 	nationalElection* getNationalElections();
 	regionalElection* getRegionalElections();

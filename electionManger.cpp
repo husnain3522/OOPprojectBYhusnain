@@ -133,3 +133,23 @@ void electionManger::displayAllCandidates() {
 	//	regional[i].displayCandiates(regional[i].getCandidateArray(), regional[i].getNumberOfRegions());
 	//}
 }
+void electionManger::castVote() {
+	// Implement the logic to cast a vote
+	cout << "Casting vote..." << endl;
+	// Add your code here
+	displayAllElectionNames();
+	cout << "Enter Election ID to cast vote: ";
+	int enteredElectionId;
+	cin >> enteredElectionId;
+	for (int i = 0; i < countLocal; i++) {
+		cout << "we looking ID ::" << endl;
+
+		if (local[i].getElectionId() == enteredElectionId) {
+			cout << "we found ID ::" << endl;
+			local[i].displayElectionDetails();
+
+			return;
+		}
+	}
+
+}

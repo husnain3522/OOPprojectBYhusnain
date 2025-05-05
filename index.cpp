@@ -211,8 +211,8 @@ int main() {
 				}
 
 				case 5 :
-					em.displayAllElectionNames();
-					//em.displayAllElectionInDetails();
+					//em.displayAllElectionNames();
+					em.displayAllElectionInDetails();
 					//em.displayAllCandidates();
 
 					break;
@@ -258,9 +258,10 @@ int main() {
 				switch (voterChoice) {
 				case 1:
 					//v.viewElections();
+					em.displayAllElectionNames();
 					break;
 				case 2:
-					//v.castVote();
+					em.castVote();
 					break;
 				case 3:
 					//v.checkVoteStatus();
