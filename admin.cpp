@@ -138,17 +138,23 @@ void admin::createElection(int id) {
 	string time;
 	
 	reEnterHrs:
-	cout << "Enter Election Time :: Press 1 - 2 repectively\n1 : Hours\nDays ";
+	cout << "Enter Election Time :: Press 1 - 2 repectively\n1 : Days\n2 Hours ";
 	int choice1;
 	cin >> choice1;
 	if (choice1 == 1) {
-		cout << "You have selected Hours" << endl;
-		cout << "Enter Time in Hours: ";
+		cout << "You have selected Days" << endl;
+		cout << "Enter Time in Days: ";
 		cin >> time;
 	}
 	else if (choice1 == 2) {
-		cout << "You have selected Days" << endl;
-		cout << "Enter Time in Days: ";
+		cout << "You have selected Hours" << endl;
+		cout << "Enter Time in Hours: ";
+		cin >> time;
+
+	}
+	else if (choice1 == 3) {
+		cout << "You have selected Seconds" << endl;
+		cout << "Enter Time in Seconds: ";
 		cin >> time;
 
 	}
