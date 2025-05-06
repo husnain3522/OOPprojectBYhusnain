@@ -67,7 +67,8 @@ public://change please
 	candidate* getCandidateByCnic(string);
 	void actiDeactiElectionAdmin(bool);
 	void actiDeactiElectionUsingId(int,int,bool);
-	
+	void setFutureEndTime();
+
 
 
 };
