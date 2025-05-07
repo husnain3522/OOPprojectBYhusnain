@@ -166,24 +166,19 @@ int* electionManger::displayLocalElections(int type) {
 }
 
 
-
-
-int* electionManger::displayNationalElections(int type) {
-	if (countNational == 0)
-	{
-		cout << "No National Election" << endl;
-		int* Choices = new int[1];
-		Choices[0] = -1;
-		return Choices;
+int* electionManger::displayNationalElections(int type) { 
+	if (countNational == 0) {
+		cout << "No national Election" << endl;
+		int* regionChoices = new int[1];
+		regionChoices[0] = -1;
+		return regionChoices;
 	}
 	else {
 		int counter = 0;
-
-		int* Choices = new int[countNational+1];
-		cout << "National Elections: " << endl;
+		int* Choices = new int[countNational + 1];
+		cout << "national Elections: " << endl;
 		for (int i = 0; i < countNational; i++) {
 			if (type == 1) {
-
 				if (national[i].getIsActice() == false) {
 					continue;
 				}
@@ -195,43 +190,39 @@ int* electionManger::displayNationalElections(int type) {
 			}
 			cout << "Name :: " << national[i].getElectionName() << endl;
 			cout << "ID :: " << national[i].getElectionId() << endl;
-			if (type==3) {
-				cout << "Election Status :: " << national[i].getIsActice()<<endl;
+			if (type == 3) {
+				cout << "Election Status :: " << national[i].getIsActice() << endl;
 			}
-			Choices[i + 1] = national[i].getElectionId();
+			Choices[counter + 1] = national[i].getElectionId();
+			cout << Choices[counter + 1] << "::" << national[i].getElectionId() << endl;
 			counter++;
-
-
-
 		}
 		if (counter == 0) {
 			counter = -1;
-			cout << "No National Elections Activated YET" << endl;
-
+			cout << "No Local Elections Activated YET" << endl;
 		}
 		Choices[0] = counter;
-
+		if (counter > 0) {
+			cout << "election at choices 1: " << Choices[1] << endl;
+		}
 		return Choices;
 	}
-
 }
+
+
 int* electionManger::displayRegionalElections(int type) {
-
 	if (countRegional == 0) {
-		cout << "No Regional Electios" << endl;
-		int* Choices = new int[1];
-		Choices[0] = -1;
-		return Choices;
-
+		cout << "No regional Election" << endl;
+		int* regionChoices = new int[1];
+		regionChoices[0] = -1;
+		return regionChoices;
 	}
 	else {
 		int counter = 0;
-		int* Choices = new int[countRegional+1];
-
-		cout << "Regional Elections: " << endl;
+		int* Choices = new int[countRegional + 1];
+		cout << "regional Elections: " << endl;
 		for (int i = 0; i < countRegional; i++) {
 			if (type == 1) {
-
 				if (regional[i].getIsActice() == false) {
 					continue;
 				}
@@ -246,20 +237,23 @@ int* electionManger::displayRegionalElections(int type) {
 			if (type == 3) {
 				cout << "Election Status :: " << regional[i].getIsActice() << endl;
 			}
-			Choices[i + 1] = regional[i].getElectionId();
+			Choices[counter + 1] = regional[i].getElectionId();
+			cout << Choices[counter + 1] << "::" << regional[i].getElectionId() << endl;
 			counter++;
-
 		}
-
 		if (counter == 0) {
 			counter = -1;
-			cout << "No Regional Elections Activated YET" << endl;
+			cout << "No Local Elections Activated YET" << endl;
 		}
 		Choices[0] = counter;
-
+		if (counter > 0) {
+			cout << "election at choices 1: " << Choices[1] << endl;
+		}
 		return Choices;
 	}
 }
+
+
 
 void electionManger::displayAllElectionInDetails() {
 	cout << "Local Elections: " << endl;

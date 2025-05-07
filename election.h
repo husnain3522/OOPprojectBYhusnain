@@ -19,6 +19,7 @@ protected:
 	int electionId;
 	int numOfCandidates;
 	int duration;
+	time_t futureTime;
 	candidate * selCandidates;
  static	int electionIdCounter;
  bool isActive;
@@ -44,6 +45,13 @@ public:// please change
 bool getIsActice() {
 		return isActive;
 	}
+time_t getFutureTime() {
+	cout << "Future time" << futureTime << endl;//remove me
+	return futureTime;
+}	
+void setFutureTime(time_t time) {
+	futureTime = time;
+}
 void setIsActive(bool status) {
 	isActive = status;
 }

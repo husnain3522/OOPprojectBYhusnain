@@ -124,5 +124,8 @@
     <Text Include="partyNames.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="reference.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

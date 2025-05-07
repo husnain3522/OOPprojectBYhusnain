@@ -171,6 +171,7 @@ void admin::createElection(int id) {
 		cout << "Enter Region Code " << i + 1 << ": ";
 		cin >> regionCodes[i];
 	}
+	
 	election e(name, date, time, numRegions);
 	e.setElectionId(id);
 	e.setRegionCodes(regionCodes, numRegions);
@@ -180,6 +181,8 @@ void admin::createElection(int id) {
 		numRegions = 1;
 	else if (choice1 == 2)
 		numRegions = 2;
+	else if (choice1 == 3)
+		numRegions = 3;
 
 	e.addElectionToFileWithCandies(numRegions,fileNameToStoreName);
 	delete[] regionCodes;
