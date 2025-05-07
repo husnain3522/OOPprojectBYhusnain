@@ -768,3 +768,7 @@ int electionManger::getIdFromUserTodDisplayResult(int* choices) {
 
 
 }
+void electionManger::setFutureEndTime() {
+
+
+}

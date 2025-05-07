@@ -23,6 +23,7 @@ protected:
 	candidate * selCandidates;
  static	int electionIdCounter;
  bool isActive;
+ int futureTime;
 	
 public:// please change
 	candidate* getSelectedCandidates() {
@@ -42,6 +43,13 @@ public:// please change
 		//electionId = "";
 		isActive = false;
 	};
+	int getFutureTime() {
+		return futureTime;
+
+	}
+	void setFutureTime(int time) {
+		futureTime = time;
+	}
 bool getIsActice() {
 		return isActive;
 	}
