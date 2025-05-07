@@ -1,0 +1,1 @@
+elecitionId*ElectionName*Date*Time(sec/hr/day)*TimeType(1,2,3)*totalCanids*candi1*candi2*isactive;
