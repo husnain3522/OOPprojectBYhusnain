@@ -280,8 +280,8 @@ void election::addElectionToFileWithCandies(int timeType,string fileName) {
 		electionVoteFileToMain << "*" << candiArray[i].getCnic();
 		electionVoteFile << electionId << "*" << candiArray[i].getCnic() << "*" << 0<<endl;
 	}
-	electionFile <<isActive<< endl;
-	electionVoteFileToMain<<isActive << endl;
+	electionFile <<"*0" << endl;
+	electionVoteFileToMain<<"*0" << endl;
 	electionVoteFileToMain.close();
 	electionVoteFile.close();
 	//addElectionToFileWithCandiesToMainFile(timeType, "electionData");
@@ -478,9 +478,16 @@ time_t election::calculateFutureTime(int amount, int type) {
 
 	if (type == 1) {
 		now += amount * 24 * 60 * 60; // Add days in seconds
+		cout << "Future time in days is " << amount << endl;
+
+	}
+	else if (type == 3) {
+		now += amount /** 60 * 60*/; // Add hours in seconds
+		cout << "Future time in seconds is " << amount << endl;
 	}
 	else if (type == 2) {
-		now += amount * 60 * 60; // Add hours in seconds
+		now += amount * 60 * 60; // Add hours in hours
+		cout << "Future time in hours is " << amount << endl;
 	}
 	else {
 		cerr << "Invalid type. Use 'd' for days or 'h' for hours.\n";
@@ -492,5 +499,7 @@ time_t election::calculateFutureTime(int amount, int type) {
 
 bool election::hasTimePassed(time_t futureTime) {
 	time_t now = time(NULL);
+	cout << "Now " << now << endl;
+	cout << (now >= futureTime )<< "-BOOL TIME PASSED" << endl;
 	return now >= futureTime;
 }

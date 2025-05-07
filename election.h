@@ -19,9 +19,11 @@ protected:
 	int electionId;
 	int numOfCandidates;
 	int duration;
+	time_t futureTime;
 	candidate * selCandidates;
  static	int electionIdCounter;
  bool isActive;
+ int futureTime;
 	
 public:// please change
 	candidate* getSelectedCandidates() {
@@ -41,9 +43,23 @@ public:// please change
 		//electionId = "";
 		isActive = false;
 	};
+	int getFutureTime() {
+		return futureTime;
+
+	}
+	void setFutureTime(int time) {
+		futureTime = time;
+	}
 bool getIsActice() {
 		return isActive;
 	}
+time_t getFutureTime() {
+	cout << "Future time" << futureTime << endl;//remove me
+	return futureTime;
+}	
+void setFutureTime(time_t time) {
+	futureTime = time;
+}
 void setIsActive(bool status) {
 	isActive = status;
 }
