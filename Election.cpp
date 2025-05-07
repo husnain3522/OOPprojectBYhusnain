@@ -482,7 +482,7 @@ time_t election::calculateFutureTime(int amount, int type) {
 
 	}
 	else if (type == 3) {
-		now += amount /** 60 * 60*/; // Add seconds
+		now += amount /** 60 * 60*/; // Add hours in seconds
 		cout << "Future time in seconds is " << amount << endl;
 	}
 	else if (type == 2) {
