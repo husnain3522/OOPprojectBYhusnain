@@ -20,16 +20,15 @@ protected:
 	int numOfCandidates;
 	int duration;
 	time_t futureTime;
-	candidate * selCandidates;
- static	int electionIdCounter;
- bool isActive;
- int futureTime;
-	
+	candidate* selCandidates;
+	static	int electionIdCounter;
+	bool isActive;
+
 public:// please change
 	candidate* getSelectedCandidates() {
 		return selCandidates;
 	}
-	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate,int);
+	candidate* addSelectedCandidate(candidate candi, candidate* selectedCandidate, int);
 	election() {
 		//electionIdCounter++;
 		//electionId = electionIdCounter;
@@ -43,26 +42,19 @@ public:// please change
 		//electionId = "";
 		isActive = false;
 	};
-	int getFutureTime() {
-		return futureTime;
-
-	}
-	void setFutureTime(int time) {
-		futureTime = time;
-	}
-bool getIsActice() {
+	bool getIsActice() {
 		return isActive;
 	}
-time_t getFutureTime() {
-	cout << "Future time" << futureTime << endl;//remove me
-	return futureTime;
-}	
-void setFutureTime(time_t time) {
-	futureTime = time;
-}
-void setIsActive(bool status) {
-	isActive = status;
-}
+	time_t getFutureTime() {
+		cout << "Future time" << futureTime << endl;//remove me
+		return futureTime;
+	}
+	void setFutureTime(time_t time) {
+		futureTime = time;
+	}
+	void setIsActive(bool status) {
+		isActive = status;
+	}
 	int getElectionIdCounter() {
 		return electionIdCounter;
 	}
@@ -82,10 +74,10 @@ void setIsActive(bool status) {
 	void setTimeType(int type) {
 		duration = type;
 	}
-	
+
 
 	candidate* getCandidateArray();
-	void displayCandiates(candidate*,int);
+	void displayCandiates(candidate*, int);
 	election(string, string, string, int);
 	void setElectionId(int id) {
 		electionId = id;
@@ -94,7 +86,7 @@ void setIsActive(bool status) {
 		return electionId;
 	}
 	int fileLenght(string);// checkes file lengh
-	void addElectionToFileWithCandies(int,string);
+	void addElectionToFileWithCandies(int, string);
 	candidate* selectCandidates();
 	void setElectionName(string name);
 	void setElectionDate(string date);
@@ -109,7 +101,7 @@ void setIsActive(bool status) {
 	void displayElectionDetails();
 	void castVote(voter*, int);
 	void saveElectionToFile();
-	void loadElectionFromFile(string,int);
+	void loadElectionFromFile(string, int);
 	void addElection();
 	void deleteElection();
 	void updateElection();
@@ -124,10 +116,8 @@ void setIsActive(bool status) {
 	void saveElectionVotesToFile();
 	void addElectionToFileWithCandiesToMainFile(int timeType, string fileName);
 	string getPartyNameToSetInCandidate(int id);
-	time_t calculateFutureTime(int amount, int type); 
+	time_t calculateFutureTime(int amount, int type);
 	bool hasTimePassed(time_t futureTime);
 
 
 };
-
-
