@@ -13,3 +13,9 @@
 18*National Election*6
 19*Regional Election*6
 20*Local Election*6
+22*Local Election*6
+23*Local Election*1
+24*Regional Election*1
+25*Regional Election*1
+26*Local Election*1
+27*National Election*1
