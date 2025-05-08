@@ -439,7 +439,7 @@ void election::castVote(voter* v, int candidateId) {
 			break;
 		}
 	}
-	saveElectionVotesToFile();
+	//saveElectionVotesToFile();
 }
 void election::saveCandidateVotesToFile(candidate* candi) {
 	ofstream candidateVote(to_string(electionId) + ".txt", ios::app);
