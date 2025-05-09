@@ -135,29 +135,39 @@ int main() {
 	//em.local->selCandidates[0].voteCount = 69;
 	//cout<< em.local->selCandidates[0].voteCount;
 
-	logIn:
-	cout << "Welcome to Online Voting System" << endl;
+logIn:
+	cout << "---------------------------------------------------" << endl;
+	cout << "***********************************" << endl;
+	cout << "* Welcome to Online Voting System *" << endl;
+	cout << "***********************************" << endl;
 	cout << "1. Admin" << endl;
 	cout << "2. Voter" << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Enter your choice: ";
 	int choice;
 	cin >> choice;
+	cout << "---------------------------------------------------" << endl;
 	if (choice == 1) {
+		cout << "---------------------------------------------------" << endl;
 		cout << "Enter name: ";
 		string name;
 		cin >> name;
+		cout << "---------------------------------------------------" << endl;
 		cout << "Enter CNIC: ";
 		string snic;
 		cin >> snic;
+		cout << "---------------------------------------------------" << endl;
 		cout << "Enter password: ";
 		string password;
 		cin >> password;
-		
+		cout << "---------------------------------------------------" << endl;
 		admin a;
 
 		a = checkAdmin( snic, password,"admin");
 		if (a.getCnic() == "") {
-	
+			cout << "---------------------------------------------------" << endl;
+			cout << "Login failed to admin. Something MisMatched" << endl;
+			cout << "---------------------------------------------------" << endl;
 			a.setLoginStatus(false);
 	
 		}
@@ -172,22 +182,34 @@ int main() {
 
 
 			int adminChoice;
-			adminPanel:
+		adminPanel:
+			cout << "---------------------------------------------------" << endl;
 			cout << "Welcome To Admin Panel" << endl;
+			cout << "---------------------------------------------------" << endl;
 			do {
+				cout << "---------------------------------------------------" << endl;
 				cout << "1. Add Voter" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "2. Add Admin" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "3. Add Candidate" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "4. Create Election" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "5. Show ALl Election Names" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "6. Show Result" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "7. Activate Election" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "8. Deactivate Election" << endl;
+				cout << "---------------------------------------------------" << endl;
 				//cout << "9. Show All Candidates" << endl;
 				cout << "9. Exit" << endl;
-
+				cout << "---------------------------------------------------" << endl;
 				cout << "Enter your choice: ";
 				cin >> adminChoice;
+				cout << "---------------------------------------------------" << endl;
 				switch (adminChoice) {
 				case 1:
 					a.addVoter();
@@ -239,41 +261,57 @@ int main() {
 					em.actiDeactiElectionAdmin(false);
 					break;
 				default:
+					cout << "---------------------------------------------------" << endl;
 					cout << "Invalid choice." << endl;
+					cout << "---------------------------------------------------" << endl;
 				}
 			} while (adminChoice != 4);
 		}
 	}
 	else if (choice == 2) {
+		cout << "---------------------------------------------------" << endl;
 		cout << "Enter name: ";
 		string name;
 		cin >> name;
-
+		cout << "---------------------------------------------------" << endl;
 		cout << "Enter CNIC: ";
 		string snic;
 		cin >> snic;
+		cout << "---------------------------------------------------" << endl;
 		cout << "Enter password: ";
 		string password;
 		cin >> password;
+		cout << "---------------------------------------------------" << endl;
 		voter v(name , snic, password);
 		v = checkVoter(snic, password, "voter");
 		if (v.getCnic() == "") {
+			cout << "---------------------------------------------------" << endl;
+			cout << "Login failed to voter. Something MisMatched" << endl;
+			cout << "---------------------------------------------------" << endl;
 			v.setLoginStatus(false);
 		}
 		else v.setLoginStatus(true);
 
 		if (v.getLoginStatus() == true) {
+			cout << "---------------------------------------------------" << endl;
 			cout << "Welcome To Voter Panel" << endl;
+			cout << "---------------------------------------------------" << endl;
 			int voterChoice;
 			em.setVoter(&v);
 			/*em.getVoter().display();*/
 			do {
+				cout << "---------------------------------------------------" << endl;
 				cout << "1. View Elections" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "2. Cast Vote" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "3. Check Vote Status" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "4. Exit" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "Enter your choice: ";
 				cin >> voterChoice;
+				cout << "---------------------------------------------------" << endl;
 				switch (voterChoice) {
 				case 1:
 				em.displayAllElectionNames();
@@ -292,14 +330,18 @@ int main() {
 					break;
 
 				default:
+					cout << "---------------------------------------------------" << endl;
 					cout << "Invalid choice." << endl;
+					cout << "---------------------------------------------------" << endl;
 				}
 			} while (voterChoice != 4);
 		}
 
 	}
 	else {
+		cout << "---------------------------------------------------" << endl;
 		cout << "Invalid choice." << endl;
+		cout << "---------------------------------------------------" << endl;
 	}
 
 return 0;

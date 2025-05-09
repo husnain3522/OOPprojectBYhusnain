@@ -519,7 +519,7 @@ string election::getPartyNameToSetInCandidate(int id) {
 		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
 		cout << "---------------------------------------------------" << endl;
-		return ;
+		return "not found";
 	}
 	string partyId, partyName;
 	for (int i = 0; i < len; i++) {
