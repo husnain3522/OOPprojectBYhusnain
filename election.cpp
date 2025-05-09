@@ -11,7 +11,9 @@ using namespace std;
 int election::fileLenght(string fileName) {
 	ifstream file((fileName + ".txt"));
 	if (!file.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << fileName << endl;
+		cout << "---------------------------------------------------" << endl;
 		return -1;
 	}
 	int count = 0;
@@ -67,16 +69,23 @@ int election::getNumberOfRegions() {
 	return numberOfRegions;
 }
 void election::displayElectionDetails() {
+	cout << "---------------------------------------------------" << endl;
 	cout << "Election Name: " << electionName << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Election Date: " << electionDate << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Election Time: " << electionTime << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Duration: " << duration << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Region Codes: ";
+	cout << "---------------------------------------------------" << endl;
 	/*for (int i = 0; i< 1; i++) {
 		cout << regionCodes[i] << " ";
 	}*/
 	//for (int i = 0; i < numOfCandidates; i++) {
 	displayCandiates(selCandidates, numOfCandidates);
+	cout << "---------------------------------------------------" << endl;
 	//}
 	cout << endl;
 }
@@ -85,7 +94,9 @@ candidate* election::getCandidateArray() {
 	candidate* candiArray = new candidate[totalCandidates];
 	ifstream candidateFile("candidate.txt");
 	if (!candidateFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return nullptr;
 	}
 	for (int i = 0; i < totalCandidates; i++)
@@ -103,18 +114,22 @@ candidate* election::getCandidateArray() {
 
 void election::displayCandiates(candidate* candiArray, int totalCandis) {
 	//find candidates in array
-	cout << "were are in display candidates" << endl;
+//	cout << "were are in display candidates" << endl;
 
 
-	cout << "Total candis are " << totalCandis << endl;
-
+	//cout << "Total candis are " << totalCandis << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Candidates:" << endl;
+	cout << "---------------------------------------------------" << endl;
 	for (int i = 0; i < totalCandis; i++) {
+		cout << "---------------------------------------------------" << endl;
 		cout << "Name: " << candiArray[i].getName() << endl;
+		cout << "---------------------------------------------------" << endl;
 		cout << "CNIC: " << candiArray[i].getCnic() << endl;
-
+		cout << "---------------------------------------------------" << endl;
 		cout << "Party Name: " << getPartyNameToSetInCandidate(stoi(candiArray[i].getPartyName())) << endl;
 		candiArray[i].getPartyNameInString();
+		cout << "---------------------------------------------------" << endl;
 	}
 
 }
@@ -134,8 +149,9 @@ candidate* deleteAcandy(candidate* candiArray, int candyIndex, int total) {
 	// Return the new array  
 	return tempArray;
 }candidate* election::addSelectedCandidate(candidate candi, candidate* selectedCandidates, int lenOfSelectedCandis) {
+	cout << "---------------------------------------------------" << endl;
 	cout << "Adding candidate to selectedCandidates array..." << endl;
-
+	cout << "---------------------------------------------------" << endl;
 	// Create new array with size +1
 	candidate* tempArray = new candidate[lenOfSelectedCandis + 1];
 
@@ -158,12 +174,16 @@ candidate* deleteAcandy(candidate* candiArray, int candyIndex, int total) {
 
 candidate* election::selectCandidates() {
 	int totalCandidates = fileLenght("candidate");
+	cout << "---------------------------------------------------" << endl;
 	cout << "total candidates are " << totalCandidates << endl;
+	cout << "---------------------------------------------------" << endl;
 	candidate* candiArray = new candidate[totalCandidates];
 	candiArray = getCandidateArray();
 	ifstream candidateFile("candidate.txt");
 	if (!candidateFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return nullptr;
 	}
 	bool selectNext = true;
@@ -172,36 +192,42 @@ candidate* election::selectCandidates() {
 	int selectedCandidatesLength = 0;
 	while (selectNext) {
 		if (totalCandidates == 0) {
+			cout << "---------------------------------------------------" << endl;
 			cout << "No candidates available." << endl;
+			cout << "---------------------------------------------------" << endl;
 			break;
 		}
 		displayCandiates(candiArray, totalCandidates);
+		cout << "---------------------------------------------------" << endl;
 		cout << "Select a candidate by entering their CNIC: ";
 		string cnic;
 		cin >> cnic;
-		cout << "we are just before cncin" << endl;
+		cout << "---------------------------------------------------" << endl;
+		//cout << "we are just before cncin" << endl;
 		for (int i = 0; i < totalCandidates; i++) {
-			cout << "we are in for loop " << i << endl;
+			//cout << "we are in for loop " << i << endl;
 
 
 			if (candiArray[i].getCnic() == cnic) {
-				cout << "we are in if" << endl;
+			//	cout << "we are in if" << endl;
 				//add that candidate to selected candidates
-				cout << "we are selcting" << endl;
+				//cout << "we are selcting" << endl;
 				selectedCandidates = addSelectedCandidate(candiArray[i], selectedCandidates, selectedCandidatesLength);
 				selectedCandidatesLength++;
-				cout << "we are selcted" << endl;
-
+			//	cout << "we are selcted" << endl;
+				cout << "---------------------------------------------------" << endl;
 				cout << "Candidate selected: " << candiArray[i].getName() << endl;
-
+				cout << "---------------------------------------------------" << endl;
 
 				//delete that candidate from that array and add it to selected candies
-				cout << "now we are deketing " << endl;
+				//cout << "now we are deketing " << endl;
 				candiArray = deleteAcandy(candiArray, i, totalCandidates);
-				cout << "we deleted candi " << endl;
+				//cout << "we deleted candi " << endl;
 
 				totalCandidates--;
+				cout << "---------------------------------------------------" << endl;
 				cout << "Do You want to add More Candidates (y/n): ";
+				cout << "---------------------------------------------------" << endl;
 				char choice;
 				cin >> choice;
 				if (choice == 'y' || choice == 'Y') {
@@ -213,15 +239,17 @@ candidate* election::selectCandidates() {
 				}
 
 			}
-			cout << "were out of if" << endl;
+		//	cout << "were out of if" << endl;
 
 		}
-		cout << "were out of for loop" << endl;
+		//cout << "were out of for loop" << endl;
 		if (selectNext == false) {
 			break;
 		}
 		else {
+			cout << "---------------------------------------------------" << endl;
 			cout << "Candidate not found. Please try again." << endl;
+			cout << "---------------------------------------------------" << endl;
 		}
 		//show all candidates
 
@@ -230,31 +258,39 @@ candidate* election::selectCandidates() {
 	ofstream lengh("lenghOfSelectedCandies.txt");
 	lengh << selectedCandidatesLength;
 	lengh.close();
+	cout << "---------------------------------------------------" << endl;
 	cout << "selected candidates are " << selectedCandidatesLength << endl;
+	cout << "---------------------------------------------------" << endl;
 	displayCandiates(selectedCandidates, selectedCandidatesLength);
-
+	cout << "---------------------------------------------------" << endl;
 	return selectedCandidates;
 
 }
 void election::addElectionToFileWithCandies(int timeType, string fileName) {
+	cout << "---------------------------------------------------" << endl;
 	cout << "Here Is list of candidates" << endl;
+	cout << "---------------------------------------------------" << endl;
 	int totalCandidates = fileLenght("candidate");
+	cout << "---------------------------------------------------" << endl;
 	cout << "Flile lenght is " << totalCandidates << endl;
+	cout << "---------------------------------------------------" << endl;
 	candidate* candiArray = new candidate[totalCandidates];
 	ofstream electionFile(fileName + ".txt", ios::app);
 
 	if (!electionFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
-	cout << "selected candis" << endl;
+	//cout << "selected candis" << endl;
 
 	candiArray = selectCandidates();
 
 	int len;
 	ifstream fileF("lenghOfSelectedCandies.txt");
 	fileF >> len;
-	cout << "after selected candis" << endl;
+	//cout << "after selected candis" << endl;
 	//find lenght of selected candidates
 	int selectedCandidatesLength = len;
 	//election is saving to 3 files 
@@ -288,11 +324,11 @@ void election::addElectionToFileWithCandies(int timeType, string fileName) {
 
 
 
-
+	cout << "---------------------------------------------------" << endl;
 	cout << "Election saved to file." << endl;
 
 
-
+	cout << "---------------------------------------------------" << endl;
 
 }
 //
@@ -340,7 +376,9 @@ void election::loadElectionFromFile(string fileName, int load) {
 	int fileLen = fileLenght(fileName);
 	ifstream electionFile(fileName + ".txt");
 	if (!electionFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
 	//string electionName, electionDate, electionTime, regionCode;
@@ -351,7 +389,7 @@ void election::loadElectionFromFile(string fileName, int load) {
 	string line;
 	for (int i = 0; i < fileLen; i++)
 	{
-		cout << "load is L:: " << load << endl;
+		//cout << "load is L:: " << load << endl;
 
 		if (i < load - 1) {
 			getline(electionFile, line, '\n');
@@ -360,7 +398,9 @@ void election::loadElectionFromFile(string fileName, int load) {
 	string electionIdStr;
 	getline(electionFile, electionIdStr, '*');
 	electionId = stoi(electionIdStr);
-	cout << "e;ection id in load is " << electionId << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "election id in load is " << electionId << endl;
+	cout << "---------------------------------------------------" << endl;
 	getline(electionFile, electionName, '*');
 	getline(electionFile, electionDate, '*');
 	getline(electionFile, electionTime, '*');
@@ -383,18 +423,26 @@ void election::loadElectionFromFile(string fileName, int load) {
 	//selCandidatesCnic = 
 	ifstream candidateVoteFile(to_string(electionId) + ".txt");
 	if (!candidateVoteFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
 	string temp;
 	for (int i = 0; i < numOfCandidates; i++) {
 
 		getline(candidateVoteFile, temp, '*');
+		cout << "---------------------------------------------------" << endl;
 		cout << "election id is " << temp << endl;
+		cout << "---------------------------------------------------" << endl;
 		getline(candidateVoteFile, temp, '*');
+		cout << "---------------------------------------------------" << endl;
 		cout << "candidate cnic is " << temp << endl;
+		cout << "---------------------------------------------------" << endl;
 		getline(candidateVoteFile, temp, '\n');
+		cout << "---------------------------------------------------" << endl;
 		cout << "vote count is " << temp << endl;
+		cout << "---------------------------------------------------" << endl;
 		selCandidates[i].setVoteCount(stoi(temp));
 
 
@@ -417,25 +465,33 @@ void election::loadElectionFromFile(string fileName, int load) {
 void election::saveElectionVotesToFile() {
 	ofstream candidateVote(to_string(electionId) + ".txt");
 	if (!candidateVote.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file to save candidate votes." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
 	for (int i = 0; i < numOfCandidates; i++) {
 		candidateVote << electionId << "" << selCandidates[i].getCnic() << "" << selCandidates[i].getVoteCount();
 		candidateVote << endl;
-	}
+	}cout << "---------------------------------------------------" << endl;
 	cout << "candidateVote ssaved to file :: " << selCandidates[0].getName() << "::" << selCandidates[0].getVoteCount() << endl;
+	cout << "---------------------------------------------------" << endl;
 	candidateVote.close();
 }
 
 void election::castVote(voter* v, int candidateId) {
+	cout << "---------------------------------------------------" << endl;
 	cout << "Casting vote for candidate with ID: " << candidateId << endl;
+	cout << "---------------------------------------------------" << endl;
 	for (int i = 0; i < numOfCandidates; i++) {
 		if (selCandidates[i].getCnicInt() == candidateId) {
 			selCandidates[i].incrementVoteCount();
+			cout << "---------------------------------------------------" << endl;
 			cout << "Vote count for candidate " << selCandidates[i].getName() << ": " << selCandidates[i].getVoteCount() << endl;
 			saveCandidateVotesToFile(&selCandidates[i]);
+			cout << "---------------------------------------------------" << endl;
 			cout << "Vote casted successfully for candidate: " << selCandidates[i].getName() << endl;
+			cout << "---------------------------------------------------" << endl; 
 			break;
 		}
 	}
@@ -444,23 +500,35 @@ void election::castVote(voter* v, int candidateId) {
 void election::saveCandidateVotesToFile(candidate* candi) {
 	ofstream candidateVote(to_string(electionId) + ".txt", ios::app);
 	if (!candidateVote.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file to save candidate votes." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
 	candidateVote << electionId << "*" << candi->getCnic() << "*" << candi->getVoteCount();
 	candidateVote << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "candidateVote ssaved to file :: " << candi->getName() << "::" << candi->getVoteCount() << endl;
+	cout << "---------------------------------------------------" << endl; 
 	candidateVote.close();
 }
 string election::getPartyNameToSetInCandidate(int id) {
 	int len = fileLenght("partyNames");
 	ifstream partyNameFile("partyNames.txt");
+	if (!partyNameFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
+		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return "not found";
+	}
 	string partyId, partyName;
 	for (int i = 0; i < len; i++) {
 		getline(partyNameFile, partyId, '*');
 		getline(partyNameFile, partyName, '\n');
 		if (partyId == to_string(id)) {
+			cout << "---------------------------------------------------" << endl;
 			cout << "Returning Part Name" << partyName << endl;
+			cout << "---------------------------------------------------" << endl;
 			return partyName;
 		}
 
@@ -478,28 +546,41 @@ time_t election::calculateFutureTime(int amount, int type) {
 
 	if (type == 1) {
 		now += amount * 24 * 60 * 60; // Add days in seconds
+		cout << "---------------------------------------------------" << endl;
 		cout << "Future time in days is " << amount << endl;
+		cout << "---------------------------------------------------" << endl;
 
 	}
 	else if (type == 3) {
 		now += amount /** 60 * 60*/; // Add seconds
+		cout << "---------------------------------------------------" << endl; 
 		cout << "Future time in seconds is " << amount << endl;
+		cout << "---------------------------------------------------" << endl;
 	}
 	else if (type == 2) {
 		now += amount * 60 * 60; // Add hours in hours
+		cout << "---------------------------------------------------" << endl; 
 		cout << "Future time in hours is " << amount << endl;
+		cout << "---------------------------------------------------" << endl;
 	}
 	else {
-		cerr << "Invalid type. Use 'd' for days or 'h' for hours.\n";
+		cout << "---------------------------------------------------" << endl;
+		cerr << "Invalid type. Use 'd' for days or 'h' for hours.\n''s' for seconds\n";
+		cout << "---------------------------------------------------" << endl;
 	}
+	cout << "---------------------------------------------------" << endl;
 	cout << now << "  <- Time" << endl;
+	cout << "---------------------------------------------------" << endl;
 	futureTime = now;
 	return now;
 }
 
 bool election::hasTimePassed(time_t futureTime) {
 	time_t now = time(NULL);
+	cout << "---------------------------------------------------" << endl;
 	cout << "Now " << now << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << (now >= futureTime) << "-BOOL TIME PASSED" << endl;
+	cout << "---------------------------------------------------" << endl;
 	return now >= futureTime;
 }

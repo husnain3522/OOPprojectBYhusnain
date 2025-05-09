@@ -33,14 +33,20 @@ void user::setPassword(string p) {
 //}
 
 void user::display() {
+	cout << "---------------------------------------------------" << endl;
 	cout << "Name: " << name << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "CNIC: " << cnic << endl;
+	cout << "---------------------------------------------------" << endl;
 	cout << "Password: " << password << endl;
+	cout << "---------------------------------------------------" << endl;
 }
 int user::fileLenght() {
 	ifstream file("admin.txt");
 	if (!file.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return -1;
 	}
 	int count = 0;
@@ -54,7 +60,9 @@ int user::fileLenght() {
 int user::fileLenght(string fileName) {
 	ifstream file(fileName + ".txt");
 	if (!file.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return -1;
 	}
 	int count = 0;
@@ -70,17 +78,24 @@ void user::addUserToFile(string name, string snic, string password, string fileN
 
 	ofstream userFile((fileName + ".txt"), ios::app);
 	if (!userFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
-	userFile << name << "*" << snic << "*" << password << endl;
+	else {
+		userFile << name << "*" << snic << "*" << password << endl;
 		cout << fileName << " saved to file." << endl;
+		cout << "---------------------------------------------------" << endl;
+	}
 	userFile.close();
 }
 bool user::checkIfUserExists(string inputCnic, string fileName) {
 	ifstream userFile(fileName + ".txt");
 	if (!userFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return false;
 	}
 	string serchedCnic;
@@ -90,7 +105,9 @@ bool user::checkIfUserExists(string inputCnic, string fileName) {
 		getline(userFile, serchedCnic, '*');
 		if (serchedCnic == inputCnic) {
 			userFile.close();
-
+			cout << "---------------------------------------------------" << endl;
+			cout << "CNIC already exists." << endl;
+			cout << "---------------------------------------------------" << endl;
 			return true;
 		}
 		getline(userFile, temp, '\n');
@@ -102,7 +119,9 @@ bool user::checkIfUserExists(string inputCnic, string fileName) {
 void user::checkCredentials(string inputCnic, string inputPassword, string fileName) {
 	ifstream userFile(fileName + ".txt");
 	if (!userFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
 	string serchedCnic;
@@ -114,16 +133,22 @@ void user::checkCredentials(string inputCnic, string inputPassword, string fileN
 		getline(userFile, serchedPassword, '\n');
 		if (serchedCnic == inputCnic && serchedPassword == inputPassword) {
 			userFile.close();
+			cout << "---------------------------------------------------" << endl;
 			cout << "Login successful." << endl;
+			cout << "---------------------------------------------------" << endl;
 			return;
 		}
 	}
+	cout << "---------------------------------------------------" << endl;
 	cout << "Login failed to "<<fileName<< ".Something MisMatched" << endl;
+	cout << "---------------------------------------------------" << endl;
 }
 bool user::checkIfPartyIdExists(string partyId) {
 	ifstream partyFile("candidate.txt");
 	if (!partyFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return false;
 	}
 	string serchedPartyId;
@@ -133,17 +158,25 @@ bool user::checkIfPartyIdExists(string partyId) {
 		getline(partyFile, serchedPartyId, '*');
 		if (serchedPartyId == partyId) {
 			partyFile.close();
+			cout << "---------------------------------------------------" << endl;
+			cout << "Party ID already exists." << endl;
+			cout << "---------------------------------------------------" << endl;
 			return true;
 		}
 		getline(partyFile, temp, '\n');
 	}
 	partyFile.close();
+	cout << "---------------------------------------------------" << endl;
+	cout << "Party ID does not exist." << endl;
+	cout << "---------------------------------------------------" << endl;
 	return false;
 }
 void user::viewElections() {
 	ifstream electionFile("election.txt");
 	if (!electionFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
+		cout << "---------------------------------------------------" << endl;
 		return;
 	}
 	election elec;
