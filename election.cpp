@@ -398,9 +398,9 @@ void election::loadElectionFromFile(string fileName, int load) {
 	string electionIdStr;
 	getline(electionFile, electionIdStr, '*');
 	electionId = stoi(electionIdStr);
-	cout << "---------------------------------------------------" << endl;
-	cout << "election id in load is " << electionId << endl;
-	cout << "---------------------------------------------------" << endl;
+	//cout << "---------------------------------------------------" << endl;
+	//cout << "election id in load is " << electionId << endl;
+	//cout << "---------------------------------------------------" << endl;
 	getline(electionFile, electionName, '*');
 	getline(electionFile, electionDate, '*');
 	getline(electionFile, electionTime, '*');
@@ -432,17 +432,17 @@ void election::loadElectionFromFile(string fileName, int load) {
 	for (int i = 0; i < numOfCandidates; i++) {
 
 		getline(candidateVoteFile, temp, '*');
-		cout << "---------------------------------------------------" << endl;
-		cout << "election id is " << temp << endl;
-		cout << "---------------------------------------------------" << endl;
+		//cout << "-----------------------/*----------------------------" << endl;
+		//cout << "election id is " << temp << endl;
+		//cout << "-----------------------*/----------------------------" << endl;
 		getline(candidateVoteFile, temp, '*');
-		cout << "---------------------------------------------------" << endl;
-		cout << "candidate cnic is " << temp << endl;
-		cout << "---------------------------------------------------" << endl;
+		//cout << "---------------------------------------------------" << endl;
+		//cout << "candidate cnic is " << temp << endl;
+		//cout << "---------------------------------------------------" << endl;
 		getline(candidateVoteFile, temp, '\n');
-		cout << "---------------------------------------------------" << endl;
-		cout << "vote count is " << temp << endl;
-		cout << "---------------------------------------------------" << endl;
+		//cout << "---------------------------------------------------" << endl;
+		//cout << "vote count is " << temp << endl;
+		//cout << "---------------------------------------------------" << endl;
 		selCandidates[i].setVoteCount(stoi(temp));
 
 
@@ -526,9 +526,9 @@ string election::getPartyNameToSetInCandidate(int id) {
 		getline(partyNameFile, partyId, '*');
 		getline(partyNameFile, partyName, '\n');
 		if (partyId == to_string(id)) {
-			cout << "---------------------------------------------------" << endl;
-			cout << "Returning Part Name" << partyName << endl;
-			cout << "---------------------------------------------------" << endl;
+			//cout << "---------------------------------------------------" << endl;
+			//cout << "---------------------------------------------------" << endl;
+			//cout << "Returning Part Name" << partyName << endl;
 			return partyName;
 		}
 

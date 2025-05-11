@@ -1,4 +1,6 @@
 ﻿#include<iostream>
+#include<cstdlib>
+
 /*
 Session-2025 Object Oriented Programming-Lab
 Project Description: Online Voting System
@@ -146,7 +148,9 @@ logIn:
 	cout << "Enter your choice: ";
 	int choice;
 	cin >> choice;
+
 	cout << "---------------------------------------------------" << endl;
+	system("cls");
 	if (choice == 1) {
 		cout << "---------------------------------------------------" << endl;
 		cout << "Enter name: ";

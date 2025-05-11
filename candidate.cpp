@@ -20,8 +20,8 @@ void candidate::getCandidateByCnic(string inputCnic) {
    candidate candi;
    bool isCnicFound = false;
    ifstream candidateFile("candidate.txt");
-   cout << "---------------------------------------------------" << endl;
    if (!candidateFile.is_open()) {
+   cout << "---------------------------------------------------" << endl;
        cerr << "Error opening file." << endl;
        cout << "---------------------------------------------------" << endl;
        return;
@@ -32,26 +32,26 @@ void candidate::getCandidateByCnic(string inputCnic) {
        getline(candidateFile, partyId, '\n');
        if (inputCnic == Scnic) { 
            isCnicFound = true;
-		   cout << "---------------------------------------------------" << endl;
-		   cout << "CNIC found." << endl;
-           cout << "---------------------------------------------------" << endl;
+		   //cout << "---------------------------------------------------" << endl;
+		   //cout << "CNIC found." << endl;
+           //cout << "---------------------------------------------------" << endl;
            partyName = partyId;
            cnic = inputCnic;
            name = Sname;
-		   cout << "---------------------------------------------------" << endl;
-		   cout << "Name: " << name << endl;
-           cout << "---------------------------------------------------" << endl;
-		   cout << "CNIC: " << cnic << endl;
-           cout << "---------------------------------------------------" << endl;
-		   cout << "Party ID: " << partyName << endl;
-		   cout << "---------------------------------------------------" << endl;
+		   //cout << "---------------------------------------------------" << endl;
+		   //cout << "Name: " << name << endl;
+           //cout << "---------------------------------------------------" << endl;
+		   //cout << "CNIC: " << cnic << endl;
+           //cout << "---------------------------------------------------" << endl;
+		   //cout << "Party ID: " << partyName << endl;
+		   //cout << "---------------------------------------------------" << endl;
            break;
        }
    }
    if (!isCnicFound) {
-       cout << "---------------------------------------------------" << endl;
-       cout << "CNIC not found."<<inputCnic << endl;
-       cout << "---------------------------------------------------" << endl;
+       //cout << "---------------------------------------------------" << endl;
+       //cout << "CNIC not found."<<inputCnic << endl;
+       //cout << "---------------------------------------------------" << endl;
    }
    candidateFile.close();
 }
