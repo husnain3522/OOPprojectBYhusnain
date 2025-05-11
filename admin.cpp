@@ -6,9 +6,11 @@
 #include "election.h"
 #include "candidate.h"
 #include "voter.h"
+#include<sstream>
 #include<cstdlib> // For system("cls")
 
 using namespace std;
+bool checkInput(string input,string tag);
 
 // This function's parameters (name, cnic, password) are not used in the current logic.
 // The login status depends solely on the member variable 'isLoginVar'.
@@ -77,6 +79,11 @@ void admin::addVoter() {
 	cout << "Enter Voter's CNIC: ";
 	cin >> snic;
 	cout << "---------------------------------------------------" << endl;
+	if (!checkInput(snic,"CNIC")) {
+		system("pause");
+		return;
+
+	}
 
 	if (checkIfUserExists(snic, "voter")) {
 		cout << "---------------------------------------------------" << endl;
@@ -100,8 +107,8 @@ void admin::addVoter() {
 		cout << "Name: " << name << endl;
 		cout << "CNIC: " << snic << endl;
 		cout << "---------------------------------------------------" << endl;
-		// system("pause"); // Optional: pause to see the success message
-		// system("cls"); // Optional: clear screen after success message if returning to a menu
+		 system("pause"); 
+		 system("cls"); 
 	}
 }
 
@@ -118,6 +125,12 @@ void admin::addAdmin() {
 
 	cout << "Enter Admin's CNIC: ";
 	cin >> snic;
+	if (!checkInput(snic,"CNIC")) {
+		system("pause");
+		return;
+
+	}
+
 	cout << "---------------------------------------------------" << endl;
 
 	if (checkIfUserExists(snic, "admin")) {
@@ -142,7 +155,7 @@ void admin::addAdmin() {
 		cout << "Name: " << name << endl;
 		cout << "CNIC: " << snic << endl;
 		cout << "---------------------------------------------------" << endl;
-		// system("pause"); // Optional: pause to see the success message
+		 system("pause"); 
 		// system("cls"); // Optional: clear screen after success message if returning to a menu
 	}
 }
@@ -154,9 +167,18 @@ void admin::addCandidate() {
 	cout << "---------------------------------------------------" << endl;
 	cout << "How many Candidates do you want to add? ";
 	int num;
-	cin >> num;
+	string numStr;
+	cin >> numStr;
+	if (!checkInput(numStr,"Num Of Candidates")) {
+		system("pause");
+		return;
+
+	}
+	num = stoi(numStr);
+
 	system("cls"); // Original placement: Clears after getting 'num'.
 
+		string name, snic, partyId;
 	for (int i = 0; i < num; i++) {
 	AgainEnterData:
 		system("cls"); // Clear screen for each new candidate or re-entry
@@ -164,13 +186,20 @@ void admin::addCandidate() {
 		cout << "||      Adding Candidate " << (i + 1) << " of " << num << "             ||" << endl;
 		cout << "---------------------------------------------------" << endl;
 
-		string name, snic, partyId;
 		cout << "Enter Name for Candidate " << (i + 1) << ": ";
+		//system("pause");
+
 		cin >> name;
 		cout << "---------------------------------------------------" << endl;
-
+		//system("pause");
 		cout << "Enter CNIC for Candidate " << (i + 1) << ": ";
 		cin >> snic;
+		if (!checkInput(snic,"CNIC")) {
+			system("pause");
+			goto AgainEnterData;
+
+		}
+
 		cout << "---------------------------------------------------" << endl;
 
 		if (checkIfUserExists(snic, "candidate")) {
@@ -222,7 +251,7 @@ void admin::addCandidate() {
 			cout << "---------------------------------------------------" << endl;
 			cout << "Candidate " << (i + 1) << ": " << name << " (Party ID: " << partyId << ")" << endl;
 			cout << "---------------------------------------------------" << endl;
-			// system("pause"); // Optional: pause to see the success message
+			 system("pause"); 
 			system("cls"); // Clear success message before next candidate or finishing.
 		}
 	}
@@ -230,7 +259,7 @@ void admin::addCandidate() {
 	cout << "---------------------------------------------------" << endl;
 	cout << "||       All Candidates Processed.               ||" << endl;
 	cout << "---------------------------------------------------" << endl;
-	// system("pause"); // Optional
+	 //system("pause"); // Opti
 	// system("cls"); // Optional: clear before returning to main menu
 }
 
@@ -303,37 +332,73 @@ reEnterHrs:
 	cout << "  3 : Seconds" << endl;
 	cout << "---------------------------------------------------" << endl;
 	cout << "Enter your choice (1-3): ";
-	cin >> time_unit_choice;
+	string time_unit_choiceStr;
+	cin >> time_unit_choiceStr;
+	if (!checkInput(time_unit_choiceStr,"Duration Option")) {
+		system("pause");
+		system("cls");
+		goto reEnterHrs;
+	}
+	time_unit_choice = stoi(time_unit_choiceStr);
+
+
 
 	int durationTypeIndicator = 0; // Used for addElectionToFileWithCandies
 
 	if (time_unit_choice == 1) {
+		enterDays:
 		system("cls");
 		cout << "---------------------------------------------------" << endl;
 		cout << "||         Duration Unit: Days                   ||" << endl;
 		cout << "---------------------------------------------------" << endl;
 		cout << "Enter Election Duration (in Days): ";
-		cin >> time_duration_value;
+		string time_duration_valueStr;
+		cin >> time_duration_valueStr;
+		if (!checkInput(time_duration_valueStr, "Duration")) {
+			system("pause");
+			goto enterDays;
+
+		}
+		time_duration_value = stoi(time_duration_valueStr);
 		durationTypeIndicator = 1;
 		system("cls"); // Original placement: Clears after time_duration_value input.
 	}
 	else if (time_unit_choice == 2) {
+		enterHours:
 		system("cls");
 		cout << "---------------------------------------------------" << endl;
 		cout << "||         Duration Unit: Hours                  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
 		cout << "Enter Election Duration (in Hours): ";
-		cin >> time_duration_value;
+		string time_duration_valueStr;
+		cin >> time_duration_valueStr;
+		if (!checkInput(time_duration_valueStr,"Duration")) {
+			system("pause");
+			goto enterHours;
+
+		}
+		time_duration_value = stoi(time_duration_valueStr);
+
+
 		durationTypeIndicator = 2;
 		system("cls"); // Original placement.
 	}
 	else if (time_unit_choice == 3) {
+		enterSeconds:
 		system("cls");
 		cout << "---------------------------------------------------" << endl;
 		cout << "||         Duration Unit: Seconds                ||" << endl;
 		cout << "---------------------------------------------------" << endl;
 		cout << "Enter Election Duration (in Seconds): ";
-		cin >> time_duration_value;
+		string time_duration_valueStr;
+		cin >> time_duration_valueStr;
+		if (!checkInput(time_duration_valueStr, "Duration")) {
+			system("pause");
+			goto enterSeconds;
+
+		}
+		time_duration_value = stoi(time_duration_valueStr);
+
 		durationTypeIndicator = 3;
 		system("cls"); // Original placement.
 	}
@@ -384,4 +449,32 @@ reEnterHrs:
 	cout << "---------------------------------------------------" << endl;
 	// system("pause"); // Optional: to see the success message
 	// system("cls"); // Optional: clear screen after success message if returning to a menu
+}
+
+bool checkInput(string input,string tag) {
+
+	//checking if it is storing int valur or string
+	stringstream ss(input);
+	int num;
+	char extra;
+
+	// Try to parse an integer
+	if (!(ss >> num)) {
+		cout << "---------------------------------------------------" << endl;
+		cout << "Error: "<<tag<<" '" << input << "' " << tag << " Must be in NUMERIC." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return false;
+	}
+
+	// Check if there's any non-integer character left
+	if (ss >> extra) {
+		cout << "---------------------------------------------------" << endl;
+		cout << "Error: " << tag << " '" << input << "' " << tag << " Must be in NUMERIC." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return false;
+	}
+
+	return true;
+
+
 }

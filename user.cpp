@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include"election.h"
 using namespace std;
 
@@ -87,7 +88,7 @@ void user::addUserToFile(string name, string snic, string password, string fileN
 	}
 	else {
 		userFile << name << "*" << snic << "*" << password << endl;
-		cout << fileName << " saved to file." << endl;
+		//cout << fileName << " saved to file." << endl;
 		cout << "---------------------------------------------------" << endl;
 	}
 	userFile.close();

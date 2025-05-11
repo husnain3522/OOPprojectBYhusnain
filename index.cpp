@@ -1,6 +1,6 @@
 ﻿#include<iostream>
 #include<cstdlib> // For system("cls") and system("pause")
-
+#include<sstream>
 /*
 Session-2025 Object Oriented Programming-Lab
 Project Description: Online Voting System
@@ -123,6 +123,7 @@ data.
 #include "electionManger.h"
 
 using namespace std;
+bool checkInputIndex(string input, string tag);
 admin checkAdmin(string, string, string);
 voter checkVoter(string, string, string);
 // admin checkCandidate(string, string , string); // This function is declared but not defined or used.
@@ -137,6 +138,7 @@ int main() {
 
 logIn:
 	system("cls");
+	
 	cout << "---------------------------------------------------" << endl;
 	cout << "||                                               ||" << endl;
 	cout << "||       WELCOME TO THE ONLINE VOTING SYSTEM     ||" << endl;
@@ -148,8 +150,16 @@ logIn:
 	cout << "||   3. Exit System                              ||" << endl;
 	cout << "---------------------------------------------------" << endl;
 	cout << "Enter your choice (1-3): ";
-	int choice;
-	cin >> choice;
+	// Added input validation for choice
+	string choiceStr;
+	cin >> choiceStr;
+
+	if (!checkInputIndex(choiceStr, "Choice")) {
+		system("pause");
+		goto logIn;
+
+	}
+	int choice = stoi(choiceStr);
 	system("cls"); // Clear screen after choice
 
 	if (choice == 1) { // Administrator Login
@@ -191,7 +201,6 @@ logIn:
 			cout << "---------------------------------------------------" << endl;
 			system("pause");
 
-			int adminChoice;
 		adminPanel:
 			system("cls");
 			cout << "---------------------------------------------------" << endl;
@@ -199,6 +208,8 @@ logIn:
 			cout << "---------------------------------------------------" << endl;
 			// The loop `while (adminChoice != 4)` seems to be an issue if 9 is the exit.
 			// Kept as original to not change logic. Ideally, it should be `while(adminChoice != 9)`
+			int adminChoice;
+
 			do {
 				cout << "Please select an option:" << endl;
 				cout << "  1. Add Voter" << endl;
@@ -213,7 +224,15 @@ logIn:
 				cout << "  9. Logout and Return to Main Menu" << endl;
 				cout << "---------------------------------------------------" << endl;
 				cout << "Enter your choice (1-9): ";
-				cin >> adminChoice;
+				string choiceStr;
+				cin >> choiceStr;
+
+				if (!checkInputIndex(choiceStr, "Choice")) {
+					system("pause");
+					goto adminPanel;
+
+				}
+				adminChoice= stoi(choiceStr);
 				// system("cls"); // Clear menu before action (actions usually clear screen themselves)
 
 				switch (adminChoice) {
@@ -257,10 +276,15 @@ logIn:
 					// These functions (displayNationalElections etc.) handle their own system("cls")
 					em.displayNationalElections(3); // Type 3: Show all (active & inactive)
 					system("pause");
+					system("cls");
 					em.displayLocalElections(3);
 					system("pause");
+					system("cls");
+
 					em.displayRegionalElections(3);
 					system("pause");
+					system("cls");
+
 					// em.displayAllElectionInDetails();
 					// em.displayAllCandidates();
 					// No goto here, loop will continue to display admin panel menu
@@ -340,9 +364,9 @@ logIn:
 			cout << "---------------------------------------------------" << endl;
 			system("pause");
 
-			int voterChoice;
 			em.setCurrentVoter(&v); // Set current voter in election manager
 		voterPanel:
+			int voterChoice;
 			system("cls");
 			cout << "---------------------------------------------------" << endl;
 			cout << "||                  VOTER PANEL                  ||" << endl;
@@ -355,13 +379,22 @@ logIn:
 				cout << "  4. Logout and Return to Main Menu" << endl;
 				cout << "---------------------------------------------------" << endl;
 				cout << "Enter your choice (1-4): ";
-				cin >> voterChoice;
+				string choiceStr;
+				cin >> choiceStr;
+
+				if (!checkInputIndex(choiceStr, "Choice")) {
+					system("pause");
+					goto voterPanel;
+
+				}
+				 voterChoice = stoi(choiceStr);
 				// system("cls"); // Actions will clear screen if needed
 
 				switch (voterChoice) {
 				case 1:
 					em.displayAllElectionNames(); // Shows only active elections by default
 					system("pause");
+					system("cls");
 					break;
 				case 2:
 					em.castVote();
@@ -496,4 +529,33 @@ int electionIdGenerator() {
 	fileOut << electionId;
 	fileOut.close();
 	return electionId;
+}
+
+
+bool checkInputIndex(string input, string tag) {
+
+	//checking if it is storing int valur or string
+	stringstream ss(input);
+	int num;
+	char extra;
+
+	// Try to parse an integer
+	if (!(ss >> num)) {
+		cout << "---------------------------------------------------" << endl;
+		cout << "Error: " << tag << " '" << input << "' " << tag << " Must be in NUMERIC." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return false;
+	}
+
+	// Check if there's any non-integer character left
+	if (ss >> extra) {
+		cout << "---------------------------------------------------" << endl;
+		cout << "Error: " << tag << " '" << input << "' " << tag << " Must be in NUMERIC." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return false;
+	}
+
+	return true;
+
+
 }

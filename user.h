@@ -42,5 +42,6 @@ public:
 	void checkCredentials(string cnic, string password, string fileName);  // maches cnic and pass word
 	bool checkIfPartyIdExists(string partyId); // checks if party has already registerd a candidate
 	void viewElections();
+	//bool checkInput(string);
 };
 

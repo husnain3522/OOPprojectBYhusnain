@@ -2,11 +2,13 @@
 #include <iostream>
 #include <string>
 #include<cstdlib> // For system("cls")
+#include<sstream>
 #include <fstream>
 // Assuming user.h is needed for 'voterr' if it's a member of electionManger
 // #include "user.h" // Uncomment if voterr is a member and its type (e.g., Voter*) is defined here
 
 using namespace std;
+bool checkInputElectionManger(string input, string tag);
 
 int electionManger::countNumOfElections(string fileName) {
     int count = 0;
@@ -698,8 +700,15 @@ reSelectVoteType:
     cout << "  4. Back to Previous Menu" << endl;
     cout << "---------------------------------------------------" << endl;
     cout << "Enter your choice (1-4): ";
-    int choice;
-    cin >> choice;
+    string choiceStr;
+    cin >> choiceStr;
+
+    if (!checkInputElectionManger(choiceStr, "Choice")) {
+        system("pause");
+        goto reSelectVoteType;
+
+    }
+    int choice = stoi(choiceStr);
     cout << "---------------------------------------------------" << endl;
 
     int* electionChoices = nullptr; // Use a single pointer
@@ -952,6 +961,7 @@ void electionManger::displayResultsWithId(int electionId) {
 void electionManger::displayResults() {
 reSelectTypeForResults:
     system("cls");
+    viewElectionResultsMenu:
     cout << "---------------------------------------------------" << endl;
     cout << "||        View Election Results Menu             ||" << endl;
     cout << "---------------------------------------------------" << endl;
@@ -962,8 +972,17 @@ reSelectTypeForResults:
     cout << "  4. Back to Previous Menu" << endl;
     cout << "---------------------------------------------------" << endl;
     cout << "Enter your choice (1-4): ";
-    int choice;
-    cin >> choice;
+    string choiceStr;
+    cin >> choiceStr;
+
+    if (!checkInputElectionManger(choiceStr, "Choice")) {
+        system("pause");
+        goto viewElectionResultsMenu;
+
+    }
+    int choice = stoi(choiceStr);
+
+   
     // system("cls"); // Clear after choice, before listing elections
 
     int* electionChoicesList = nullptr;
@@ -1051,7 +1070,7 @@ reSelectTypeForActivation:
     cout << "  4. Back to Previous Menu" << endl;
     cout << "---------------------------------------------------" << endl;
     cout << "Enter your choice (1-4): ";
-    int choice;
+    char choice;
     cin >> choice;
     // system("cls"); // Clear after choice
 
@@ -1059,12 +1078,12 @@ reSelectTypeForActivation:
     int electionIdToModify = -1;
 
     switch (choice) {
-    case 1:
+    case '1':
         electionChoicesList = displayLocalElections(filterType);
         if (electionChoicesList && electionChoicesList[0] != -1) {
             electionIdToModify = getIdFromUserTodDisplayResult(electionChoicesList); // Reusing this helper
             if (electionIdToModify != -1) {
-                actiDeactiElectionUsingId(electionIdToModify, choice, activate);
+                actiDeactiElectionUsingId(electionIdToModify, 1, activate);
             }
         }
         else {
@@ -1073,12 +1092,12 @@ reSelectTypeForActivation:
         }
         if (electionChoicesList) delete[] electionChoicesList;
         break;
-    case 2:
+    case '2':
         electionChoicesList = displayNationalElections(filterType);
         if (electionChoicesList && electionChoicesList[0] != -1) {
             electionIdToModify = getIdFromUserTodDisplayResult(electionChoicesList);
             if (electionIdToModify != -1) {
-                actiDeactiElectionUsingId(electionIdToModify, choice, activate);
+                actiDeactiElectionUsingId(electionIdToModify, 2, activate);
             }
         }
         else {
@@ -1087,12 +1106,12 @@ reSelectTypeForActivation:
         }
         if (electionChoicesList) delete[] electionChoicesList;
         break;
-    case 3:
+    case '3':
         electionChoicesList = displayRegionalElections(filterType);
         if (electionChoicesList && electionChoicesList[0] != -1) {
             electionIdToModify = getIdFromUserTodDisplayResult(electionChoicesList);
             if (electionIdToModify != -1) {
-                actiDeactiElectionUsingId(electionIdToModify, choice, activate);
+                actiDeactiElectionUsingId(electionIdToModify, 3, activate);
             }
         }
         else {
@@ -1101,7 +1120,7 @@ reSelectTypeForActivation:
         }
         if (electionChoicesList) delete[] electionChoicesList;
         break;
-    case 4:
+    case '4':
         cout << "Returning to previous menu..." << endl;
         // system("pause"); // Optional
         return;
@@ -1254,4 +1273,32 @@ void electionManger::setFutureEndTime() {
 // Add a setter for the voterr member if it's intended to be set from outside
 void electionManger::setCurrentVoter(voter* v) { // Assuming Voter is the class/struct type
     voterr = v;
+}
+
+bool checkInputElectionManger(string input, string tag) {
+
+    //checking if it is storing int valur or string
+    stringstream ss(input);
+    int num;
+    char extra;
+
+    // Try to parse an integer
+    if (!(ss >> num)) {
+        cout << "---------------------------------------------------" << endl;
+        cout << "Error: " << tag << " '" << input << "' " << tag << " Must be in NUMERIC." << endl;
+        cout << "---------------------------------------------------" << endl;
+        return false;
+    }
+
+    // Check if there's any non-integer character left
+    if (ss >> extra) {
+        cout << "---------------------------------------------------" << endl;
+        cout << "Error: " << tag << " '" << input << "' " << tag << " Must be in NUMERIC." << endl;
+        cout << "---------------------------------------------------" << endl;
+        return false;
+    }
+
+    return true;
+
+
 }
