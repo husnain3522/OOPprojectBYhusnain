@@ -11,7 +11,7 @@
 
 using namespace std;
 bool checkInput(string input,string tag);
-//log in function
+
 bool admin::isLogin(string name, string cnic, string password) {
 	if (isLoginVar) {
 		cout << "---------------------------------------------------" << endl;
@@ -29,7 +29,9 @@ bool admin::isLogin(string name, string cnic, string password) {
 			}
 }
 
-// this functions saves admin to file
+//default constructor for admin 
+
+
 void admin::saveAdminToFile() {
 	ofstream adminFile("admin.txt", ios::app);
 	if (!adminFile.is_open()) {

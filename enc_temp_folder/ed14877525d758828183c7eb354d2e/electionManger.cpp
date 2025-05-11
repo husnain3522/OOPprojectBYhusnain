@@ -748,9 +748,10 @@ void electionManger::checkVoteHistory() {
             electionIdInt = stoi(idStr);
             cout << "---------------------------------------------------" << endl;
             cout << "  Voted in Election ID : " << idStr << endl;
-            string elecName = getElectionNameById(electionIdInt); 
+            string elecName = getElectionNameById(electionIdInt); // This also prints, might be redundant
             if (!elecName.empty()) {
-              
+                // getElectionNameById already prints details, so this might be extra:
+                // cout << "  Election Name        : " << elecName << endl;
             }
             else {
                 cout << "  (Could not retrieve election name)" << endl;
@@ -770,7 +771,7 @@ void electionManger::checkVoteHistory() {
         cout << "||            End of Voting History              ||" << endl;
         cout << "---------------------------------------------------" << endl;
     }
-  
+    // system("pause"); // Optional
 }
 
 string electionManger::getElectionNameById(int id) {
@@ -781,8 +782,8 @@ string electionManger::getElectionNameById(int id) {
     }
     string electionIdFromFile, electionNameFromFile, tempDetails;
     while (getline(checkNameFile, electionIdFromFile, '*')) {
-        getline(checkNameFile, electionNameFromFile, '*'); // Namme
-        getline(checkNameFile, tempDetails, '\n');      
+        getline(checkNameFile, electionNameFromFile, '*'); // Name
+        getline(checkNameFile, tempDetails, '\n');      // Rest of the line (e.g., candidate count)
         if (stoi(electionIdFromFile) == id) {
             checkNameFile.close();
           
@@ -790,7 +791,7 @@ string electionManger::getElectionNameById(int id) {
         }
     }
     checkNameFile.close();
-    return ""; 
+    return ""; // Not found
 }
 
 
@@ -818,7 +819,7 @@ void electionManger::displayResultsWithId(int electionId) {
             cout << "---------------------------------------------------" << endl;
             cout << "  Election ID      : " << electionIdStr << endl;
             cout << "  Election Name    : " << currentElectionNameStr << endl;
-            cout << "  Total Candidates : " << totalCandidatesStr << endl; 
+            cout << "  Total Candidates : " << totalCandidatesStr << endl; // In this election's setup
             cout << "---------------------------------------------------" << endl;
             break;
         }
@@ -855,7 +856,7 @@ void electionManger::displayResultsWithId(int electionId) {
 
     int* candidateCnics = new int[totalCandidatesInt];
     int* candidateVoteCounts = new int[totalCandidatesInt];
-    string cnicStr, voteCountStr, candidateNameStr; 
+    string cnicStr, voteCountStr, candidateNameStr; // Added candidateNameStr
 
     cout << "||                Voting Results                 ||" << endl;
     cout << "---------------------------------------------------" << endl;
@@ -912,7 +913,7 @@ reSelectTypeForResults:
 
     switch (choice) {
     case 1:
-        electionChoicesList = displayLocalElections(3); 
+        electionChoicesList = displayLocalElections(3); // Type 3 for all (active/inactive)
         if (electionChoicesList && electionChoicesList[0] != -1) {
             electionIdToDisplay = getIdFromUserTodDisplayResult(electionChoicesList);
             if (electionIdToDisplay != -1) {
@@ -967,16 +968,16 @@ reSelectTypeForResults:
    
 }
 
-void electionManger::actiDeactiElectionAdmin(bool activate) { 
-    int filterType; 
+void electionManger::actiDeactiElectionAdmin(bool activate) { // 'parity' renamed to 'activate'
+    int filterType; // 0 for inactive (to activate them), 1 for active (to deactivate them)
     string actionVerb;
 
-    if (activate) { 
-        filterType = 0;
+    if (activate) { // If true, we want to activate an election (so list inactive ones)
+        filterType = 0; // List inactive elections
         actionVerb = "Activate";
     }
     else { 
-        filterType = 1;
+        filterType = 1; // List active elections
         actionVerb = "Deactivate";
     }
 
@@ -1002,7 +1003,7 @@ reSelectTypeForActivation:
     case '1':
         electionChoicesList = displayLocalElections(filterType);
         if (electionChoicesList && electionChoicesList[0] != -1) {
-            electionIdToModify = getIdFromUserTodDisplayResult(electionChoicesList);
+            electionIdToModify = getIdFromUserTodDisplayResult(electionChoicesList); // Reusing this helper
             if (electionIdToModify != -1) {
                 actiDeactiElectionUsingId(electionIdToModify, 1, activate);
             }
@@ -1055,23 +1056,23 @@ reSelectTypeForActivation:
    
 }
 
-void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) { 
+void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) { // 'parity' renamed
     system("cls"); 
     string electionTypeName;
     bool success = false;
 
-    if (type == 1) { 
+    if (type == 1) { // Local
         electionTypeName = "Local";
         for (int i = 0; i < countLocal; i++) {
             if (local[i].getElectionId() == id) {
-                if (local[i].getIsActice() == activate) { 
+                if (local[i].getIsActice() == activate) { // Already in desired state
                     cout << "---------------------------------------------------" << endl;
                     cout << "|| Local Election (ID: " << id << ") is already " << (activate ? "Activated." : "Deactivated.") << " ||" << endl;
                     cout << "---------------------------------------------------" << endl;
                 }
                 else {
                     local[i].setIsActive(activate);
-                    if (activate) { 
+                    if (activate) { // If activating, calculate future time
                         local[i].calculateFutureTime(stoi(local[i].getElectionTime()), local[i].getTimeType());
                     }
                     success = true;
@@ -1134,7 +1135,7 @@ void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) 
             << (activate ? "Activated." : "Deactivated.") << " ||" << endl;
         cout << "---------------------------------------------------" << endl;
     }
-    else if (!((type == 1 && countLocal > 0 && local[0].getIsActice() == activate) || 
+    else if (!((type == 1 && countLocal > 0 && local[0].getIsActice() == activate) || // check if it was already in state
         (type == 2 && countNational > 0 && national[0].getIsActice() == activate) ||
         (type == 3 && countRegional > 0 && regional[0].getIsActice() == activate))) {
         // If not successful and not already in desired state, then it means election ID was not found for that type
@@ -1142,7 +1143,7 @@ void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) 
         cout << "|| Error: " << electionTypeName << " Election with ID " << id << " not found. ||" << endl;
         cout << "---------------------------------------------------" << endl;
     }
-     system("pause"); 
+     system("pause"); // Optional
 }
 
 
@@ -1171,8 +1172,8 @@ int electionManger::getIdFromUserTodDisplayResult(int* choices) {
         cout << "|| Error: Invalid Election ID '" << id_input << "' entered.      ||" << endl;
         cout << "|| Please select an ID from the displayed list.  ||" << endl;
         cout << "---------------------------------------------------" << endl;
-      
-        return -1; 
+        // system("pause"); // Optional
+        return -1; // Indicates error or invalid selection
     }
 }
 
