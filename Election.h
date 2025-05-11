@@ -46,7 +46,7 @@ public:// please change
 		return isActive;
 	}
 	time_t getFutureTime() {
-		cout << "Future time" << futureTime << endl;//remove me
+		//cout << "Future time" << futureTime << endl;//remove me
 		return futureTime;
 	}
 	void setFutureTime(time_t time) {
