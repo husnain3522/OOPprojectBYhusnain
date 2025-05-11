@@ -6,6 +6,7 @@
 #include "election.h"
 #include "candidate.h"
 #include "voter.h"
+#include<cstdlib>
 
 using namespace std;
 bool admin::isLogin(string name, string cnic, string password) {
@@ -39,6 +40,7 @@ void admin::saveAdminToFile() {
 	   cout << "---------------------------------------------------" << endl;
 	   cout << "CNIC already exists." << endl;
 	   cout << "---------------------------------------------------" << endl;
+	   system("cls");
 	   return;
    }
    else {
@@ -64,6 +66,7 @@ void admin::addVoter() {
 		cout << "---------------------------------------------------" << endl;
 		cout << "CNIC already exists." << endl; 
 		cout << "---------------------------------------------------" << endl;
+		system("cls");
 		return;
 	}
 	else {
@@ -71,6 +74,7 @@ void admin::addVoter() {
 		cout << "Enter password: ";
 		string password;
 		cin >> password;
+		system("cls");
 		cout << "---------------------------------------------------" << endl;
 		addUserToFile(name, snic, password, "voter");
 		cout << "Voter saved to file." << endl;
@@ -93,6 +97,7 @@ void admin::addAdmin() {
 		cout << "---------------------------------------------------" << endl;
 		cout << "CNIC already exists." << endl;
 		cout << "---------------------------------------------------" << endl;
+		system("cls");
 		return;
 	}
 	else {
@@ -100,6 +105,7 @@ void admin::addAdmin() {
 		cout << "Enter password: ";
 		string password;
 		cin >> password;
+		system("cls");
 		cout << "---------------------------------------------------" << endl; 
 		addUserToFile(name, snic, password, "admin");
 		cout << "Admin saved to file." << endl;
@@ -111,6 +117,7 @@ void admin::addCandidate() {
 	cout << "How many Candidates you want to add" << endl;
 	int num;
 	cin >> num;
+	system("cls");
 	for (int i = 0; i < num; i++) {
 	AgainEnterData:
 		cout << "---------------------------------------------------" << endl;
@@ -127,6 +134,7 @@ void admin::addCandidate() {
 			cout << "---------------------------------------------------" << endl;
 			cout << "CNIC already exists." << endl;
 			cout << "---------------------------------------------------" << endl;
+			system("cls");
 			goto AgainEnterData;
 		}
 		else {
@@ -134,10 +142,12 @@ void admin::addCandidate() {
 			cout << "Enter PartyId according to National Party Meeting  ";
 			string partyId;
 			cin >> partyId;
+			system("cls");
 			if (checkIfPartyIdExists(partyId))
 			{
 				cout << "---------------------------------------------------" << endl;
 				cout << "Party Candidate already exists." << endl;
+				system("cls");
 				cout << "---------------------------------------------------" << endl;
 				cout << "Press 1 to Re Enter Credentials\nPress 2 to Skip this candidate" << endl;
 				cout << "---------------------------------------------------" << endl;
@@ -165,6 +175,7 @@ reEnterName:
 	int choice;
 	string name; 
 	cin >> choice;
+	system("cls");
 	string fileNameToStoreName;
 	if (choice == 1) {
 		cout << "---------------------------------------------------" << endl;
@@ -194,6 +205,7 @@ reEnterName:
 	cout << "Enter Election Date: ";
 	string date;
 	cin >> date;
+	system("cls");
 	string time;
 	cout << "---------------------------------------------------" << endl;
 reEnterHrs:
@@ -209,6 +221,7 @@ reEnterHrs:
 		cout << "Enter Time in Days: ";
 		cout << "---------------------------------------------------" << endl;
 		cin >> time;
+		system("cls");
 	}
 	else if (choice1 == 2) {
 		cout << "---------------------------------------------------" << endl;
@@ -217,6 +230,7 @@ reEnterHrs:
 		cout << "Enter Time in Hours: ";
 		cout << "---------------------------------------------------" << endl;
 		cin >> time;
+		system("cls");
 
 	}
 	else if (choice1 == 3) {
@@ -226,6 +240,7 @@ reEnterHrs:
 		cout << "Enter Time in Seconds: ";
 		cout << "---------------------------------------------------" << endl;
 		cin >> time;
+		system("cls");
 
 	}
 	else {
@@ -245,7 +260,7 @@ reEnterHrs:
 		cin >> regionCodes[i];
 		cout << "---------------------------------------------------" << endl;
 	}
-	
+	system("cls");
 	election e(name, date, time, numRegions);
 	e.setElectionId(id);
 	e.setRegionCodes(regionCodes, numRegions);
