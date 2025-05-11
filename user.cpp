@@ -64,6 +64,7 @@ int user::fileLenght(string fileName) {
 		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file." << endl;
 		cout << "---------------------------------------------------" << endl;
+		system("cls");
 		return -1;
 	}
 	int count = 0;
@@ -109,6 +110,7 @@ bool user::checkIfUserExists(string inputCnic, string fileName) {
 			cout << "---------------------------------------------------" << endl;
 			cout << "CNIC already exists." << endl;
 			cout << "---------------------------------------------------" << endl;
+			system("cls");
 			return true;
 		}
 		getline(userFile, temp, '\n');
@@ -137,12 +139,14 @@ void user::checkCredentials(string inputCnic, string inputPassword, string fileN
 			cout << "---------------------------------------------------" << endl;
 			cout << "Login successful." << endl;
 			cout << "---------------------------------------------------" << endl;
+			system("cls");
 			return;
 		}
 	}
 	cout << "---------------------------------------------------" << endl;
 	cout << "Login failed to "<<fileName<< ".Something MisMatched" << endl;
 	cout << "---------------------------------------------------" << endl;
+	system("cls");
 }
 bool user::checkIfPartyIdExists(string partyId) {
 	ifstream partyFile("candidate.txt");
@@ -162,6 +166,7 @@ bool user::checkIfPartyIdExists(string partyId) {
 			cout << "---------------------------------------------------" << endl;
 			cout << "Party ID already exists." << endl;
 			cout << "---------------------------------------------------" << endl;
+			system("cls");
 			return true;
 		}
 		getline(partyFile, temp, '\n');
@@ -170,6 +175,7 @@ bool user::checkIfPartyIdExists(string partyId) {
 	cout << "---------------------------------------------------" << endl;
 	cout << "Party ID does not exist." << endl;
 	cout << "---------------------------------------------------" << endl;
+	system("cls"); 
 	return false;
 }
 void user::viewElections() {
