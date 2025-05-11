@@ -5,7 +5,7 @@
 #include "candidate.h"
 #include "voter.h"
 #include <ctime>
-
+#include<cstdlib>
 using namespace std;
 
 int election::fileLenght(string fileName) {
@@ -124,9 +124,9 @@ void election::displayCandiates(candidate* candiArray, int totalCandis) {
 	for (int i = 0; i < totalCandis; i++) {
 		cout << "---------------------------------------------------" << endl;
 		cout << "Name: " << candiArray[i].getName() << endl;
-		cout << "---------------------------------------------------" << endl;
+		//cout << "---------------------------------------------------" << endl;
 		cout << "CNIC: " << candiArray[i].getCnic() << endl;
-		cout << "---------------------------------------------------" << endl;
+		//cout << "---------------------------------------------------" << endl;
 		cout << "Party Name: " << getPartyNameToSetInCandidate(stoi(candiArray[i].getPartyName())) << endl;
 		candiArray[i].getPartyNameInString();
 		cout << "---------------------------------------------------" << endl;
@@ -225,6 +225,8 @@ candidate* election::selectCandidates() {
 				//cout << "we deleted candi " << endl;
 
 				totalCandidates--;
+
+				reEnterYN:
 				cout << "---------------------------------------------------" << endl;
 				cout << "Do You want to add More Candidates (y/n): ";
 				cout << "---------------------------------------------------" << endl;
@@ -236,6 +238,14 @@ candidate* election::selectCandidates() {
 				else if (choice == 'n' || choice == 'N') {
 					selectNext = false;
 					break;
+				}
+				else {
+					cout << "---------------------------------------------------" << endl;
+					cout << "|| Invalid choice. Please enter a Char (Y-N).  ||" << endl;
+					cout << "---------------------------------------------------" << endl;
+					system("pause");
+					system("clear");
+					goto reEnterYN;
 				}
 
 			}
@@ -267,14 +277,12 @@ candidate* election::selectCandidates() {
 
 }
 void election::addElectionToFileWithCandies(int timeType, string fileName) {
-	cout << "---------------------------------------------------" << endl;
-	cout << "Here Is list of candidates" << endl;
-	cout << "---------------------------------------------------" << endl;
 	int totalCandidates = fileLenght("candidate");
-	cout << "---------------------------------------------------" << endl;
-	cout << "Flile lenght is " << totalCandidates << endl;
-	cout << "---------------------------------------------------" << endl;
+
 	candidate* candiArray = new candidate[totalCandidates];
+	cout << "---------------------------------------------------" << endl;
+	cout << "Here Is list of '"<<totalCandidates<<"' candidates" << endl;
+	cout << "---------------------------------------------------" << endl;
 	ofstream electionFile(fileName + ".txt", ios::app);
 
 	if (!electionFile.is_open()) {
