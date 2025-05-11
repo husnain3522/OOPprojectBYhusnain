@@ -1,6 +1,7 @@
 #include "electionManger.h"
 #include <iostream>
 #include <string>
+#include<cstdlib>
 #include <fstream>
 using namespace std;
 
@@ -26,7 +27,7 @@ int electionManger::countNumOfElections(string fileName) {
 
 }
 void electionManger::refreshAllData() {
-	cout << "---------------------------------------------------" << endl;
+	//cout << "---------------------------------------------------" << endl;
 	countLocal = countNumOfElections("localElection");
 	countNational = countNumOfElections("nationalElection");
 	countRegional = countNumOfElections("regionalElection");
@@ -56,11 +57,6 @@ void electionManger::refreshAllData() {
 	load = 0;
 	for (int i = 0; i < countNational; i++) {
 		load++;
-		cout << "---------------------------------------------------" << endl;
-		cout << "count regional is " << countRegional << endl;
-		cout << "---------------------------------------------------" << endl;
-		cout << "lodaing local election::" << i << endl;
-		cout << "---------------------------------------------------" << endl;
 		national[i].loadElectionFromFile("nationalElection", load);
 	}
 	//cout << "after region lodin elction" << endl;
@@ -82,11 +78,11 @@ void electionManger::refreshAllData() {
 	nationalFile.close();
 	regionalFile.close();
 
-
+	system("cls");
 
 }
 electionManger::electionManger() {
-//	refreshAllData();
+	refreshAllData();
 
 }
 void electionManger::displayAllElectionNames() {

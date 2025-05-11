@@ -33,6 +33,7 @@ void user::setPassword(string p) {
 //}
 
 void user::display() {
+	system("cls");
 	cout << "---------------------------------------------------" << endl;
 	cout << "Name: " << name << endl;
 	cout << "---------------------------------------------------" << endl;
