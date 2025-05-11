@@ -32,19 +32,12 @@ void candidate::getCandidateByCnic(string inputCnic) {
        getline(candidateFile, partyId, '\n');
        if (inputCnic == Scnic) { 
            isCnicFound = true;
-		   //cout << "---------------------------------------------------" << endl;
-		   //cout << "CNIC found." << endl;
+		 
            //cout << "---------------------------------------------------" << endl;
            partyName = partyId;
            cnic = inputCnic;
            name = Sname;
-		   //cout << "---------------------------------------------------" << endl;
-		   //cout << "Name: " << name << endl;
-           //cout << "---------------------------------------------------" << endl;
-		   //cout << "CNIC: " << cnic << endl;
-           //cout << "---------------------------------------------------" << endl;
-		   //cout << "Party ID: " << partyName << endl;
-		   //cout << "---------------------------------------------------" << endl;
+		
            break;
        }
    }
