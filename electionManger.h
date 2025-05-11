@@ -31,6 +31,7 @@ public://change please
 		return *voterr;
 	}
 	electionManger();
+	void setCurrentVoter(voter* v);
 	//electionManger() {
 	//	countLocal = 0;
 	//	countNational = 0;

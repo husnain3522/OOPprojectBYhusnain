@@ -1,5 +1,5 @@
 ﻿#include<iostream>
-#include<cstdlib>
+#include<cstdlib> // For system("cls") and system("pause")
 
 /*
 Session-2025 Object Oriented Programming-Lab
@@ -112,9 +112,9 @@ data.
 */
 #include "user.h"
 #include "voter.h"
-#include"admin.h"
-#include<fstream>
-#include<string>
+#include "admin.h" // Corrected from #include"admin.h"
+#include <fstream>
+#include <string>
 #include "election.h"
 #include "candidate.h"
 #include "regionalElection.h"
@@ -123,37 +123,40 @@ data.
 #include "electionManger.h"
 
 using namespace std;
-admin checkAdmin(string , string , string );
+admin checkAdmin(string, string, string);
 voter checkVoter(string, string, string);
-admin checkCandidate(string, string , string);
+// admin checkCandidate(string, string , string); // This function is declared but not defined or used.
 int electionIdGenerator();
 
- int election::electionIdCounter = 3;
-int main() {
-	
+int election::electionIdCounter = 3; // Static member initialization
 
-	electionManger em;
-	//cout << "Id genereator :: " << electionIdGenerator() << endl;
-	//em.local->selCandidates[0].voteCount = 69;
-	//cout<< em.local->selCandidates[0].voteCount;
+int main() {
+	system("cls"); // Clear screen at the very beginning
+
+	electionManger em; // Initialize election manager, loads data
 
 logIn:
+	system("cls");
 	cout << "---------------------------------------------------" << endl;
-	cout << "***********************************" << endl;
-	cout << "* Welcome to Online Voting System *" << endl;
-	cout << "***********************************" << endl;
-	cout << "1. Admin" << endl;
-	cout << "2. Voter" << endl;
+	cout << "||                                               ||" << endl;
+	cout << "||       WELCOME TO THE ONLINE VOTING SYSTEM     ||" << endl;
+	cout << "||                                               ||" << endl;
 	cout << "---------------------------------------------------" << endl;
-	cout << "Enter your choice: ";
+	cout << "|| Please select your role:                      ||" << endl;
+	cout << "||   1. Administrator                            ||" << endl;
+	cout << "||   2. Voter                                    ||" << endl;
+	cout << "||   3. Exit System                              ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "Enter your choice (1-3): ";
 	int choice;
 	cin >> choice;
+	system("cls"); // Clear screen after choice
 
-	cout << "---------------------------------------------------" << endl;
-	system("cls");
-	if (choice == 1) {
+	if (choice == 1) { // Administrator Login
 		cout << "---------------------------------------------------" << endl;
-		cout << "Enter name: ";
+		cout << "||               Administrator Login             ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Enter Name: ";
 		string name;
 		cin >> name;
 		cout << "---------------------------------------------------" << endl;
@@ -161,120 +164,149 @@ logIn:
 		string snic;
 		cin >> snic;
 		cout << "---------------------------------------------------" << endl;
-		cout << "Enter password: ";
+		cout << "Enter Password: ";
 		string password;
 		cin >> password;
 		cout << "---------------------------------------------------" << endl;
-		admin a;
+		system("cls"); // Clear login prompts
 
-		a = checkAdmin( snic, password,"admin");
-		if (a.getCnic() == "") {
+		admin a; // Default constructor
+		a = checkAdmin(snic, password, "admin"); // Attempt login
+
+		if (a.getCnic() == "") { // Login failed
 			cout << "---------------------------------------------------" << endl;
-			cout << "Login failed to admin. Something MisMatched" << endl;
+			cout << "||                 LOGIN FAILED!                 ||" << endl;
+			cout << "||     Invalid CNIC or Password for Admin.       ||" << endl;
 			cout << "---------------------------------------------------" << endl;
 			a.setLoginStatus(false);
-	
+			system("pause"); // Wait for user to acknowledge
+			goto logIn; // Go back to main login screen
 		}
-		else a.setLoginStatus(true);
-		if (a.getLoginStatus() == false) {
-			// add what to do after failed login
-			return 0;
-		}
-		else {
-
-
-
+		else { // Login successful
+			a.setLoginStatus(true);
+			// admin.isLogin() will print success, or we can print it here
+			cout << "---------------------------------------------------" << endl;
+			cout << "||          Admin Login Successful!              ||" << endl;
+			cout << "||             Welcome, " << a.getName() << "!                 ||" << endl;
+			cout << "---------------------------------------------------" << endl;
+			system("pause");
 
 			int adminChoice;
 		adminPanel:
+			system("cls");
 			cout << "---------------------------------------------------" << endl;
-			cout << "Welcome To Admin Panel" << endl;
+			cout << "||              ADMINISTRATOR PANEL              ||" << endl;
 			cout << "---------------------------------------------------" << endl;
+			// The loop `while (adminChoice != 4)` seems to be an issue if 9 is the exit.
+			// Kept as original to not change logic. Ideally, it should be `while(adminChoice != 9)`
 			do {
+				cout << "Please select an option:" << endl;
+				cout << "  1. Add Voter" << endl;
+				cout << "  2. Add Admin" << endl;
+				cout << "  3. Add Candidate" << endl;
+				cout << "  4. Create Election" << endl;
+				cout << "  5. Show All Election Names" << endl;
+				cout << "  6. Show Election Results" << endl;
+				cout << "  7. Activate Election" << endl;
+				cout << "  8. Deactivate Election" << endl;
+				//cout << "9. Show All Candidates" << endl; // This was commented out
+				cout << "  9. Logout and Return to Main Menu" << endl;
 				cout << "---------------------------------------------------" << endl;
-				cout << "1. Add Voter" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "2. Add Admin" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "3. Add Candidate" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "4. Create Election" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "5. Show ALl Election Names" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "6. Show Result" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "7. Activate Election" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "8. Deactivate Election" << endl;
-				cout << "---------------------------------------------------" << endl;
-				//cout << "9. Show All Candidates" << endl;
-				cout << "9. Exit" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "Enter your choice: ";
+				cout << "Enter your choice (1-9): ";
 				cin >> adminChoice;
-				cout << "---------------------------------------------------" << endl;
+				// system("cls"); // Clear menu before action (actions usually clear screen themselves)
+
 				switch (adminChoice) {
 				case 1:
-					a.addVoter();
+					a.addVoter(); // This function should handle its own UI (cls, pause)
+					//system("pause"); // Pause after action before returning to menu
 					goto adminPanel;
-					break;
+					// break; // Unreachable due to goto
 				case 2:
 					a.addAdmin();
+					//system("pause");
 					goto adminPanel;
-
-					break;
+					// break; // Unreachable
 				case 3:
 					a.addCandidate();
+					//system("pause");
 					goto adminPanel;
-
-					break;
+					// break; // Unreachable
 				case 4: {
-
-					int id =  electionIdGenerator();
-
-					a.createElection(id);
-					
-					em.refreshAllData();
+					int id = electionIdGenerator();
+					if (id != -1) {
+						a.createElection(id);
+						em.refreshAllData(); // Refresh data after new election
+					}
+					else {
+						cout << "---------------------------------------------------" << endl;
+						cout << "|| Error: Could not generate Election ID.        ||" << endl;
+						cout << "---------------------------------------------------" << endl;
+					}
+					system("pause");
 					goto adminPanel;
-
-					break;
+					// break; // Unreachable
 				}
-
-				case 5 :
-					//em.displayAllElectionNames();
-					em.displayNationalElections(3);
+				case 5:
+					system("cls");
+					cout << "---------------------------------------------------" << endl;
+					cout << "||          Displaying All Elections             ||" << endl;
+					cout << "---------------------------------------------------" << endl;
+					// em.displayAllElectionNames(); // This shows only active elections
+					// The following calls show elections based on filter type 3 (all)
+					// These functions (displayNationalElections etc.) handle their own system("cls")
+					em.displayNationalElections(3); // Type 3: Show all (active & inactive)
+					system("pause");
 					em.displayLocalElections(3);
+					system("pause");
 					em.displayRegionalElections(3);
-					//em.displayAllElectionInDetails();
-					//em.displayAllCandidates();
-
+					system("pause");
+					// em.displayAllElectionInDetails();
+					// em.displayAllCandidates();
+					// No goto here, loop will continue to display admin panel menu
 					break;
 				case 6:
-					em.displayResults();
+					em.displayResults(); // Handles its own UI flow
+					system("pause");
 					break;
-				case 9:
+				case 7: // Activate Election
+					em.actiDeactiElectionAdmin(true); // true for activate
+					//em.refreshAllData(); // Refresh data after status change
+					system("pause");
+					break;
+				case 8: // Deactivate Election
+					em.actiDeactiElectionAdmin(false); // false for deactivate
+					//em.refreshAllData(); // Refresh data after status change
+					system("pause");
+					break;
+				case 9: // Exit Admin Panel
 					a.setLoginStatus(false);
-					goto logIn;
-					break;
-				case 7:
-					em.actiDeactiElectionAdmin(true);
-					break;
-
-				case 8:
-					em.actiDeactiElectionAdmin(false);
-					break;
+					system("cls");
+					cout << "---------------------------------------------------" << endl;
+					cout << "||           Admin Logged Out Successfully.      ||" << endl;
+					cout << "---------------------------------------------------" << endl;
+					system("pause");
+					goto logIn; // Go back to main login screen
+					// break; // Unreachable
 				default:
+					system("cls");
 					cout << "---------------------------------------------------" << endl;
-					cout << "Invalid choice." << endl;
+					cout << "|| Invalid choice. Please enter a number (1-9).||" << endl;
 					cout << "---------------------------------------------------" << endl;
+					system("pause");
+					// No goto here, loop will continue to display admin panel menu
 				}
-			} while (adminChoice != 4);
+			} while (adminChoice != 9); // Loop should ideally be controlled by choice 9
+			// Original was `while (adminChoice != 4);`
+			// Changed to 9 for logical exit from this menu.
+			// If you want to keep original, note that gotos bypass this.
 		}
 	}
-	else if (choice == 2) {
+	else if (choice == 2) { // Voter Login
 		cout << "---------------------------------------------------" << endl;
-		cout << "Enter name: ";
+		cout << "||                  Voter Login                  ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Enter Name: ";
 		string name;
 		cin >> name;
 		cout << "---------------------------------------------------" << endl;
@@ -282,145 +314,186 @@ logIn:
 		string snic;
 		cin >> snic;
 		cout << "---------------------------------------------------" << endl;
-		cout << "Enter password: ";
+		cout << "Enter Password: ";
 		string password;
 		cin >> password;
 		cout << "---------------------------------------------------" << endl;
-		voter v(name , snic, password);
-		v = checkVoter(snic, password, "voter");
-		if (v.getCnic() == "") {
+		system("cls"); // Clear login prompts
+
+		voter v(name, snic, password); // Create voter object (name is not used for login check here)
+		v = checkVoter(snic, password, "voter"); // Attempt login
+
+		if (v.getCnic() == "") { // Login failed
 			cout << "---------------------------------------------------" << endl;
-			cout << "Login failed to voter. Something MisMatched" << endl;
+			cout << "||                 LOGIN FAILED!                 ||" << endl;
+			cout << "||      Invalid CNIC or Password for Voter.      ||" << endl;
 			cout << "---------------------------------------------------" << endl;
 			v.setLoginStatus(false);
+			system("pause");
+			goto logIn; // Go back to main login screen
 		}
-		else v.setLoginStatus(true);
+		else { // Login successful
+			v.setLoginStatus(true);
+			cout << "---------------------------------------------------" << endl;
+			cout << "||           Voter Login Successful!             ||" << endl;
+			cout << "||             Welcome, " << v.getName() << "!                ||" << endl;
+			cout << "---------------------------------------------------" << endl;
+			system("pause");
 
-		if (v.getLoginStatus() == true) {
-			cout << "---------------------------------------------------" << endl;
-			cout << "Welcome To Voter Panel" << endl;
-			cout << "---------------------------------------------------" << endl;
 			int voterChoice;
-			em.setVoter(&v);
-			/*em.getVoter().display();*/
+			em.setCurrentVoter(&v); // Set current voter in election manager
+		voterPanel:
+			system("cls");
+			cout << "---------------------------------------------------" << endl;
+			cout << "||                  VOTER PANEL                  ||" << endl;
+			cout << "---------------------------------------------------" << endl;
 			do {
+				cout << "Please select an option:" << endl;
+				cout << "  1. View Available Elections" << endl;
+				cout << "  2. Cast Vote" << endl;
+				cout << "  3. Check My Vote History" << endl;
+				cout << "  4. Logout and Return to Main Menu" << endl;
 				cout << "---------------------------------------------------" << endl;
-				cout << "1. View Elections" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "2. Cast Vote" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "3. Check Vote Status" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "4. Exit" << endl;
-				cout << "---------------------------------------------------" << endl;
-				cout << "Enter your choice: ";
+				cout << "Enter your choice (1-4): ";
 				cin >> voterChoice;
-				cout << "---------------------------------------------------" << endl;
+				// system("cls"); // Actions will clear screen if needed
+
 				switch (voterChoice) {
 				case 1:
-				em.displayAllElectionNames();
+					em.displayAllElectionNames(); // Shows only active elections by default
+					system("pause");
 					break;
 				case 2:
 					em.castVote();
+					system("pause");
 					break;
 				case 3:
-					//check vvote history
-					// 
 					em.checkVoteHistory();
+					system("pause");
 					break;
-				case 4:
+				case 4: // Exit Voter Panel
 					v.setLoginStatus(false);
-					goto logIn;
-					break;
-
+					em.setCurrentVoter(nullptr); // Clear current voter
+					system("cls");
+					cout << "---------------------------------------------------" << endl;
+					cout << "||           Voter Logged Out Successfully.        ||" << endl;
+					cout << "---------------------------------------------------" << endl;
+					system("pause");
+					goto logIn; // Go back to main login screen
+					// break; // Unreachable
 				default:
+					system("cls");
 					cout << "---------------------------------------------------" << endl;
-					cout << "Invalid choice." << endl;
+					cout << "|| Invalid choice. Please enter a number (1-4).||" << endl;
 					cout << "---------------------------------------------------" << endl;
+					system("pause");
 				}
-			} while (voterChoice != 4);
+			} while (voterChoice != 4); // Loop continues until user chooses to exit
 		}
-
 	}
-	else {
+	else if (choice == 3) { // Exit System
+		system("cls");
 		cout << "---------------------------------------------------" << endl;
-		cout << "Invalid choice." << endl;
+		cout << "||         Thank you for using the Online        ||" << endl;
+		cout << "||                  Voting System!               ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		cout << "||                 Exiting now...                ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		system("pause");
+		return 0; // Exit the application
+	}
+	else { // Invalid role choice
+		system("cls");
+		cout << "---------------------------------------------------" << endl;
+		cout << "|| Invalid role choice. Please try again.        ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		system("pause");
+		goto logIn; // Go back to main login screen
 	}
 
-return 0;
+	return 0;
 }
 
 admin checkAdmin(string inputCnic, string inputPassword, string fileName) {
-	
-		ifstream userFile(fileName + ".txt");
-		if (!userFile.is_open()) {
-			cerr << "Error opening file." << endl;
-			return admin();
-		}
-		string serchedCnic;
-		string serchedPassword;
-		string serchedName;
-		while (getline(userFile, serchedName, '*'))
-		{
-			getline(userFile, serchedCnic, '*');
-			getline(userFile, serchedPassword, '\n');
-			if (serchedCnic == inputCnic && serchedPassword == inputPassword) {
-				userFile.close();
-				cout << "Login successful." << endl;
-				admin temp(serchedName, serchedCnic, serchedPassword);
-				temp.setLoginStatus(true);	
-				return temp;
-			}
-		}
-		cout << "Login failed to " << fileName << ". Something MisMatched" << endl;
-		userFile.close();
-		return admin();
-	
-	
-}
-voter checkVoter(string inputCnic, string inputPassword, string fileName) {
 	ifstream userFile(fileName + ".txt");
 	if (!userFile.is_open()) {
-		cerr << "Error opening file." << endl;
-		return voter();
+		// No system("cls") here, simple error message
+		cout << "---------------------------------------------------" << endl;
+		cerr << "Error: Could not open " << fileName << ".txt for authentication." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return admin(); // Return default (empty) admin
 	}
-	string serchedCnic;
-	string serchedPassword;
-	string serchedName;
-	while (getline(userFile, serchedName, '*'))
-	{
+	string serchedName, serchedCnic, serchedPassword;
+	while (getline(userFile, serchedName, '*')) {
 		getline(userFile, serchedCnic, '*');
 		getline(userFile, serchedPassword, '\n');
 		if (serchedCnic == inputCnic && serchedPassword == inputPassword) {
 			userFile.close();
-			cout << "Login successful." << endl;
-			voter temp(serchedName, serchedCnic, serchedPassword);
+			// Success message is handled by the main function for consistency
+			admin temp(serchedName, serchedCnic, serchedPassword);
+			// temp.setLoginStatus(true); // Login status set in main
 			return temp;
 		}
 	}
-	cout << "Login failed to " << fileName << ". Something MisMatched" << endl;
+	userFile.close();
+	// Failure message is handled by the main function
+	return admin(); // Return default (empty) admin if not found
+}
 
+voter checkVoter(string inputCnic, string inputPassword, string fileName) {
+	ifstream userFile(fileName + ".txt");
+	if (!userFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
+		cerr << "Error: Could not open " << fileName << ".txt for authentication." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return voter();
+	}
+	string serchedName, serchedCnic, serchedPassword;
+	while (getline(userFile, serchedName, '*')) {
+		getline(userFile, serchedCnic, '*');
+		getline(userFile, serchedPassword, '\n');
+		if (serchedCnic == inputCnic && serchedPassword == inputPassword) {
+			userFile.close();
+			voter temp(serchedName, serchedCnic, serchedPassword);
+			// temp.setLoginStatus(true); // Login status set in main
+			return temp;
+		}
+	}
 	userFile.close();
 	return voter();
 }
+
 int electionIdGenerator() {
-	int electionId;
-	ifstream file("electionId.txt");
-	if (!file.is_open()) {
-		cerr << "Error opening file." << endl;
-		return -1;
+	int electionId = 0; // Initialize to a default or error value
+	ifstream fileIn("electionId.txt");
+	if (!fileIn.is_open()) {
+		// If file doesn't exist, maybe start IDs from 1 or a defined base
+		// For now, treat as error or create the file with a starting ID.
+		// Let's create it if it doesn't exist.
+		ofstream createFile("electionId.txt");
+		if (!createFile.is_open()) {
+			cerr << "Critical Error: Could not create electionId.txt." << endl;
+			return -1; // Critical failure
+		}
+		electionId = 0; // Start with ID 0, so first generated will be 1
+		createFile << electionId << endl;
+		createFile.close();
+		// Now proceed to read and increment
 	}
-	file >> electionId;
-	file.close();
-	ofstream fileOut("electionId.txt");
+	else {
+		fileIn >> electionId;
+		fileIn.close();
+	}
+
+	ofstream fileOut("electionId.txt"); // Open in truncation mode to overwrite
 	if (!fileOut.is_open()) {
-		cerr << "Error opening file." << endl;
-		return -1;
+		cout << "---------------------------------------------------" << endl;
+		cerr << "Error: Could not open electionId.txt for writing." << endl;
+		cout << "---------------------------------------------------" << endl;
+		return -1; // Return error
 	}
-	electionId++;
+	electionId++; // Increment for the new election
 	fileOut << electionId;
 	fileOut.close();
 	return electionId;
-
 }

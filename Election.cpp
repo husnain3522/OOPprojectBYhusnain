@@ -488,7 +488,9 @@ void election::castVote(voter* v, int candidateId) {
 			selCandidates[i].incrementVoteCount();
 			cout << "---------------------------------------------------" << endl;
 			cout << "Vote count for candidate " << selCandidates[i].getName() << ": " << selCandidates[i].getVoteCount() << endl;
-			saveCandidateVotesToFile(&selCandidates[i]);
+			saveCandidateVotesToFile(selCandidates);
+			
+				
 			cout << "---------------------------------------------------" << endl;
 			cout << "Vote casted successfully for candidate: " << selCandidates[i].getName() << endl;
 			cout << "---------------------------------------------------" << endl; 
@@ -498,15 +500,16 @@ void election::castVote(voter* v, int candidateId) {
 	//saveElectionVotesToFile();
 }
 void election::saveCandidateVotesToFile(candidate* candi) {
-	ofstream candidateVote(to_string(electionId) + ".txt", ios::app);
+	ofstream candidateVote(to_string(electionId) + ".txt");
 	if (!candidateVote.is_open()) {
 		cout << "---------------------------------------------------" << endl;
 		cerr << "Error opening file to save candidate votes." << endl;
 		cout << "---------------------------------------------------" << endl;
 		return;
 	}
-	candidateVote << electionId << "*" << candi->getCnic() << "*" << candi->getVoteCount();
-	candidateVote << endl;
+	for (int i = 0; i < getTotalCandidates();i++) {
+		candidateVote << electionId << "*" << candi[i].getCnic() << "*" << candi[i].getVoteCount() << endl;
+	}
 	cout << "---------------------------------------------------" << endl;
 	cout << "candidateVote ssaved to file :: " << candi->getName() << "::" << candi->getVoteCount() << endl;
 	cout << "---------------------------------------------------" << endl; 
@@ -547,20 +550,20 @@ time_t election::calculateFutureTime(int amount, int type) {
 	if (type == 1) {
 		now += amount * 24 * 60 * 60; // Add days in seconds
 		cout << "---------------------------------------------------" << endl;
-		cout << "Future time in days is " << amount << endl;
+		cout << "Election Time in days is " << amount << endl;
 		cout << "---------------------------------------------------" << endl;
 
 	}
 	else if (type == 3) {
 		now += amount /** 60 * 60*/; // Add seconds
 		cout << "---------------------------------------------------" << endl; 
-		cout << "Future time in seconds is " << amount << endl;
+		cout << "Election Time in seconds is " << amount << endl;
 		cout << "---------------------------------------------------" << endl;
 	}
 	else if (type == 2) {
 		now += amount * 60 * 60; // Add hours in hours
 		cout << "---------------------------------------------------" << endl; 
-		cout << "Future time in hours is " << amount << endl;
+		cout << "Election Time  in hours is " << amount << endl;
 		cout << "---------------------------------------------------" << endl;
 	}
 	else {
@@ -568,19 +571,19 @@ time_t election::calculateFutureTime(int amount, int type) {
 		cerr << "Invalid type. Use 'd' for days or 'h' for hours.\n''s' for seconds\n";
 		cout << "---------------------------------------------------" << endl;
 	}
-	cout << "---------------------------------------------------" << endl;
-	cout << now << "  <- Time" << endl;
-	cout << "---------------------------------------------------" << endl;
+	//cout << "---------------------------------------------------" << endl;
+	//cout << now << "  <- Time" << endl;
+	//cout << "---------------------------------------------------" << endl;
 	futureTime = now;
 	return now;
 }
 
 bool election::hasTimePassed(time_t futureTime) {
 	time_t now = time(NULL);
-	cout << "---------------------------------------------------" << endl;
-	cout << "Now " << now << endl;
-	cout << "---------------------------------------------------" << endl;
-	cout << (now >= futureTime) << "-BOOL TIME PASSED" << endl;
-	cout << "---------------------------------------------------" << endl;
+	//cout << "---------------------------------------------------" << endl;
+	//cout << "Now " << now << endl;
+	//cout << "---------------------------------------------------" << endl;
+	//cout << (now >= futureTime) << "-BOOL TIME PASSED" << endl;
+	//cout << "---------------------------------------------------" << endl;
 	return now >= futureTime;
 }

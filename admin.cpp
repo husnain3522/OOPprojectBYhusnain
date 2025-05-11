@@ -6,273 +6,382 @@
 #include "election.h"
 #include "candidate.h"
 #include "voter.h"
-#include<cstdlib>
+#include<cstdlib> // For system("cls")
 
 using namespace std;
-bool admin::isLogin(string name, string cnic, string password) {
 
+// This function's parameters (name, cnic, password) are not used in the current logic.
+// The login status depends solely on the member variable 'isLoginVar'.
+// Unreachable cout statements after 'return' have been kept as per original structure.
+bool admin::isLogin(string name, string cnic, string password) {
 	if (isLoginVar) {
 		cout << "---------------------------------------------------" << endl;
-		cout << "Login Successful" << endl;
-		return 1;
+		cout << "||              Login Successful                 ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		return 1;
+		cout << "---------------------------------------------------" << endl; // Unreachable
 	}
 	else {
 		cout << "---------------------------------------------------" << endl;
-		cout << "Login Failed" << endl;
-		return 0;
+		cout << "||                 Login Failed                  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		return 0;
+		cout << "---------------------------------------------------" << endl; // Unreachable
 	}
-
 }
-//default constructor for admin
 
-void admin::saveAdminToFile() {  
-   ofstream adminFile("admin.txt", ios::app);  
-   if (!adminFile.is_open()) {  
-	   cout << "---------------------------------------------------" << endl;
-       cerr << "Error opening file." << endl;  
-	   cout << "---------------------------------------------------" << endl;
-       return;  
-   }  
-   //check that cnic already exist
-   if (checkIfUserExists(cnic, "admin")) {
-	   cout << "---------------------------------------------------" << endl;
-	   cout << "CNIC already exists." << endl;
-	   cout << "---------------------------------------------------" << endl;
-	   system("cls");
-	   return;
-   }
-   else {
-	   cout << "---------------------------------------------------" << endl;
-	   adminFile << name << "*" << cnic << "*" << password << endl;
-	   cout << "Admin saved to file." << endl;
-	   cout << "---------------------------------------------------" << endl;
-   }
-   adminFile.close();
+//default constructor for admin (Comment from original code)
+
+// This function saves the current admin object's details.
+// Assumes 'name', 'cnic', 'password' are member variables of the admin class
+// and are set before this function is called.
+void admin::saveAdminToFile() {
+	ofstream adminFile("admin.txt", ios::app);
+	if (!adminFile.is_open()) {
+		cout << "---------------------------------------------------" << endl;
+		cerr << "Error: Could not open admin.txt for writing." << endl;
+		cout << "---------------------------------------------------" << endl;
+		// Consider adding a system("pause") here if the console closes too quickly
+		return;
+	}
+	// Check if the CNIC of the current admin object already exists in the file
+	if (checkIfUserExists(cnic, "admin")) { // 'cnic' is a member variable
+		cout << "---------------------------------------------------" << endl;
+		cout << "Error: CNIC '" << cnic << "' already exists for an admin." << endl;
+		cout << "Admin details were not saved." << endl;
+		cout << "---------------------------------------------------" << endl;
+		system("cls"); // Original placement: Clears the error message.
+		return;
+	}
+	else {
+		adminFile << name << "*" << cnic << "*" << password << endl; // 'name', 'password' are member variables
+		cout << "---------------------------------------------------" << endl;
+		cout << "Admin details (" << name << ") saved to admin.txt successfully." << endl;
+		cout << "---------------------------------------------------" << endl;
+		// system("cls"); // You might want to clear the screen after success
+	}
+	adminFile.close();
 }
+
 void admin::addVoter() {
+	system("cls");
 	cout << "---------------------------------------------------" << endl;
-	cout << "Enter name: ";
-	string name;
+	cout << "||               Add New Voter                   ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	string name, snic, password;
+
+	cout << "Enter Voter's Name: ";
 	cin >> name;
 	cout << "---------------------------------------------------" << endl;
-	cout << "Enter CNIC: ";
-	string snic;
+
+	cout << "Enter Voter's CNIC: ";
 	cin >> snic;
 	cout << "---------------------------------------------------" << endl;
-	// check if cnic already exists
+
 	if (checkIfUserExists(snic, "voter")) {
 		cout << "---------------------------------------------------" << endl;
-		cout << "CNIC already exists." << endl; 
+		cout << "Error: CNIC '" << snic << "' already exists for a voter." << endl;
+		cout << "Cannot add duplicate voter." << endl;
 		cout << "---------------------------------------------------" << endl;
-		system("cls");
+		 system("pause"); 
+		system("cls"); 
 		return;
 	}
 	else {
-		cout << "---------------------------------------------------" << endl;
-		cout << "Enter password: ";
-		string password;
+		cout << "Enter Voter's Password: ";
 		cin >> password;
-		system("cls");
-		cout << "---------------------------------------------------" << endl;
+		// system("cls"); // Original placement was here. Moved for clarity.
+
 		addUserToFile(name, snic, password, "voter");
-		cout << "Voter saved to file." << endl;
+		system("cls"); // Clear input prompts before showing success message.
 		cout << "---------------------------------------------------" << endl;
+		cout << "||         Voter Added Successfully!             ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Name: " << name << endl;
+		cout << "CNIC: " << snic << endl;
+		cout << "---------------------------------------------------" << endl;
+		// system("pause"); // Optional: pause to see the success message
+		// system("cls"); // Optional: clear screen after success message if returning to a menu
 	}
-	
 }
+
 void admin::addAdmin() {
+	system("cls");
 	cout << "---------------------------------------------------" << endl;
-	cout << "Enter name: ";
-	string name;
+	cout << "||               Add New Admin                   ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	string name, snic, password;
+
+	cout << "Enter Admin's Name: ";
 	cin >> name;
 	cout << "---------------------------------------------------" << endl;
-	cout << "Enter CNIC: ";
-	string snic;
+
+	cout << "Enter Admin's CNIC: ";
 	cin >> snic;
 	cout << "---------------------------------------------------" << endl;
-	// check if cnic already exists
+
 	if (checkIfUserExists(snic, "admin")) {
 		cout << "---------------------------------------------------" << endl;
-		cout << "CNIC already exists." << endl;
+		cout << "Error: CNIC '" << snic << "' already exists for an admin." << endl;
+		cout << "Cannot add duplicate admin." << endl;
 		cout << "---------------------------------------------------" << endl;
-		system("cls");
+		 system("pause"); 
+		system("cls"); // Original placement: Clears the error message.
 		return;
 	}
 	else {
-		cout << "---------------------------------------------------" << endl;
-		cout << "Enter password: ";
-		string password;
+		cout << "Enter Admin's Password: ";
 		cin >> password;
-		system("cls");
-		cout << "---------------------------------------------------" << endl; 
+		// system("cls"); // Original placement was here. Moved for clarity.
+
 		addUserToFile(name, snic, password, "admin");
-		cout << "Admin saved to file." << endl;
+		system("cls"); // Clear input prompts before showing success message.
 		cout << "---------------------------------------------------" << endl;
+		cout << "||         Admin Added Successfully!             ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Name: " << name << endl;
+		cout << "CNIC: " << snic << endl;
+		cout << "---------------------------------------------------" << endl;
+		// system("pause"); // Optional: pause to see the success message
+		// system("cls"); // Optional: clear screen after success message if returning to a menu
 	}
 }
+
 void admin::addCandidate() {
+	system("cls");
 	cout << "---------------------------------------------------" << endl;
-	cout << "How many Candidates you want to add" << endl;
+	cout << "||            Add New Candidate(s)               ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "How many Candidates do you want to add? ";
 	int num;
 	cin >> num;
-	system("cls");
+	system("cls"); // Original placement: Clears after getting 'num'.
+
 	for (int i = 0; i < num; i++) {
 	AgainEnterData:
+		system("cls"); // Clear screen for each new candidate or re-entry
 		cout << "---------------------------------------------------" << endl;
-		cout << "Enter name: ";
-		string name;
+		cout << "||      Adding Candidate " << (i + 1) << " of " << num << "             ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+
+		string name, snic, partyId;
+		cout << "Enter Name for Candidate " << (i + 1) << ": ";
 		cin >> name;
 		cout << "---------------------------------------------------" << endl;
-		cout << "Enter CNIC: ";
-		string snic;
+
+		cout << "Enter CNIC for Candidate " << (i + 1) << ": ";
 		cin >> snic;
 		cout << "---------------------------------------------------" << endl;
-		// check if cnic already exists
+
 		if (checkIfUserExists(snic, "candidate")) {
 			cout << "---------------------------------------------------" << endl;
-			cout << "CNIC already exists." << endl;
+			cout << "Error: CNIC '" << snic << "' already exists for a candidate." << endl;
+			cout << "Please re-enter details for Candidate " << (i + 1) << "." << endl;
 			cout << "---------------------------------------------------" << endl;
-			system("cls");
+			 system("pause"); 
+			system("cls"); 
 			goto AgainEnterData;
 		}
 		else {
-			cout << "---------------------------------------------------" << endl;
-			cout << "Enter PartyId according to National Party Meeting  ";
-			string partyId;
+			cout << "Enter Party ID for Candidate " << (i + 1) << ": ";
 			cin >> partyId;
-			system("cls");
-			if (checkIfPartyIdExists(partyId))
-			{
+			system("cls"); // Original placement: Clears Name, CNIC, PartyID prompts.
+
+			if (checkIfPartyIdExists(partyId)) {
 				cout << "---------------------------------------------------" << endl;
-				cout << "Party Candidate already exists." << endl;
-				system("cls");
+				cout << "Error: Party ID '" << partyId << "' is already assigned." << endl;
 				cout << "---------------------------------------------------" << endl;
-				cout << "Press 1 to Re Enter Credentials\nPress 2 to Skip this candidate" << endl;
+				// system("pause"); // Optional: pause to see the message
+				system("cls"); // Original placement: Clears the "Party Candidate already exists" message.
+
 				cout << "---------------------------------------------------" << endl;
+				cout << "Options for Candidate " << (i + 1) << " (Party ID conflict):" << endl;
+				cout << "  1: Re-enter all credentials for this candidate" << endl;
+				cout << "  2: Skip adding this candidate" << endl;
+				cout << "---------------------------------------------------" << endl;
+				cout << "Your choice (1 or 2): ";
 				int choice;
 				cin >> choice;
+				system("cls"); // Clear choice prompt before action
+
 				if (choice == 1)
 					goto AgainEnterData;
-				else
-					continue;
-
+				else {
+					cout << "---------------------------------------------------" << endl;
+					cout << "Skipping Candidate " << (i + 1) << "." << endl;
+					cout << "---------------------------------------------------" << endl;
+					// system("pause"); // Optional
+					system("cls");
+					continue; // Skip this candidate
+				}
 			}
 			addUserToFile(name, snic, partyId, "candidate");
-			cout << "Candidate saved to file." << endl;
+			// Screen was cleared by system("cls") after partyId input or after choice handling.
 			cout << "---------------------------------------------------" << endl;
+			cout << "||      Candidate Added Successfully!            ||" << endl;
+			cout << "---------------------------------------------------" << endl;
+			cout << "Candidate " << (i + 1) << ": " << name << " (Party ID: " << partyId << ")" << endl;
+			cout << "---------------------------------------------------" << endl;
+			// system("pause"); // Optional: pause to see the success message
+			system("cls"); // Clear success message before next candidate or finishing.
 		}
 	}
-
+	// system("cls"); // Final clear if needed, but loop already clears last message.
+	cout << "---------------------------------------------------" << endl;
+	cout << "||       All Candidates Processed.               ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	// system("pause"); // Optional
+	// system("cls"); // Optional: clear before returning to main menu
 }
 
+
 void admin::createElection(int id) {
+	string name, date, time_duration_value, fileNameToStoreName;
+	int election_type_choice, time_unit_choice;
+
 reEnterName:
-	cout << "---------------------------------------------------" << endl;
-	cout << "Enter ( 1 - 3 ) Respectively\n1 : National\n2 : Local \n3 : Regional \n";
-	cout << "---------------------------------------------------" << endl;
-	int choice;
-	string name; 
-	cin >> choice;
 	system("cls");
-	string fileNameToStoreName;
-	if (choice == 1) {
-		cout << "---------------------------------------------------" << endl;
-		cout << "You have selected National Election" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "||             Create New Election               ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "Select Election Type:" << endl;
+	cout << "  1 : National Election" << endl;
+	cout << "  2 : Local Election" << endl;
+	cout << "  3 : Regional Election" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "Enter your choice (1-3): ";
+	cin >> election_type_choice;
+
+	// system("cls"); // Original placement was here. Moved for better flow.
+
+	if (election_type_choice == 1) {
+		system("cls");
 		name = "National Election";
 		fileNameToStoreName = "nationalElection";
-	}
-	else if (choice == 2) {
 		cout << "---------------------------------------------------" << endl;
-		cout << "You have selected Local Election" << endl;
+		cout << "||     Selected: National Election               ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+	}
+	else if (election_type_choice == 2) {
+		system("cls");
 		name = "Local Election";
 		fileNameToStoreName = "localElection";
-	}
-	else if (choice == 3) {
 		cout << "---------------------------------------------------" << endl;
-		cout << "You have selected Regional Election" << endl;
+		cout << "||       Selected: Local Election                ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+	}
+	else if (election_type_choice == 3) {
+		system("cls");
 		name = "Regional Election";
 		fileNameToStoreName = "regionalElection";
+		cout << "---------------------------------------------------" << endl;
+		cout << "||     Selected: Regional Election               ||" << endl;
+		cout << "---------------------------------------------------" << endl;
 	}
 	else {
+		system("cls");
 		cout << "---------------------------------------------------" << endl;
-		cout << "Invalid choice." << endl;
+		cout << "|| Invalid choice. Please enter a number (1-3).  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		// system("pause"); // Optional: to see the message before re-entry
 		goto reEnterName;
 	}
-	cout << "---------------------------------------------------" << endl;
-	cout << "Enter Election Date: ";
-	string date;
+	// system("pause"); // Optional: pause to confirm selection before next input
+
+	cout << "Enter Election Date (e.g., YYYY-MM-DD): ";
 	cin >> date;
-	system("cls");
-	string time;
-	cout << "---------------------------------------------------" << endl;
+	system("cls"); // Original placement: Clears after date input.
+
 reEnterHrs:
+	// Screen is now clear from previous step or re-entry
 	cout << "---------------------------------------------------" << endl;
-	cout << "Enter Election Time :: Press 1 - 2 repectively\n1 : Days\n2 Hours \n3 Seconds \n";
+	cout << "||        Configure Election Duration            ||" << endl;
 	cout << "---------------------------------------------------" << endl;
-	int choice1;
-	cin >> choice1;
-	if (choice1 == 1) {
-		cout << "---------------------------------------------------" << endl;
-		cout << "You have selected Days" << endl;
-		cout << "---------------------------------------------------" << endl;
-		cout << "Enter Time in Days: ";
-		cout << "---------------------------------------------------" << endl;
-		cin >> time;
-		system("cls");
-	}
-	else if (choice1 == 2) {
-		cout << "---------------------------------------------------" << endl;
-		cout << "You have selected Hours" << endl;
-		cout << "---------------------------------------------------" << endl;
-		cout << "Enter Time in Hours: ";
-		cout << "---------------------------------------------------" << endl;
-		cin >> time;
-		system("cls");
+	cout << "Select Election Duration Unit:" << endl;
+	cout << "  1 : Days" << endl;
+	cout << "  2 : Hours" << endl;
+	cout << "  3 : Seconds" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "Enter your choice (1-3): ";
+	cin >> time_unit_choice;
 
-	}
-	else if (choice1 == 3) {
-		cout << "---------------------------------------------------" << endl;
-		cout << "You have selected Seconds" << endl;
-		cout << "---------------------------------------------------" << endl;
-		cout << "Enter Time in Seconds: ";
-		cout << "---------------------------------------------------" << endl;
-		cin >> time;
-		system("cls");
+	int durationTypeIndicator = 0; // Used for addElectionToFileWithCandies
 
+	if (time_unit_choice == 1) {
+		system("cls");
+		cout << "---------------------------------------------------" << endl;
+		cout << "||         Duration Unit: Days                   ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Enter Election Duration (in Days): ";
+		cin >> time_duration_value;
+		durationTypeIndicator = 1;
+		system("cls"); // Original placement: Clears after time_duration_value input.
+	}
+	else if (time_unit_choice == 2) {
+		system("cls");
+		cout << "---------------------------------------------------" << endl;
+		cout << "||         Duration Unit: Hours                  ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Enter Election Duration (in Hours): ";
+		cin >> time_duration_value;
+		durationTypeIndicator = 2;
+		system("cls"); // Original placement.
+	}
+	else if (time_unit_choice == 3) {
+		system("cls");
+		cout << "---------------------------------------------------" << endl;
+		cout << "||         Duration Unit: Seconds                ||" << endl;
+		cout << "---------------------------------------------------" << endl;
+		cout << "Enter Election Duration (in Seconds): ";
+		cin >> time_duration_value;
+		durationTypeIndicator = 3;
+		system("cls"); // Original placement.
 	}
 	else {
+		system("cls");
 		cout << "---------------------------------------------------" << endl;
-		cout << "Invalid choice." << endl;
+		cout << "|| Invalid choice. Please enter a number (1-3).  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		// system("pause"); // Optional: to see the message before re-entry
 		goto reEnterHrs;
 	}
 
-	//cout << "Enter Number of Regions: ";
-	int numRegions=1;
-	
-	string* regionCodes = new string[numRegions];
-	for (int i = 0; i < numRegions; i++) {
-		cout << "---------------------------------------------------" << endl;
+	// Region Codes (as per original logic, numRegions is fixed to 1 for input here)
+	int numInputRegions = 1; // Based on original code: int numRegions=1;
+	string* regionCodes = new string[numInputRegions];
+
+	// Screen is clear from previous step.
+	cout << "---------------------------------------------------" << endl;
+	cout << "||           Configure Region Code(s)            ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	for (int i = 0; i < numInputRegions; i++) {
 		cout << "Enter Region Code " << i + 1 << ": ";
 		cin >> regionCodes[i];
 		cout << "---------------------------------------------------" << endl;
 	}
-	system("cls");
-	election e(name, date, time, numRegions);
-	e.setElectionId(id);
-	e.setRegionCodes(regionCodes, numRegions);
-	// were using numRegions due to change of plan disccused by our team
-	// here num regions show that you have slected hours or days
-	if (choice1 == 1)
-		numRegions = 1;
-	else if (choice1 == 2)
-		numRegions = 2;
-	else if (choice1 == 3)
-		numRegions = 3;
+	system("cls"); // Original placement: Clears after all region codes are entered.
 
-	e.addElectionToFileWithCandies(numRegions,fileNameToStoreName);
+	election e(name, date, time_duration_value, numInputRegions); // Original constructor uses numInputRegions
+	e.setElectionId(id);
+	e.setRegionCodes(regionCodes, numInputRegions); // Sets the actual region codes
+
+	// The 'durationTypeIndicator' (derived from time_unit_choice) is passed to addElectionToFileWithCandies.
+	// This matches the comment in the original code about 'numRegions' being repurposed.
+	e.addElectionToFileWithCandies(durationTypeIndicator, fileNameToStoreName);
 	delete[] regionCodes;
+
+	// Screen is clear. Display success message.
+	cout << "---------------------------------------------------" << endl;
+	cout << "||   Election (" << name << ") Created Successfully!  ||" << endl;
+	cout << "---------------------------------------------------" << endl;
+	cout << "Details:" << endl;
+	cout << "  ID: " << id << endl;
+	cout << "  Date: " << date << endl;
+	cout << "  Duration: " << time_duration_value;
+	if (time_unit_choice == 1) cout << " Days" << endl;
+	else if (time_unit_choice == 2) cout << " Hours" << endl;
+	else if (time_unit_choice == 3) cout << " Seconds" << endl;
+	cout << "---------------------------------------------------" << endl;
+	// system("pause"); // Optional: to see the success message
+	// system("cls"); // Optional: clear screen after success message if returning to a menu
 }
