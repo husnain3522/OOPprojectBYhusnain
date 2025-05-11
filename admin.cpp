@@ -7,60 +7,53 @@
 #include "candidate.h"
 #include "voter.h"
 #include<sstream>
-#include<cstdlib> // For system("cls")
+#include<cstdlib> 
 
 using namespace std;
 bool checkInput(string input,string tag);
 
-// This function's parameters (name, cnic, password) are not used in the current logic.
-// The login status depends solely on the member variable 'isLoginVar'.
-// Unreachable cout statements after 'return' have been kept as per original structure.
 bool admin::isLogin(string name, string cnic, string password) {
 	if (isLoginVar) {
 		cout << "---------------------------------------------------" << endl;
 		cout << "||              Login Successful                 ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		cout << "---------------------------------------------------" << endl;
 		return 1;
-		cout << "---------------------------------------------------" << endl; // Unreachable
-	}
+			}
 	else {
 		cout << "---------------------------------------------------" << endl;
 		cout << "||                 Login Failed                  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
+		cout << "---------------------------------------------------" << endl;
 		return 0;
-		cout << "---------------------------------------------------" << endl; // Unreachable
-	}
+			}
 }
 
-//default constructor for admin (Comment from original code)
+//default constructor for admin 
 
-// This function saves the current admin object's details.
-// Assumes 'name', 'cnic', 'password' are member variables of the admin class
-// and are set before this function is called.
+
 void admin::saveAdminToFile() {
 	ofstream adminFile("admin.txt", ios::app);
 	if (!adminFile.is_open()) {
 		cout << "---------------------------------------------------" << endl;
 		cerr << "Error: Could not open admin.txt for writing." << endl;
 		cout << "---------------------------------------------------" << endl;
-		// Consider adding a system("pause") here if the console closes too quickly
 		return;
 	}
 	// Check if the CNIC of the current admin object already exists in the file
-	if (checkIfUserExists(cnic, "admin")) { // 'cnic' is a member variable
+	if (checkIfUserExists(cnic, "admin")) { 
 		cout << "---------------------------------------------------" << endl;
 		cout << "Error: CNIC '" << cnic << "' already exists for an admin." << endl;
 		cout << "Admin details were not saved." << endl;
 		cout << "---------------------------------------------------" << endl;
-		system("cls"); // Original placement: Clears the error message.
+		system("cls"); //  Clears the error message.
 		return;
 	}
 	else {
-		adminFile << name << "*" << cnic << "*" << password << endl; // 'name', 'password' are member variables
+		adminFile << name << "*" << cnic << "*" << password << endl; 
 		cout << "---------------------------------------------------" << endl;
 		cout << "Admin details (" << name << ") saved to admin.txt successfully." << endl;
 		cout << "---------------------------------------------------" << endl;
-		// system("cls"); // You might want to clear the screen after success
 	}
 	adminFile.close();
 }
@@ -97,7 +90,7 @@ void admin::addVoter() {
 	else {
 		cout << "Enter Voter's Password: ";
 		cin >> password;
-		// system("cls"); // Original placement was here. Moved for clarity.
+		
 
 		addUserToFile(name, snic, password, "voter");
 		system("cls"); // Clear input prompts before showing success message.
@@ -139,13 +132,13 @@ void admin::addAdmin() {
 		cout << "Cannot add duplicate admin." << endl;
 		cout << "---------------------------------------------------" << endl;
 		 system("pause"); 
-		system("cls"); // Original placement: Clears the error message.
+		system("cls"); // Clears the error message.
 		return;
 	}
 	else {
 		cout << "Enter Admin's Password: ";
 		cin >> password;
-		// system("cls"); // Original placement was here. Moved for clarity.
+		
 
 		addUserToFile(name, snic, password, "admin");
 		system("cls"); // Clear input prompts before showing success message.
@@ -156,7 +149,6 @@ void admin::addAdmin() {
 		cout << "CNIC: " << snic << endl;
 		cout << "---------------------------------------------------" << endl;
 		 system("pause"); 
-		// system("cls"); // Optional: clear screen after success message if returning to a menu
 	}
 }
 
@@ -176,7 +168,7 @@ void admin::addCandidate() {
 	}
 	num = stoi(numStr);
 
-	system("cls"); // Original placement: Clears after getting 'num'.
+	system("cls"); //  Clears after getting 'num'.
 
 		string name, snic, partyId;
 	for (int i = 0; i < num; i++) {
@@ -187,11 +179,11 @@ void admin::addCandidate() {
 		cout << "---------------------------------------------------" << endl;
 
 		cout << "Enter Name for Candidate " << (i + 1) << ": ";
-		//system("pause");
+
 
 		cin >> name;
 		cout << "---------------------------------------------------" << endl;
-		//system("pause");
+	
 		cout << "Enter CNIC for Candidate " << (i + 1) << ": ";
 		cin >> snic;
 		if (!checkInput(snic,"CNIC")) {
@@ -214,14 +206,14 @@ void admin::addCandidate() {
 		else {
 			cout << "Enter Party ID for Candidate " << (i + 1) << ": ";
 			cin >> partyId;
-			system("cls"); // Original placement: Clears Name, CNIC, PartyID prompts.
+			system("cls"); 
 
 			if (checkIfPartyIdExists(partyId)) {
 				cout << "---------------------------------------------------" << endl;
 				cout << "Error: Party ID '" << partyId << "' is already assigned." << endl;
 				cout << "---------------------------------------------------" << endl;
-				// system("pause"); // Optional: pause to see the message
-				system("cls"); // Original placement: Clears the "Party Candidate already exists" message.
+			
+				system("cls"); 
 
 				cout << "---------------------------------------------------" << endl;
 				cout << "Options for Candidate " << (i + 1) << " (Party ID conflict):" << endl;
@@ -239,28 +231,27 @@ void admin::addCandidate() {
 					cout << "---------------------------------------------------" << endl;
 					cout << "Skipping Candidate " << (i + 1) << "." << endl;
 					cout << "---------------------------------------------------" << endl;
-					// system("pause"); // Optional
+					
 					system("cls");
 					continue; // Skip this candidate
 				}
 			}
 			addUserToFile(name, snic, partyId, "candidate");
-			// Screen was cleared by system("cls") after partyId input or after choice handling.
+			
 			cout << "---------------------------------------------------" << endl;
 			cout << "||      Candidate Added Successfully!            ||" << endl;
 			cout << "---------------------------------------------------" << endl;
 			cout << "Candidate " << (i + 1) << ": " << name << " (Party ID: " << partyId << ")" << endl;
 			cout << "---------------------------------------------------" << endl;
 			 system("pause"); 
-			system("cls"); // Clear success message before next candidate or finishing.
+			system("cls"); /
 		}
 	}
-	// system("cls"); // Final clear if needed, but loop already clears last message.
+	
 	cout << "---------------------------------------------------" << endl;
 	cout << "||       All Candidates Processed.               ||" << endl;
 	cout << "---------------------------------------------------" << endl;
-	 //system("pause"); // Opti
-	// system("cls"); // Optional: clear before returning to main menu
+	
 }
 
 
@@ -281,7 +272,7 @@ reEnterName:
 	cout << "Enter your choice (1-3): ";
 	cin >> election_type_choice;
 
-	// system("cls"); // Original placement was here. Moved for better flow.
+
 
 	if (election_type_choice == 1) {
 		system("cls");
@@ -312,17 +303,15 @@ reEnterName:
 		cout << "---------------------------------------------------" << endl;
 		cout << "|| Invalid choice. Please enter a number (1-3).  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
-		// system("pause"); // Optional: to see the message before re-entry
 		goto reEnterName;
 	}
-	// system("pause"); // Optional: pause to confirm selection before next input
 
 	cout << "Enter Election Date (e.g., YYYY-MM-DD): ";
 	cin >> date;
-	system("cls"); // Original placement: Clears after date input.
+	system("cls"); 
 
 reEnterHrs:
-	// Screen is now clear from previous step or re-entry
+	
 	cout << "---------------------------------------------------" << endl;
 	cout << "||        Configure Election Duration            ||" << endl;
 	cout << "---------------------------------------------------" << endl;
@@ -361,7 +350,7 @@ reEnterHrs:
 		}
 		time_duration_value = stoi(time_duration_valueStr);
 		durationTypeIndicator = 1;
-		system("cls"); // Original placement: Clears after time_duration_value input.
+		system("cls"); 
 	}
 	else if (time_unit_choice == 2) {
 		enterHours:
@@ -381,7 +370,7 @@ reEnterHrs:
 
 
 		durationTypeIndicator = 2;
-		system("cls"); // Original placement.
+		system("cls"); 
 	}
 	else if (time_unit_choice == 3) {
 		enterSeconds:
@@ -400,14 +389,14 @@ reEnterHrs:
 		time_duration_value = stoi(time_duration_valueStr);
 
 		durationTypeIndicator = 3;
-		system("cls"); // Original placement.
+		system("cls");
 	}
 	else {
 		system("cls");
 		cout << "---------------------------------------------------" << endl;
 		cout << "|| Invalid choice. Please enter a number (1-3).  ||" << endl;
 		cout << "---------------------------------------------------" << endl;
-		// system("pause"); // Optional: to see the message before re-entry
+		
 		goto reEnterHrs;
 	}
 
@@ -430,8 +419,7 @@ reEnterHrs:
 	e.setElectionId(id);
 	e.setRegionCodes(regionCodes, numInputRegions); // Sets the actual region codes
 
-	// The 'durationTypeIndicator' (derived from time_unit_choice) is passed to addElectionToFileWithCandies.
-	// This matches the comment in the original code about 'numRegions' being repurposed.
+	
 	e.addElectionToFileWithCandies(durationTypeIndicator, fileNameToStoreName);
 	delete[] regionCodes;
 
@@ -447,8 +435,7 @@ reEnterHrs:
 	else if (time_unit_choice == 2) cout << " Hours" << endl;
 	else if (time_unit_choice == 3) cout << " Seconds" << endl;
 	cout << "---------------------------------------------------" << endl;
-	// system("pause"); // Optional: to see the success message
-	// system("cls"); // Optional: clear screen after success message if returning to a menu
+	
 }
 
 bool checkInput(string input,string tag) {
