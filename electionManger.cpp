@@ -1,11 +1,10 @@
 #include "electionManger.h"
 #include <iostream>
 #include <string>
-#include<cstdlib> // For system("cls")
+#include<cstdlib> 
 #include<sstream>
 #include <fstream>
-// Assuming user.h is needed for 'voterr' if it's a member of electionManger
-// #include "user.h" // Uncomment if voterr is a member and its type (e.g., Voter*) is defined here
+
 
 using namespace std;
 bool checkInputElectionManger(string input, string tag);
@@ -14,7 +13,7 @@ int electionManger::countNumOfElections(string fileName) {
     int count = 0;
     ifstream file(fileName + ".txt");
     if (!file.is_open()) {
-        // No system("cls") here as this is a low-level utility, error handled by caller or logged.
+        
         cout << "---------------------------------------------------" << endl;
         cerr << "Error: Could not open file '" << fileName << ".txt' for counting." << endl;
         cout << "---------------------------------------------------" << endl;
@@ -29,24 +28,7 @@ int electionManger::countNumOfElections(string fileName) {
 }
 
 void electionManger::refreshAllData() {
-    // system("cls"); // Optional: Clear screen before starting refresh
-    // cout << "---------------------------------------------------" << endl;
-    // cout << "||       Refreshing All Election Data...         ||" << endl;
-    // cout << "---------------------------------------------------" << endl;
-
-    // Deallocate old arrays if they exist to prevent memory leaks
-    // This is a logic change, so I will only comment it out.
-    // If you re-allocate 'local', 'national', 'regional' without deleting,
-    // it's a memory leak if this function is called multiple times.
-    /*
-    if (local) delete[] local;
-    if (national) delete[] national;
-    if (regional) delete[] regional;
-    local = nullptr;
-    national = nullptr;
-    regional = nullptr;
-    */
-
+   
     countLocal = countNumOfElections("localElection");
     countNational = countNumOfElections("nationalElection");
     countRegional = countNumOfElections("regionalElection");
@@ -109,12 +91,8 @@ void electionManger::refreshAllData() {
         }
     }
 
-    system("cls"); // Original placement, clears screen after loading.
-    // cout << "---------------------------------------------------" << endl;
-    // cout << "||          Data Refresh Complete!               ||" << endl;
-    // cout << "---------------------------------------------------" << endl;
-    // system("pause"); // Optional: pause to see message
-}
+    system("cls"); 
+   
 
 electionManger::electionManger() {
     local = nullptr;     // Initialize pointers to nullptr
@@ -202,7 +180,7 @@ void electionManger::displayAllElectionNames() {
         cout << "||      No Currently Active Elections to Display   ||" << endl;
         cout << "---------------------------------------------------" << endl;
     }
-    // system("pause"); // Optional
+    
 }
 
 // Helper function to create title for displayElectionType functions
@@ -259,11 +237,9 @@ int* electionManger::displayLocalElections(int type) {
             if (type == 3) { // Display status if showing all
                 cout << "  Status: " << (local[i].getIsActice() ? "Active" : "Inactive") << endl;
             }
-            // The line below `cout << Choices[counter + 1] << "::" << local[i].getElectionId() << endl;`
-            // seems to be a debug/verification line. It prints an uninitialized value from Choices
-            // before assigning to it. I'll assign first then print if needed for verification.
+            
             Choices[displayCounter + 1] = local[i].getElectionId();
-            // cout << "  (Choice Index " << displayCounter + 1 << " refers to ID: " << Choices[displayCounter + 1] << ")" << endl; // More descriptive
+            
             displayCounter++;
         }
     }
@@ -277,18 +253,14 @@ int* electionManger::displayLocalElections(int type) {
         cout << "---------------------------------------------------" << endl;
     }
     else {
-        Choices[0] = displayCounter; // Store the number of displayed elections
-        // The debug print `cout << "election at choices 1: " << Choices[1] << endl;`
-        // should only happen if displayCounter > 0.
-        // cout << "DEBUG: First selectable election ID: " << Choices[1] << endl;
-        // cout << "---------------------------------------------------" << endl;
+        Choices[0] = displayCounter; 
     }
-    // system("pause"); // Optional
+  
     return Choices;
 }
 
 int* electionManger::displayNationalElections(int type) {
-    //if (type != 3)
+  
     system("cls");
     displayElectionListTitle("National", type);
 
@@ -298,7 +270,7 @@ int* electionManger::displayNationalElections(int type) {
         cout << "---------------------------------------------------" << endl;
         int* noElectionChoices = new int[1];
         noElectionChoices[0] = -1;
-        // system("pause"); // Optional
+     
         return noElectionChoices;
     }
 
@@ -340,7 +312,7 @@ int* electionManger::displayNationalElections(int type) {
     else {
         Choices[0] = displayCounter;
     }
-    // system("pause"); // Optional
+  
     return Choices;
 }
 
@@ -355,7 +327,7 @@ int* electionManger::displayRegionalElections(int type) {
         cout << "---------------------------------------------------" << endl;
         int* noElectionChoices = new int[1];
         noElectionChoices[0] = -1;
-        // system("pause"); // Optional
+     
         return noElectionChoices;
     }
 
@@ -397,7 +369,7 @@ int* electionManger::displayRegionalElections(int type) {
     else {
         Choices[0] = displayCounter;
     }
-    // system("pause"); // Optional
+   
     return Choices;
 }
 
@@ -481,40 +453,12 @@ void electionManger::displayAllCandidates() {
         cout << "---------------------------------------------------" << endl;
     }
 
-    // National and Regional Candidates sections are commented out in the original code
-    // Re-implement or uncomment if needed, following the pattern above.
-    /*
-    if (countNational > 0) {
-        cout << "National Election Candidates: " << endl;
-        for (int i = 0; i < countNational; i++) {
-            cout << "--- Candidates for National Election: " << national[i].getElectionName() << " (ID: " << national[i].getElectionId() << ") ---" << endl;
-            national[i].displayCandiates(national[i].getCandidateArray(), national[i].getNumberOfRegions());
-            cout << "---------------------------------------------------" << endl;
-            foundAnyCandidates = true;
-        }
-    } else {
-        cout << "No National Elections to display candidates for." << endl;
-        cout << "---------------------------------------------------" << endl;
-    }
-
-    if (countRegional > 0) {
-        cout << "Regional Election Candidates: " << endl;
-        for (int i = 0; i < countRegional; i++) {
-            cout << "--- Candidates for Regional Election: " << regional[i].getElectionName() << " (ID: " << regional[i].getElectionId() << ") ---" << endl;
-            regional[i].displayCandiates(regional[i].getCandidateArray(), regional[i].getNumberOfRegions());
-            cout << "---------------------------------------------------" << endl;
-            foundAnyCandidates = true;
-        }
-    } else {
-        cout << "No Regional Elections to display candidates for." << endl;
-        cout << "---------------------------------------------------" << endl;
-    }
-    */
+   
     if (!foundAnyCandidates && countLocal == 0) { // Adjust if National/Regional uncommented
         cout << "|| No candidates to display for any election.    ||" << endl;
         cout << "---------------------------------------------------" << endl;
     }
-    // system("pause"); // Optional
+    
 }
 
 
@@ -523,24 +467,21 @@ bool electionManger::checkIfUserAlreadyVoted(int electionId) {
         cout << "---------------------------------------------------" << endl;
         cerr << "Error: Voter information not available to check vote status." << endl;
         cout << "---------------------------------------------------" << endl;
-        return true; // Prevent voting if voter info is missing
+        return true; 
     }
     ifstream checkFile("voterVoteStatus.txt");
     if (!checkFile.is_open()) {
         cout << "---------------------------------------------------" << endl;
         cerr << "Error: Could not open voterVoteStatus.txt to check status." << endl;
         cout << "---------------------------------------------------" << endl;
-        return false; // Or handle as critical error, maybe true to be safe
+        return false; 
     }
     string fileElectionId, fileCnic;
     while (getline(checkFile, fileElectionId, '*')) {
         getline(checkFile, fileCnic, '\n');
         if (stoi(fileElectionId) == electionId && fileCnic == voterr->getCnic()) {
             checkFile.close();
-            // This message is good, displayed by caller or here.
-            // cout << "---------------------------------------------------" << endl;
-            // cout << "||      You have already voted in this election.   ||" << endl;
-            // cout << "---------------------------------------------------" << endl;
+          
             return true;
         }
     }
@@ -567,7 +508,7 @@ void electionManger::saveVoterVoteStatusToFile(int electionId) {
 }
 
 void electionManger::casteVoteInElection(election* e_arr, int size, int* choices) {
-    // system("cls"); // Already cleared by `castVote` before calling this typically
+   
     cout << "---------------------------------------------------" << endl;
     cout << "||         Cast Your Vote in Election            ||" << endl;
     cout << "---------------------------------------------------" << endl;
@@ -577,13 +518,11 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
     cout << "---------------------------------------------------" << endl;
 
     bool isElectionFoundInChoices = false;
-    // The debug prints for 'choices' array can be confusing.
-    // cout << "DEBUG: Choices[0] (count of listed elections) = " << choices[0] << endl;
-    for (int i = 1; i <= choices[0]; i++) { // Iterate up to the count of listed elections
-        // cout << "DEBUG: Checking against choices[" << i << "] = " << choices[i] << endl;
+    
+    for (int i = 1; i <= choices[0]; i++) { 
         if (choices[i] == selected_election_id) {
             isElectionFoundInChoices = true;
-            // cout << "DEBUG: Election ID " << selected_election_id << " found in choices list." << endl;
+            
             break;
         }
     }
@@ -592,7 +531,7 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
         cout << "---------------------------------------------------" << endl;
         cout << "|| Error: Election ID " << selected_election_id << " is not valid or not listed. ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+        
         return;
     }
 
@@ -601,7 +540,7 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
         cout << "||      You have already voted in this election.   ||" << endl;
         cout << "||              Cannot vote again.               ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+       
         return;
     }
 
@@ -609,7 +548,7 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
     for (int i = 0; i < size; i++) {
         if (e_arr[i].getElectionId() == selected_election_id) {
             electionIndex = i;
-            // cout << "DEBUG: Election object found at index " << electionIndex << endl;
+           
             break;
         }
     }
@@ -620,7 +559,7 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
             cout << "|| Error: This election is currently not active. ||" << endl;
             cout << "||               Cannot cast vote.               ||" << endl;
             cout << "---------------------------------------------------" << endl;
-            // system("pause");
+          
             return;
         }
 
@@ -629,14 +568,14 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
             cout << "||  Error: The voting period for this election   ||" << endl;
             cout << "||                 has passed.                   ||" << endl;
             cout << "---------------------------------------------------" << endl;
-            // system("pause");
+           
             return;
         }
         system("cls");
         cout << "---------------------------------------------------" << endl;
         cout << "|| Candidates for Election: " << e_arr[electionIndex].getElectionName() << " (ID: " << selected_election_id << ") ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // Assuming getTotalCandidates() gives the correct count for getSelectedCandidates()
+       
         e_arr[electionIndex].displayCandiates(e_arr[electionIndex].getSelectedCandidates(), e_arr[electionIndex].getTotalCandidates());
         cout << "---------------------------------------------------" << endl;
         cout << "Enter Candidate CNIC (ID) to vote for: ";
@@ -645,8 +584,7 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
         cout << "---------------------------------------------------" << endl;
 
         bool validCandidate = false;
-        // Check if the candidate ID is valid from the displayed list
-        // The original code uses getCnicInt(). Ensure this is the ID displayed.
+       
         for (int i = 0; i < e_arr[electionIndex].getTotalCandidates(); i++) {
             if (e_arr[electionIndex].getSelectedCandidates()[i].getCnicInt() == candidate_cnic_id) {
                 validCandidate = true;
@@ -669,14 +607,12 @@ void electionManger::casteVoteInElection(election* e_arr, int size, int* choices
         }
     }
     else {
-        // This case should ideally not be reached if isElectionFoundInChoices is true
-        // and the e_arr corresponds to the choices.
+        
         cout << "---------------------------------------------------" << endl;
         cout << "||  Internal Error: Election data not found.     ||" << endl;
         cout << "---------------------------------------------------" << endl;
     }
-    // system("pause"); // Optional
-}
+    
 
 void electionManger::castVote() {
     if (!voterr) {
@@ -685,7 +621,7 @@ void electionManger::castVote() {
         cout << "|| Error: Voter not logged in or identified.     ||" << endl;
         cout << "||         Cannot proceed with voting.           ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+     
         return;
     }
 reSelectVoteType:
@@ -715,8 +651,7 @@ reSelectVoteType:
 
     switch (choice) {
     case 1:
-        // system("cls"); // displayLocalElections will clear screen
-        // cout << "Listing Active Local Elections..." << endl;
+      
         electionChoices = displayLocalElections(1); // Type 1 for active elections
         if (electionChoices && electionChoices[0] != -1) {
             casteVoteInElection(local, countLocal, electionChoices);
@@ -729,8 +664,7 @@ reSelectVoteType:
         delete[] electionChoices; // Clean up
         break;
     case 2:
-        // system("cls");
-        // cout << "Listing Active National Elections..." << endl;
+       
         electionChoices = displayNationalElections(1);
         if (electionChoices && electionChoices[0] != -1) {
             casteVoteInElection(national, countNational, electionChoices);
@@ -743,8 +677,7 @@ reSelectVoteType:
         delete[] electionChoices;
         break;
     case 3:
-        // system("cls");
-        // cout << "Listing Active Regional Elections..." << endl;
+       
         electionChoices = displayRegionalElections(1);
         if (electionChoices && electionChoices[0] != -1) {
             casteVoteInElection(regional, countRegional, electionChoices);
@@ -758,16 +691,16 @@ reSelectVoteType:
         break;
     case 4:
         cout << "Returning to previous menu..." << endl;
-        // system("pause"); // Optional
+     
         return;
     default:
         cout << "---------------------------------------------------" << endl;
         cout << "|| Invalid choice. Please try again.             ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+      
         goto reSelectVoteType;
     }
-    // system("pause"); // Pause after vote casting process before returning to main or this menu
+   
 }
 
 
@@ -792,7 +725,7 @@ void electionManger::checkVoteHistory() {
         cout << "|| Error: Voter not logged in or identified.     ||" << endl;
         cout << "||         Cannot display voting history.        ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+       
         return;
     }
 
@@ -801,7 +734,7 @@ void electionManger::checkVoteHistory() {
         cout << "---------------------------------------------------" << endl;
         cerr << "Error: Could not open voterVoteStatus.txt to check history." << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+       
         return;
     }
 
@@ -844,10 +777,7 @@ void electionManger::checkVoteHistory() {
 string electionManger::getElectionNameById(int id) {
     ifstream checkNameFile("electionNames.txt");
     if (!checkNameFile.is_open()) {
-        // This is a utility, so detailed UI might be out of place, error is enough.
-        // cout << "---------------------------------------------------" << endl;
-        // cerr << "Error: Could not open electionNames.txt." << endl;
-        // cout << "---------------------------------------------------" << endl;
+       
         return "";
     }
     string electionIdFromFile, electionNameFromFile, tempDetails;
@@ -856,13 +786,7 @@ string electionManger::getElectionNameById(int id) {
         getline(checkNameFile, tempDetails, '\n');      // Rest of the line (e.g., candidate count)
         if (stoi(electionIdFromFile) == id) {
             checkNameFile.close();
-            // The couts here are more like debug/verbose output for this specific function call.
-            // The caller (checkVoteHistory) might be the one to format the final output.
-            // cout<< "---------------------------------------------------" << endl;	
-            // cout << "  (Details from electionNames.txt)" << endl;
-            // cout << "  Election ID   : " << electionIdFromFile << endl;
-            // cout << "  Election Name : " << electionNameFromFile << endl;
-            // cout << "---------------------------------------------------" << endl;
+          
             return electionNameFromFile;
         }
     }
@@ -882,7 +806,7 @@ void electionManger::displayResultsWithId(int electionId) {
         cout << "---------------------------------------------------" << endl;
         cerr << "Error: Could not open electionNames.txt to get details." << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+      
         return;
     }
     string electionIdStr, currentElectionNameStr, totalCandidatesStr;
@@ -906,7 +830,7 @@ void electionManger::displayResultsWithId(int electionId) {
         cout << "---------------------------------------------------" << endl;
         cout << "|| Error: Election metadata not found for ID " << electionId << ".||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+    
         return;
     }
     if (totalCandidatesStr.empty() || stoi(totalCandidatesStr) == 0) {
@@ -914,7 +838,7 @@ void electionManger::displayResultsWithId(int electionId) {
         cout << "|| No candidates were registered for this election.||" << endl;
         cout << "||           No results to display.                ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+        
         return;
     }
     int totalCandidatesInt = stoi(totalCandidatesStr);
@@ -926,7 +850,7 @@ void electionManger::displayResultsWithId(int electionId) {
         cerr << "Error: Could not open results file '" << resultFileName << "'." << endl;
         cout << "||       Results might not be available yet.       ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+     
         return;
     }
 
@@ -955,7 +879,7 @@ void electionManger::displayResultsWithId(int electionId) {
 
     cout << "||              End Of Results                 ||" << endl;
     cout << "---------------------------------------------------" << endl;
-    // system("pause"); // Optional
+    
 }
 
 void electionManger::displayResults() {
@@ -982,8 +906,7 @@ reSelectTypeForResults:
     }
     int choice = stoi(choiceStr);
 
-   
-    // system("cls"); // Clear after choice, before listing elections
+  
 
     int* electionChoicesList = nullptr;
     int electionIdToDisplay = -1;
@@ -999,7 +922,7 @@ reSelectTypeForResults:
         }
         else {
             cout << "No Local Elections found to display results for." << endl;
-            // system("pause");
+           
         }
         if (electionChoicesList) delete[] electionChoicesList;
         break;
@@ -1013,7 +936,7 @@ reSelectTypeForResults:
         }
         else {
             cout << "No National Elections found to display results for." << endl;
-            // system("pause");
+           
         }
         if (electionChoicesList) delete[] electionChoicesList;
         break;
@@ -1027,22 +950,22 @@ reSelectTypeForResults:
         }
         else {
             cout << "No Regional Elections found to display results for." << endl;
-            // system("pause");
+            
         }
         if (electionChoicesList) delete[] electionChoicesList;
         break;
     case 4:
         cout << "Returning to previous menu..." << endl;
-        // system("pause"); // Optional
+       
         return;
     default:
         cout << "---------------------------------------------------" << endl;
         cout << "|| Invalid choice. Please try again.             ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+        
         goto reSelectTypeForResults;
     }
-    // system("pause"); // Pause after displaying results before returning
+   
 }
 
 void electionManger::actiDeactiElectionAdmin(bool activate) { // 'parity' renamed to 'activate'
@@ -1053,7 +976,7 @@ void electionManger::actiDeactiElectionAdmin(bool activate) { // 'parity' rename
         filterType = 0; // List inactive elections
         actionVerb = "Activate";
     }
-    else { // If false, we want to deactivate an election (so list active ones)
+    else { 
         filterType = 1; // List active elections
         actionVerb = "Deactivate";
     }
@@ -1072,8 +995,7 @@ reSelectTypeForActivation:
     cout << "Enter your choice (1-4): ";
     char choice;
     cin >> choice;
-    // system("cls"); // Clear after choice
-
+   
     int* electionChoicesList = nullptr;
     int electionIdToModify = -1;
 
@@ -1122,7 +1044,7 @@ reSelectTypeForActivation:
         break;
     case '4':
         cout << "Returning to previous menu..." << endl;
-        // system("pause"); // Optional
+   
         return;
     default:
         cout << "---------------------------------------------------" << endl;
@@ -1131,11 +1053,11 @@ reSelectTypeForActivation:
          system("pause");
         goto reSelectTypeForActivation;
     }
-    // system("pause"); // Pause after action before returning
+   
 }
 
 void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) { // 'parity' renamed
-    system("cls"); // Clear screen before showing action result
+    system("cls"); 
     string electionTypeName;
     bool success = false;
 
@@ -1203,7 +1125,7 @@ void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) 
         cout << "---------------------------------------------------" << endl;
         cout << "|| Internal Error: Invalid election type.        ||" << endl;
         cout << "---------------------------------------------------" << endl;
-        // system("pause");
+       
         return;
     }
 
@@ -1226,16 +1148,14 @@ void electionManger::actiDeactiElectionUsingId(int id, int type, bool activate) 
 
 
 int electionManger::getIdFromUserTodDisplayResult(int* choices) {
-    // This function is called after a list of elections is displayed.
-    // Screen is usually already set up by the caller (e.g., displayLocalElections).
+   
     cout << "---------------------------------------------------" << endl;
     cout << "Enter Election ID from the list above: ";
     int id_input;
     cin >> id_input;
-    // cout << "---------------------------------------------------" << endl; // Moved after validation
-
+   
     bool isElectionFound = false;
-    // choices[0] contains the count of valid IDs in choices[1]...choices[choices[0]]
+    
     for (int i = 1; i <= choices[0]; i++) {
         if (choices[i] == id_input) {
             isElectionFound = true;
@@ -1244,9 +1164,7 @@ int electionManger::getIdFromUserTodDisplayResult(int* choices) {
     }
 
     if (isElectionFound) {
-        // cout << "---------------------------------------------------" << endl;
-        // cout << "|| Election ID " << id_input << " selected.                      ||" << endl; // Confirmation
-        // cout << "---------------------------------------------------" << endl;
+    
         return id_input;
     }
     else {
@@ -1260,17 +1178,12 @@ int electionManger::getIdFromUserTodDisplayResult(int* choices) {
 }
 
 void electionManger::setFutureEndTime() {
-    // This function is empty in the provided code.
-    // If implemented, UI would depend on its functionality.
-    // For example:
-    // system("cls");
-    // cout << "---------------------------------------------------" << endl;
-    // cout << "||          Set Future End Time (Not Implemented) ||" << endl;
-    // cout << "---------------------------------------------------" << endl;
-    // system("pause");
+}
+// This function is not implemented in the provided code.
+// You might want to implement it based on your requirements.
 }
 
-// Add a setter for the voterr member if it's intended to be set from outside
+
 void electionManger::setCurrentVoter(voter* v) { // Assuming Voter is the class/struct type
     voterr = v;
 }
